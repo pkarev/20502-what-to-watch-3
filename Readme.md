@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть» [![Build status][travis-image]][travis-url]
 
 * Студент: [Павел Карев](https://up.htmlacademy.ru/react/3/user/20502).
-* Наставник: `Неизвестно`.
+* Наставник: [Вадим Атрощенко](https://htmlacademy.ru/profile/id1351257).
 
 ---
 
