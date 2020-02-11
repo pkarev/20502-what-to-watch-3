@@ -1,6 +1,6 @@
-const Movie = {
+const movie = {
   genre: `Drama`,
   releaseDate: `2014`
 };
 
-export default Movie;
+export default movie;

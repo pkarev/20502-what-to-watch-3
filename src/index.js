@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
-import Movie from './mock/movie.js';
+import movie from './mocks/movie.js';
 
 ReactDOM.render(
-    <App movie={Movie}/>,
+    <App movie={movie}/>,
     document.getElementById(`root`)
 );
