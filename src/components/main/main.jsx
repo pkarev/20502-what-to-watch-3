@@ -1,7 +1,7 @@
 import React from 'react';
 
-// eslint-disable-next-line react/prop-types
-const Main = ({genre, releaseDate}) => (
+/* eslint react/prop-types: 0 */
+const Main = ({movie}) => (
   <React.Fragment>
     <section className="movie-card">
       <div className="movie-card__bg">
@@ -36,8 +36,8 @@ const Main = ({genre, releaseDate}) => (
           <div className="movie-card__desc">
             <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
             <p className="movie-card__meta">
-              <span className="movie-card__genre">{genre}</span>
-              <span className="movie-card__year">{releaseDate}</span>
+              <span className="movie-card__genre">{movie.genre}</span>
+              <span className="movie-card__year">{movie.releaseDate}</span>
             </p>
 
             <div className="movie-card__buttons">
