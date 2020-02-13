@@ -97,13 +97,13 @@ const Main = ({currentMovie: {genre, releaseDate}, movies}) => (
         </ul>
 
         <div className="catalog__movies-list">
-          {movies.map((movie, index) => (
-            <article className="small-movie-card catalog__movies-card" key={index}>
+          {movies.map((movie) => (
+            <article className="small-movie-card catalog__movies-card" key={movie.id}>
               <div className="small-movie-card__image">
                 <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
               </div>
               <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">{movie}</a>
+                <a className="small-movie-card__link" href="movie-page.html">{movie.name}</a>
               </h3>
             </article>
           ))}
@@ -136,7 +136,10 @@ Main.propTypes = {
     genre: PropTypes.string.isRequired,
     releaseDate: PropTypes.number.isRequired,
   }),
-  movies: PropTypes.arrayOf(PropTypes.string),
+  movies: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    id: PropTypes.number,
+  })),
 };
 
 export default Main;
