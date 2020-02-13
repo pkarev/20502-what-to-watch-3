@@ -1,6 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-/* eslint react/prop-types: 0 */
 const Main = ({currentMovie: {genre, releaseDate}, movies}) => (
   <React.Fragment>
     <section className="movie-card">
@@ -130,5 +130,13 @@ const Main = ({currentMovie: {genre, releaseDate}, movies}) => (
     </div>
   </React.Fragment>
 );
+
+Main.propTypes = {
+  currentMovie: PropTypes.shape({
+    genre: PropTypes.string.isRequired,
+    releaseDate: PropTypes.number.isRequired,
+  }),
+  movies: PropTypes.arrayOf(PropTypes.string),
+};
 
 export default Main;
