@@ -2,7 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Main from '../main/main.jsx';
 
-const App = ({currentMovie, movies}) => <Main currentMovie={currentMovie} movies={movies}/>;
+const movieCaptionClickHandler = () => {};
+
+const App = ({currentMovie, movies}) => (
+  <Main
+    currentMovie={currentMovie}
+    movies={movies}
+    onMovieCaptionClick={movieCaptionClickHandler}
+  />
+);
 
 App.propTypes = {
   currentMovie: PropTypes.shape({

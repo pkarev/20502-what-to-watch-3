@@ -24,7 +24,7 @@ const currentMovie = {
 
 it(`Render Main`, () => {
   const tree = renderer
-    .create(<Main currentMovie={currentMovie} movies={movies}/>)
+    .create(<Main currentMovie={currentMovie} movies={movies} onMovieCaptionClick={() => {}}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
