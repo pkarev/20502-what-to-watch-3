@@ -13,11 +13,11 @@ const movie = {
 };
 
 it(`Whet user clicks on heading, callback gets current movie as argument`, () => {
-  const captionClickHandler = jest.fn();
-  const smallMovieCard = shallow(<SmallMovieCard movie={movie} handleCaptionClick={captionClickHandler}/>);
+  const captionHoverHandler = jest.fn();
+  const smallMovieCard = shallow(<SmallMovieCard movie={movie} handleCaptionHover={captionHoverHandler}/>);
   const link = smallMovieCard.find(`.small-movie-card__link`);
 
-  link.simulate(`click`, {preventDefault: () => {}});
+  link.simulate(`mouseEnter`, {preventDefault: () => {}});
 
-  expect(captionClickHandler.mock.calls[0][0]).toMatchObject(movie);
+  expect(captionHoverHandler.mock.calls[0][0]).toMatchObject(movie);
 });

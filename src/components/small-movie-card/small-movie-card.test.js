@@ -9,7 +9,7 @@ const movie = {
 
 it(`Render SmallMovieCard`, () => {
   const tree = renderer
-    .create(<SmallMovieCard movie={movie} handleCaptionClick={() => {}}/>)
+    .create(<SmallMovieCard movie={movie} handleCaptionHover={() => {}}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
