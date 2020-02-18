@@ -1,12 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import Main from '../main/main.jsx';
+import MoviePage from '../movie-page/movie-page.jsx';
 
 const App = ({currentMovie, movies}) => (
-  <Main
-    currentMovie={currentMovie}
-    movies={movies}
-  />
+  <BrowserRouter>
+    <Switch>
+      <Route exact path="/">
+        <Main
+          currentMovie={currentMovie}
+          movies={movies}
+          onMovieCaptionClick={() => {}}
+        />
+      </Route>
+      <Route exact path="/dev-movie-page">
+        <MoviePage/>
+      </Route>
+    </Switch>
+  </BrowserRouter>
 );
 
 App.propTypes = {
