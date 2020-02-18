@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const SmallMovieCard = (props) => {
   const {movie, onCardClick} = props;
-  const {name, poster} = movie;
+  const {name, posterSmall: poster} = movie;
 
   return (
     <article className="small-movie-card catalog__movies-card" key={name}>
@@ -26,7 +26,7 @@ SmallMovieCard.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
-    poster: PropTypes.string,
+    posterSmall: PropTypes.string,
   }),
   onCardClick: PropTypes.func.isRequired,
 };

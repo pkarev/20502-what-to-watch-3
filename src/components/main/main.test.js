@@ -6,17 +6,20 @@ const movies = [
   {
     id: 1,
     name: `Fantastic Beasts`,
-    poster: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    posterSmall: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    genre: `Awesome genre`,
   },
   {
     id: 2,
     name: `Bohemian Rhapsody`,
-    poster: `/img/bohemian-rhapsody.jpg`,
+    posterSmall: `/img/bohemian-rhapsody.jpg`,
+    genre: `Drama`,
   },
   {
     id: 3,
     name: `Moonrise kindom`,
-    poster: `/img/moonrise-kingdom.jpg`
+    posterSmall: `/img/moonrise-kingdom.jpg`,
+    genre: `Some genre`
   },
 ];
 
