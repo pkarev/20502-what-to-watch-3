@@ -25,10 +25,10 @@ const movies = [
   }
 ];
 
-it(`Should update activeCard on small card's title hover`, () => {
-  const moviesList = mount(<MoviesList movies={movies}/>);
-  const secondCardTitle = moviesList.find(`.small-movie-card__link`).at(1);
+it(`Should update activeCard on small card click`, () => {
+  const moviesList = mount(<MoviesList movies={movies} onCardClick={() => {}}/>);
+  const secondCard = moviesList.find(`.small-movie-card__image`).at(1);
 
-  secondCardTitle.simulate(`mouseEnter`, {preventDefault: () => {}});
+  secondCard.simulate(`click`, {preventDefault: () => {}});
   expect(moviesList.state().activeCard).toMatchObject(movies[1]);
 });

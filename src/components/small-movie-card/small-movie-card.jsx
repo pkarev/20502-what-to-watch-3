@@ -1,19 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const SmallMovieCard = ({movie, onCaptionHover}) => {
+const SmallMovieCard = (props) => {
+  const {movie, onCardClick} = props;
   const {name, poster} = movie;
 
   return (
-    <article className="small-movie-card catalog__movies-card">
-      <div className="small-movie-card__image">
+    <article className="small-movie-card catalog__movies-card" key={name}>
+      <div className="small-movie-card__image" onClick={(evt) => {
+        evt.preventDefault();
+        onCardClick(movie);
+      }}>
         <img src={poster} alt={name} width="280" height="175"/>
       </div>
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href="movie-page.html" onMouseEnter={(evt) => {
-          evt.preventDefault();
-          onCaptionHover(movie);
-        }}>
+        <a className="small-movie-card__link" href="movie-page.html">
           {name}
         </a>
       </h3>
@@ -27,7 +28,7 @@ SmallMovieCard.propTypes = {
     name: PropTypes.string,
     poster: PropTypes.string,
   }),
-  onCaptionHover: PropTypes.func.isRequired,
+  onCardClick: PropTypes.func.isRequired,
 };
 
 export default SmallMovieCard;

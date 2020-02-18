@@ -14,7 +14,10 @@ class MoviesList extends PureComponent {
   }
 
   _handleCaptionHover(activeCard) {
+    const {onCardClick} = this.props;
     this.setState({activeCard});
+
+    onCardClick({activeCard});
   }
 
   render() {
@@ -23,7 +26,7 @@ class MoviesList extends PureComponent {
     return (
       <div className="catalog__movies-list">
         {movies.map((movie) => (
-          <SmallMovieCard movie={movie} key={movie.id} onCaptionHover={this._handleCaptionHover}/>
+          <SmallMovieCard movie={movie} key={movie.id} onCardClick={this._handleCaptionHover}/>
         ))}
       </div>
     );
@@ -36,6 +39,7 @@ MoviesList.propTypes = {
     name: PropTypes.string,
     poster: PropTypes.string,
   })),
+  onCardClick: PropTypes.func,
 };
 
 export default MoviesList;
