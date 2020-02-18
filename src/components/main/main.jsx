@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import MoviesList from '../movies-list/movies-list.jsx';
 
-const Main = ({currentMovie: {genre, releaseDate}, movies, onMovieCaptionClick}) => (
+const Main = ({currentMovie: {genre, releaseDate}, movies}) => (
   <React.Fragment>
     <section className="movie-card">
       <div className="movie-card__bg">
@@ -96,23 +97,7 @@ const Main = ({currentMovie: {genre, releaseDate}, movies, onMovieCaptionClick})
           </li>
         </ul>
 
-        <div className="catalog__movies-list">
-          {movies.map((movie) => (
-            <article className="small-movie-card catalog__movies-card" key={movie.name}>
-              <div className="small-movie-card__image">
-                <img src={movie.poster} alt={movie.name} width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html" onClick={(evt) => {
-                  evt.preventDefault();
-                  onMovieCaptionClick();
-                }}>
-                  {movie.name}
-                </a>
-              </h3>
-            </article>
-          ))}
-        </div>
+        <MoviesList movies={movies}/>
 
         <div className="catalog__more">
           <button className="catalog__button" type="button">Show more</button>
@@ -145,7 +130,6 @@ Main.propTypes = {
     name: PropTypes.string,
     poster: PropTypes.string,
   })),
-  onMovieCaptionClick: PropTypes.func.isRequired,
 };
 
 export default Main;

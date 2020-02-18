@@ -276,7 +276,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-              onClick={[Function]}
+              onMouseEnter={[Function]}
             >
               Fantastic Beasts
             </a>
@@ -301,7 +301,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-              onClick={[Function]}
+              onMouseEnter={[Function]}
             >
               Bohemian Rhapsody
             </a>
@@ -326,7 +326,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-              onClick={[Function]}
+              onMouseEnter={[Function]}
             >
               Moonrise kindom
             </a>
