@@ -27,7 +27,7 @@ const currentMovie = {
   releaseDate: 2020
 };
 
-it(`Should do something awesome`, () => {
+it(`Shoul call callback function on small card's heading click`, () => {
   const movieCaptionClickHandler = jest.fn();
 
   const main = shallow(
@@ -40,6 +40,6 @@ it(`Should do something awesome`, () => {
 
   const headings = main.find(`.small-movie-card__link`);
 
-  headings.at(0).simulate(`click`);
+  headings.at(0).simulate(`click`, {preventDefault: () => {}});
   expect(movieCaptionClickHandler.mock.calls.length).toBe(1);
 });

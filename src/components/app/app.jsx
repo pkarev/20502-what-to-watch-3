@@ -19,7 +19,7 @@ App.propTypes = {
   }),
   movies: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
-    id: PropTypes.number,
+    poster: PropTypes.string,
   })),
 };
 

@@ -264,9 +264,9 @@ Array [
             className="small-movie-card__image"
           >
             <img
-              alt="Fantastic Beasts: The Crimes of Grindelwald"
+              alt="Fantastic Beasts"
               height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src="/img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
               width="280"
             />
           </div>
@@ -278,7 +278,7 @@ Array [
               href="movie-page.html"
               onClick={[Function]}
             >
-              One
+              Fantastic Beasts
             </a>
           </h3>
         </article>
@@ -289,9 +289,9 @@ Array [
             className="small-movie-card__image"
           >
             <img
-              alt="Fantastic Beasts: The Crimes of Grindelwald"
+              alt="Bohemian Rhapsody"
               height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src="/img/bohemian-rhapsody.jpg"
               width="280"
             />
           </div>
@@ -303,7 +303,7 @@ Array [
               href="movie-page.html"
               onClick={[Function]}
             >
-              Two
+              Bohemian Rhapsody
             </a>
           </h3>
         </article>
@@ -314,9 +314,9 @@ Array [
             className="small-movie-card__image"
           >
             <img
-              alt="Fantastic Beasts: The Crimes of Grindelwald"
+              alt="Moonrise kindom"
               height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src="/img/moonrise-kingdom.jpg"
               width="280"
             />
           </div>
@@ -328,7 +328,7 @@ Array [
               href="movie-page.html"
               onClick={[Function]}
             >
-              Three
+              Moonrise kindom
             </a>
           </h3>
         </article>

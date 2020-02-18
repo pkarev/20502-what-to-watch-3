@@ -98,12 +98,17 @@ const Main = ({currentMovie: {genre, releaseDate}, movies, onMovieCaptionClick})
 
         <div className="catalog__movies-list">
           {movies.map((movie) => (
-            <article className="small-movie-card catalog__movies-card" key={movie.id}>
+            <article className="small-movie-card catalog__movies-card" key={movie.name}>
               <div className="small-movie-card__image">
-                <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
+                <img src={movie.poster} alt={movie.name} width="280" height="175"/>
               </div>
               <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html" onClick={onMovieCaptionClick}>{movie.name}</a>
+                <a className="small-movie-card__link" href="movie-page.html" onClick={(evt) => {
+                  evt.preventDefault();
+                  onMovieCaptionClick();
+                }}>
+                  {movie.name}
+                </a>
               </h3>
             </article>
           ))}
@@ -138,7 +143,7 @@ Main.propTypes = {
   }),
   movies: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
-    id: PropTypes.number,
+    poster: PropTypes.string,
   })),
   onMovieCaptionClick: PropTypes.func.isRequired,
 };

@@ -4,16 +4,16 @@ import App from './app.jsx';
 
 const movies = [
   {
-    name: `One`,
-    id: 1
+    name: `Fantastic Beasts`,
+    poster: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
   },
   {
-    name: `Two`,
-    id: 2
+    name: `Bohemian Rhapsody`,
+    poster: `/img/bohemian-rhapsody.jpg`,
   },
   {
-    name: `Three`,
-    id: 3
+    name: `Moonrise kindom`,
+    poster: `/img/moonrise-kingdom.jpg`
   },
 ];
 
