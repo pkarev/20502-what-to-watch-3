@@ -210,7 +210,8 @@ exports[`Render MoviePage 1`] = `
             <span
               className="movie-rating__count"
             >
-              240 ratings
+              240
+               ratings
             </span>
           </p>
         </div>
@@ -227,14 +228,20 @@ exports[`Render MoviePage 1`] = `
             className="movie-card__director"
           >
             <strong>
-              Director: Wes Andreson
+              Director: 
+              Wes Andreson
             </strong>
           </p>
           <p
             className="movie-card__starring"
           >
             <strong>
-              Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other
+              Starring:
+              Bill Murray, 
+              Edward Norton, 
+              Jude Law, 
+              Willem Dafoe 
+              and other
             </strong>
           </p>
         </div>

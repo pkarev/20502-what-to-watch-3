@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
+import movie from '../../mocks/movie';
 
 const App = ({currentMovie, movies}) => (
   <BrowserRouter>
@@ -15,7 +16,7 @@ const App = ({currentMovie, movies}) => (
         />
       </Route>
       <Route exact path="/dev-movie-page">
-        <MoviePage/>
+        <MoviePage movie={movie}/>
       </Route>
     </Switch>
   </BrowserRouter>
