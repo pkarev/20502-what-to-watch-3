@@ -2,13 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Main from '../main/main.jsx';
 
-const movieCaptionClickHandler = () => {};
-
 const App = ({currentMovie, movies}) => (
   <Main
     currentMovie={currentMovie}
     movies={movies}
-    onMovieCaptionClick={movieCaptionClickHandler}
   />
 );
 
@@ -18,6 +15,7 @@ App.propTypes = {
     releaseDate: PropTypes.number.isRequired,
   }),
   movies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
     name: PropTypes.string,
     poster: PropTypes.string,
   })),

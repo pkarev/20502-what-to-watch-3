@@ -14,7 +14,7 @@ const movie = {
 
 it(`Whet user clicks on heading, callback gets current movie as argument`, () => {
   const captionHoverHandler = jest.fn();
-  const smallMovieCard = shallow(<SmallMovieCard movie={movie} handleCaptionHover={captionHoverHandler}/>);
+  const smallMovieCard = shallow(<SmallMovieCard movie={movie} onCaptionHover={captionHoverHandler}/>);
   const link = smallMovieCard.find(`.small-movie-card__link`);
 
   link.simulate(`mouseEnter`, {preventDefault: () => {}});

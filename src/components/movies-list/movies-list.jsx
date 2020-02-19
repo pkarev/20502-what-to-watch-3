@@ -6,14 +6,14 @@ class MoviesList extends PureComponent {
   constructor(props) {
     super(props);
 
-    this._captionHoverHandler = this._captionHoverHandler.bind(this);
+    this._handleCaptionHover = this._handleCaptionHover.bind(this);
 
     this.state = {
       activeCard: null,
     };
   }
 
-  _captionHoverHandler(activeCard) {
+  _handleCaptionHover(activeCard) {
     this.setState({activeCard});
   }
 
@@ -22,8 +22,8 @@ class MoviesList extends PureComponent {
 
     return (
       <div className="catalog__movies-list">
-        {movies.map((movie, index) => (
-          <SmallMovieCard movie={movie} key={`${index}-${movie.name}`} handleCaptionHover={this._captionHoverHandler}/>
+        {movies.map((movie) => (
+          <SmallMovieCard movie={movie} key={movie.id} onCaptionHover={this._handleCaptionHover}/>
         ))}
       </div>
     );
@@ -32,6 +32,7 @@ class MoviesList extends PureComponent {
 
 MoviesList.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
     name: PropTypes.string,
     poster: PropTypes.string,
   })),

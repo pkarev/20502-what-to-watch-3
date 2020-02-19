@@ -4,14 +4,17 @@ import Main from './main.jsx';
 
 const movies = [
   {
+    id: 1,
     name: `Fantastic Beasts`,
     poster: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
   },
   {
+    id: 2,
     name: `Bohemian Rhapsody`,
     poster: `/img/bohemian-rhapsody.jpg`,
   },
   {
+    id: 3,
     name: `Moonrise kindom`,
     poster: `/img/moonrise-kingdom.jpg`
   },

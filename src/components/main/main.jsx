@@ -127,6 +127,7 @@ Main.propTypes = {
     releaseDate: PropTypes.number.isRequired,
   }),
   movies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
     name: PropTypes.string,
     poster: PropTypes.string,
   })),
