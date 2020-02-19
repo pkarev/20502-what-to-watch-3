@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Main from './main.jsx';
+import MoviesList from './movies-list';
 
 const movies = [
   {
@@ -17,17 +17,12 @@ const movies = [
     id: 3,
     name: `Moonrise kindom`,
     poster: `/img/moonrise-kingdom.jpg`
-  },
+  }
 ];
 
-const currentMovie = {
-  genre: `Awesome genre`,
-  releaseDate: 2020
-};
-
-it(`Render Main`, () => {
+it(`Render MoviesList`, () => {
   const tree = renderer
-    .create(<Main currentMovie={currentMovie} movies={movies} onMovieCaptionClick={() => {}}/>)
+    .create(<MoviesList movies={movies}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
