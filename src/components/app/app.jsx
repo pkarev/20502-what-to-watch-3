@@ -72,10 +72,6 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  currentMovie: PropTypes.shape({
-    genre: PropTypes.string.isRequired,
-    releaseDate: PropTypes.number.isRequired,
-  }),
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
