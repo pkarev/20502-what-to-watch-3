@@ -4,6 +4,6 @@ import App from './components/app/app.jsx';
 import movies from './mocks/movies.js';
 
 ReactDOM.render(
-    <App currentMovie={movies[0]} movies={movies}/>,
+    <App movies={movies}/>,
     document.getElementById(`root`)
 );
