@@ -6,29 +6,29 @@ const movies = [
   {
     id: 1,
     name: `Fantastic Beasts`,
-    poster: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    posterSmall: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    genre: `Awesome genre`,
+    releaseDate: 2020,
   },
   {
     id: 2,
     name: `Bohemian Rhapsody`,
-    poster: `/img/bohemian-rhapsody.jpg`,
+    posterSmall: `/img/bohemian-rhapsody.jpg`,
+    genre: `Drama`,
+    releaseDate: 2020,
   },
   {
     id: 3,
     name: `Moonrise kindom`,
-    poster: `/img/moonrise-kingdom.jpg`
+    posterSmall: `/img/moonrise-kingdom.jpg`,
+    genre: `Some genre`,
+    releaseDate: 2020,
   },
 ];
 
-const currentMovie = {
-  id: 1,
-  genre: `Awesome genre`,
-  releaseDate: 2020
-};
-
 it(`Render App`, () => {
   const tree = renderer
-    .create(<App currentMovie={currentMovie} movies={movies}/>)
+    .create(<App movies={movies}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

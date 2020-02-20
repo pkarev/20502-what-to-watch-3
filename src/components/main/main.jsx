@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MoviesList from '../movies-list/movies-list.jsx';
 
-const Main = ({currentMovie: {genre, releaseDate}, movies}) => (
+const Main = ({currentMovie: {genre, releaseDate}, movies, onCardClick}) => (
   <React.Fragment>
     <section className="movie-card">
       <div className="movie-card__bg">
@@ -97,7 +97,7 @@ const Main = ({currentMovie: {genre, releaseDate}, movies}) => (
           </li>
         </ul>
 
-        <MoviesList movies={movies}/>
+        <MoviesList movies={movies} onCardClick={onCardClick}/>
 
         <div className="catalog__more">
           <button className="catalog__button" type="button">Show more</button>
@@ -131,6 +131,7 @@ Main.propTypes = {
     name: PropTypes.string,
     poster: PropTypes.string,
   })),
+  onCardClick: PropTypes.func,
 };
 
 export default Main;

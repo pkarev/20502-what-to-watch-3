@@ -12,12 +12,12 @@ const movie = {
   poster: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
 };
 
-it(`Whet user clicks on heading, callback gets current movie as argument`, () => {
+it(`When user clicks card, callback gets current movie as argument`, () => {
   const captionHoverHandler = jest.fn();
-  const smallMovieCard = shallow(<SmallMovieCard movie={movie} onCaptionHover={captionHoverHandler}/>);
-  const link = smallMovieCard.find(`.small-movie-card__link`);
+  const smallMovieCardComponent = shallow(<SmallMovieCard movie={movie} onCardClick={captionHoverHandler}/>);
+  const smallMovieCard = smallMovieCardComponent.find(`.small-movie-card__image`);
 
-  link.simulate(`mouseEnter`, {preventDefault: () => {}});
+  smallMovieCard.simulate(`click`, {preventDefault: () => {}});
 
   expect(captionHoverHandler.mock.calls[0][0]).toMatchObject(movie);
 });
