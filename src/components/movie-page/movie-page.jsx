@@ -108,11 +108,7 @@ const MoviePage = (
 
             <p className="movie-card__starring">
               <strong>
-                Starring:
-                {stars.map((star, index, starsArr) => {
-                  return index < starsArr.length - 1 ? `${star}, ` : `${star} `;
-                })}
-                and other
+                Starring: {stars.join(`, `)} and other
               </strong>
             </p>
           </div>

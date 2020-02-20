@@ -15,13 +15,13 @@ class App extends PureComponent {
 
     this.state = {
       appState: AppState.MAIN,
-      currentMovie: this.props.movies[0],
+      currentMovie: props.movies[0],
     };
 
-    this._handleActiveCardClick = this._handleActiveCardClick.bind(this);
+    this._handleCardClick = this._handleCardClick.bind(this);
   }
 
-  _handleActiveCardClick({activeCard}) {
+  _handleCardClick({activeCard}) {
     this.setState({
       currentMovie: activeCard,
       appState: AppState.MOVIE_PAGE,
@@ -39,7 +39,7 @@ class App extends PureComponent {
             currentMovie={currentMovie}
             movies={movies}
             onMovieCaptionClick={() => {}}
-            handleActiveCardChange={this._handleActiveCardClick}
+            onCardClick={this._handleCardClick}
           />
         );
 

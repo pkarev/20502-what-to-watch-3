@@ -236,12 +236,9 @@ exports[`Render MoviePage 1`] = `
             className="movie-card__starring"
           >
             <strong>
-              Starring:
-              Bill Murray, 
-              Edward Norton, 
-              Jude Law, 
-              Willem Dafoe 
-              and other
+              Starring: 
+              Bill Murray, Edward Norton, Jude Law, Willem Dafoe
+               and other
             </strong>
           </p>
         </div>

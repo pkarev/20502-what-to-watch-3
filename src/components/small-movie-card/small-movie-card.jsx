@@ -6,7 +6,7 @@ const SmallMovieCard = (props) => {
   const {name, posterSmall: poster} = movie;
 
   return (
-    <article className="small-movie-card catalog__movies-card" key={name}>
+    <article className="small-movie-card catalog__movies-card">
       <div className="small-movie-card__image" onClick={(evt) => {
         evt.preventDefault();
         onCardClick(movie);
