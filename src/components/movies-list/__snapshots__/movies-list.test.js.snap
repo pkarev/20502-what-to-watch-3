@@ -6,18 +6,23 @@ exports[`Render MoviesList 1`] = `
 >
   <article
     className="small-movie-card catalog__movies-card"
+    onClick={[Function]}
   >
-    <div
+    <video
       className="small-movie-card__image"
-      onClick={[Function]}
+      controls={false}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      poster="/img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+      style={
+        Object {
+          "objectFit": "cover",
+          "width": "100%",
+        }
+      }
     >
-      <img
-        alt="Fantastic Beasts"
-        height="175"
-        src="/img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-        width="280"
-      />
-    </div>
+      <source />
+    </video>
     <h3
       className="small-movie-card__title"
     >
@@ -31,18 +36,23 @@ exports[`Render MoviesList 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
+    onClick={[Function]}
   >
-    <div
+    <video
       className="small-movie-card__image"
-      onClick={[Function]}
+      controls={false}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      poster="/img/bohemian-rhapsody.jpg"
+      style={
+        Object {
+          "objectFit": "cover",
+          "width": "100%",
+        }
+      }
     >
-      <img
-        alt="Bohemian Rhapsody"
-        height="175"
-        src="/img/bohemian-rhapsody.jpg"
-        width="280"
-      />
-    </div>
+      <source />
+    </video>
     <h3
       className="small-movie-card__title"
     >
@@ -56,18 +66,23 @@ exports[`Render MoviesList 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
+    onClick={[Function]}
   >
-    <div
+    <video
       className="small-movie-card__image"
-      onClick={[Function]}
+      controls={false}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      poster="/img/moonrise-kingdom.jpg"
+      style={
+        Object {
+          "objectFit": "cover",
+          "width": "100%",
+        }
+      }
     >
-      <img
-        alt="Moonrise kindom"
-        height="175"
-        src="/img/moonrise-kingdom.jpg"
-        width="280"
-      />
-    </div>
+      <source />
+    </video>
     <h3
       className="small-movie-card__title"
     >
