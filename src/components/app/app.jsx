@@ -4,6 +4,8 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
 import VideoPlayer from '../video-player/video-player.jsx';
+import Tabs from '../tabs/tabs.jsx';
+import Tab from '../tabs/tab.jsx';
 
 const AppState = {
   MAIN: 1,
@@ -69,6 +71,13 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/dev-player">
             <VideoPlayer src={`${trailer}`} poster={`${posterSmall}`} style={{width: `400px`, height: `240px`}}/>
+          </Route>
+          <Route exact path="/dev-tabs">
+            <Tabs activeTab="one">
+              <Tab name="one">1</Tab>
+              <Tab name="two">2</Tab>
+              <Tab name="three">3</Tab>
+            </Tabs>
           </Route>
         </Switch>
       </BrowserRouter>
