@@ -33,7 +33,7 @@ const currentMovie = {
 
 it(`Render Main`, () => {
   const tree = renderer
-    .create(<Main currentMovie={currentMovie} movies={movies} onMovieCaptionClick={() => {}}/>, {
+    .create(<Main currentMovie={currentMovie} movies={movies} onCardClick={() => {}}/>, {
       createNodeMock: () => ({})
     })
     .toJSON();
