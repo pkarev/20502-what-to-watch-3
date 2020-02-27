@@ -5,9 +5,9 @@ import MoviePage from './movie-page';
 const movie = {
   name: `The Grand Budapest Hotel`,
   genre: `Drama`,
-  posterBig: `img/bg-the-grand-budapest-hotel.jpg`,
   posterSmall: `img/the-grand-budapest-hotel-poster.jpg`,
   trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  posterBig: `img/bg-the-grand-budapest-hotel.jpg`,
   releaseDate: 2014,
   rating: {
     number: `8,9`,
@@ -22,9 +22,35 @@ const movie = {
   stars: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
 };
 
+const movies = [
+  {
+    id: 1,
+    name: `Fantastic Beasts`,
+    posterSmall: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  },
+  {
+    id: 2,
+    name: `Bohemian Rhapsody`,
+    posterSmall: `/img/bohemian-rhapsody.jpg`,
+    trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  },
+  {
+    id: 3,
+    name: `Moonrise kindom`,
+    posterSmall: `/img/moonrise-kingdom.jpg`,
+    trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  }
+];
+
 it(`Render MoviePage`, () => {
   const tree = renderer
-    .create(<MoviePage movie={movie}/>)
+    .create(
+        <MoviePage movie={movie} similarMovies={movies} onCardClick={() => {}}/>,
+        {
+          createNodeMock: () => ({})
+        }
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();

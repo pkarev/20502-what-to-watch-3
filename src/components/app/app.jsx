@@ -24,7 +24,7 @@ class App extends PureComponent {
     this._handleCardClick = this._handleCardClick.bind(this);
   }
 
-  _handleCardClick({activeCard}) {
+  _handleCardClick(activeCard) {
     this.setState({
       currentMovie: activeCard,
       appState: AppState.MOVIE_PAGE,
@@ -41,14 +41,13 @@ class App extends PureComponent {
           <Main
             currentMovie={currentMovie}
             movies={movies}
-            onMovieCaptionClick={() => {}}
             onCardClick={this._handleCardClick}
           />
         );
 
       case AppState.MOVIE_PAGE:
         return (
-          <MoviePage movie={currentMovie}/>
+          <MoviePage movie={currentMovie} similarMovies={movies} onCardClick={this._handleCardClick}/>
         );
 
       default:
@@ -57,6 +56,7 @@ class App extends PureComponent {
   }
 
   render() {
+    const {movies} = this.props;
     const {currentMovie} = this.state;
     const {trailer, posterSmall} = currentMovie;
 
@@ -67,7 +67,7 @@ class App extends PureComponent {
             {this._renderScreen()}
           </Route>
           <Route exact path="/dev-movie-page">
-            <MoviePage movie={currentMovie}/>
+            <MoviePage movie={currentMovie} similarMovies={movies} onCardClick={this._handleCardClick}/>
           </Route>
           <Route exact path="/dev-player">
             <VideoPlayer src={`${trailer}`} poster={`${posterSmall}`} style={{width: `400px`, height: `240px`}}/>

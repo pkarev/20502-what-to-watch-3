@@ -25,7 +25,7 @@ const movies = [
 
 it(`Render MoviesList`, () => {
   const tree = renderer
-    .create(<MoviesList movies={movies}/>, {
+    .create(<MoviesList movies={movies} onCardClick={() => {}}/>, {
       createNodeMock: () => ({})
     })
     .toJSON();
