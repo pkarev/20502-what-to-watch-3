@@ -127,11 +127,11 @@ Main.propTypes = {
     releaseDate: PropTypes.number.isRequired,
   }),
   movies: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    poster: PropTypes.string,
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    posterSmall: PropTypes.string.isRequired,
   })),
-  onCardClick: PropTypes.func,
+  onCardClick: PropTypes.func.isRequired,
 };
 
 export default Main;

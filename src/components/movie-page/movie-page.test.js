@@ -7,6 +7,7 @@ const movie = {
   genre: `Drama`,
   posterBig: `img/bg-the-grand-budapest-hotel.jpg`,
   posterSmall: `img/the-grand-budapest-hotel-poster.jpg`,
+  trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   releaseDate: 2014,
   rating: {
     number: `8,9`,

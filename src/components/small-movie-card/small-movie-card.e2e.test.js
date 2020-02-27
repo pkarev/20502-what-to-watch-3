@@ -8,16 +8,18 @@ Enzyme.configure({
 });
 
 const movie = {
+  id: 1,
   name: `Fantastic Beasts`,
-  poster: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+  posterSmall: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+  trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
 };
 
 it(`When user clicks card, callback gets current movie as argument`, () => {
   const captionHoverHandler = jest.fn();
   const smallMovieCardComponent = shallow(<SmallMovieCard movie={movie} onCardClick={captionHoverHandler}/>);
-  const smallMovieCard = smallMovieCardComponent.find(`.small-movie-card__image`);
+  const smallMovieCard = smallMovieCardComponent.find(`.small-movie-card`);
 
-  smallMovieCard.simulate(`click`, {preventDefault: () => {}});
+  smallMovieCard.simulate(`click`, {preventDefault: () => {}, stopPropagation: () => {}});
 
   expect(captionHoverHandler.mock.calls[0][0]).toMatchObject(movie);
 });

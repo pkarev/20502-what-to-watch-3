@@ -11,23 +11,26 @@ const movies = [
   {
     id: 1,
     name: `Fantastic Beasts`,
-    poster: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    posterSmall: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
     id: 2,
     name: `Bohemian Rhapsody`,
-    poster: `/img/bohemian-rhapsody.jpg`,
+    posterSmall: `/img/bohemian-rhapsody.jpg`,
+    trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
     id: 3,
     name: `Moonrise kindom`,
-    poster: `/img/moonrise-kingdom.jpg`
+    posterSmall: `/img/moonrise-kingdom.jpg`,
+    trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   }
 ];
 
 it(`Should update activeCard on small card click`, () => {
   const moviesList = mount(<MoviesList movies={movies} onCardClick={() => {}}/>);
-  const secondCard = moviesList.find(`.small-movie-card__image`).at(1);
+  const secondCard = moviesList.find(`.small-movie-card`).at(1);
 
   secondCard.simulate(`click`, {preventDefault: () => {}});
   expect(moviesList.state().activeCard).toMatchObject(movies[1]);

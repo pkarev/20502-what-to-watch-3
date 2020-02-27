@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
+import VideoPlayer from '../video-player/video-player.jsx';
 
 const AppState = {
   MAIN: 1,
@@ -55,6 +56,7 @@ class App extends PureComponent {
 
   render() {
     const {currentMovie} = this.state;
+    const {trailer, posterSmall} = currentMovie;
 
     return (
       <BrowserRouter>
@@ -64,6 +66,9 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/dev-movie-page">
             <MoviePage movie={currentMovie}/>
+          </Route>
+          <Route exact path="/dev-player">
+            <VideoPlayer src={`${trailer}`} poster={`${posterSmall}`} style={{width: `400px`, height: `240px`}}/>
           </Route>
         </Switch>
       </BrowserRouter>
