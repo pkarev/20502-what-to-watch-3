@@ -165,6 +165,7 @@ exports[`Render MoviePage 1`] = `
               <a
                 className="movie-nav__link"
                 href="#"
+                onClick={[Function]}
               >
                 Overview
               </a>
@@ -175,6 +176,7 @@ exports[`Render MoviePage 1`] = `
               <a
                 className="movie-nav__link"
                 href="#"
+                onClick={[Function]}
               >
                 Details
               </a>
@@ -185,6 +187,7 @@ exports[`Render MoviePage 1`] = `
               <a
                 className="movie-nav__link"
                 href="#"
+                onClick={[Function]}
               >
                 Reviews
               </a>

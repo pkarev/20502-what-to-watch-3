@@ -16,11 +16,11 @@ class Tabs extends PureComponent {
 
     return (
       <React.Fragment>
-        <div className="movie-card__nav">
+        <nav className="movie-nav movie-card__nav">
           <ul className="movie-nav__list">
             {React.Children.map(this.props.children, (child) => {
               return (
-                <li className={`movie-nav__item ${child.props.name === activeTab ? `movie-nav__item--active` : ``}`} key={name}>
+                <li className={`movie-nav__item${child.props.name === activeTab ? ` movie-nav__item--active` : ``}`} key={name}>
                   <a href="#" className="movie-nav__link" onClick={(evt) => {
                     evt.preventDefault();
                     this.setState({activeTab: child.props.name});
@@ -31,7 +31,7 @@ class Tabs extends PureComponent {
               );
             })}
           </ul>
-        </div>
+        </nav>
         {React.Children.map(this.props.children, (child) => (
           child.props.name === activeTab ? child : null
         ))}
