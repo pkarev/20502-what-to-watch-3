@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SmallMovieCard from '../small-movie-card/small-movie-card.jsx';
 
+const MAX_CARDS_TO_STHOW = 4;
+
 const SimilarMovies = ({movies, onCardClick}) => {
-  const renderedMovies = movies.length > 4 ? movies.slice(0, 4) : movies;
+  const renderedMovies = movies.length > MAX_CARDS_TO_STHOW ? movies.slice(0, MAX_CARDS_TO_STHOW) : movies;
 
   return (
     <section className="catalog catalog--like-this">

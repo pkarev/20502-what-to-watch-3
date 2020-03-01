@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import Tab from './tab.jsx';
 
 class Tabs extends PureComponent {
   constructor(props) {
@@ -44,10 +43,14 @@ Tabs.propTypes = {
   activeTab: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.shape({
-      type: PropTypes.oneOf([Tab])
+      props: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+      })
     })),
     PropTypes.shape({
-      type: PropTypes.oneOf([Tab])
+      props: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+      })
     })
   ]).isRequired
 };

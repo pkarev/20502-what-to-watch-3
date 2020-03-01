@@ -1,7 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Tabs from './tabs';
-import Tab from './tab';
 
 const tabs = [
   {
@@ -17,11 +16,9 @@ it(`Render Component`, () => {
   .create(
       <Tabs activeTab={`${tabs[0].name}`}>
         {tabs.map((tab) => (
-          <Tab name={tab.name} key={tab.name}>
-            <div>
-              {tab.name}
-            </div>
-          </Tab>
+          <div name={tab.name} key={tab.name}>
+            {tab.name}
+          </div>
         ))}
       </Tabs>
   )

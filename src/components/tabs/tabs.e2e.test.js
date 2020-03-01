@@ -2,7 +2,6 @@ import React from 'react';
 import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Tabs from './tabs.jsx';
-import Tab from './tab.jsx';
 
 const tabs = [
   {
@@ -49,9 +48,7 @@ const createTabs = (tabsVal, activeTab) => {
   const tabsComponent = mount(
       <Tabs activeTab={activeTab}>
         {tabsVal.map((tab) => (
-          <Tab name={tab.name} key={tab.name}>
-            <div className="demo-content">{tab.name}</div>
-          </Tab>
+          <div className="demo-content" name={tab.name} key={tab.name}>{tab.name}</div>
         ))}
       </Tabs>
   );

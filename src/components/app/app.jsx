@@ -5,7 +5,6 @@ import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
 import VideoPlayer from '../video-player/video-player.jsx';
 import Tabs from '../tabs/tabs.jsx';
-import Tab from '../tabs/tab.jsx';
 
 const AppState = {
   MAIN: 1,
@@ -74,9 +73,9 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/dev-tabs">
             <Tabs activeTab="one">
-              <Tab name="one">1</Tab>
-              <Tab name="two">2</Tab>
-              <Tab name="three">3</Tab>
+              <div name="one">1</div>
+              <div name="two">2</div>
+              <div name="three">3</div>
             </Tabs>
           </Route>
         </Switch>
