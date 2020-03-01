@@ -16,7 +16,7 @@ Array [
           href="#"
           onClick={[Function]}
         >
-          firstTab
+          Overview
         </a>
       </li>
       <li
@@ -27,7 +27,7 @@ Array [
           href="#"
           onClick={[Function]}
         >
-          secondTab
+          Details
         </a>
       </li>
     </ul>

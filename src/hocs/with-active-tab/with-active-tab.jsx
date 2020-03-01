@@ -7,14 +7,14 @@ const withActiveTab = (Component) => {
       super(props);
 
       this.state = {
-        activeTab: props.activeTab,
+        activeTab: 0,
       };
 
       this._onTabClick = this._onTabClick.bind(this);
     }
 
-    _onTabClick(name) {
-      this.setState({activeTab: name});
+    _onTabClick(index) {
+      this.setState({activeTab: index});
     }
 
     render() {
@@ -34,19 +34,10 @@ const withActiveTab = (Component) => {
   }
 
   WithActiveTab.propTypes = {
-    activeTab: PropTypes.string.isRequired,
     children: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.shape({
-        props: PropTypes.shape({
-          name: PropTypes.string.isRequired,
-        })
-      })),
-      PropTypes.shape({
-        props: PropTypes.shape({
-          name: PropTypes.string.isRequired,
-        })
-      })
-    ]).isRequired
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node
+    ]).isRequired,
   };
 
   return WithActiveTab;

@@ -3,12 +3,6 @@ import PropTypes from 'prop-types';
 import Tabs from '../tabs/tabs.jsx';
 import SimilarMovies from '../similar-movies/similar-movies.jsx';
 
-const TabName = {
-  OVERVIEW: `Overview`,
-  DETAILS: `Details`,
-  REVIEWS: `Reviews`,
-};
-
 const MoviePage = (
     {
       movie: {
@@ -84,8 +78,8 @@ const MoviePage = (
           </div>
 
           <div className="movie-card__desc">
-            <Tabs activeTab={TabName.OVERVIEW}>
-              <div name={TabName.OVERVIEW}>
+            <Tabs>
+              <React.Fragment>
                 <div className="movie-rating">
                   <div className="movie-rating__score">{ratingNumber}</div>
                   <p className="movie-rating__meta">
@@ -111,8 +105,8 @@ const MoviePage = (
                     </strong>
                   </p>
                 </div>
-              </div>
-              <div className="movie-card__text movie-card__row" name={TabName.DETAILS}>
+              </React.Fragment>
+              <div className="movie-card__text movie-card__row">
                 <div className="movie-card__text-col">
                   <p className="movie-card__details-item">
                     <strong className="movie-card__details-name">Director</strong>
@@ -152,7 +146,7 @@ const MoviePage = (
                   </p>
                 </div>
               </div>
-              <div className="movie-card__reviews movie-card__row" name={TabName.REVIEWS}>
+              <div className="movie-card__reviews movie-card__row">
                 <div className="movie-card__reviews-col">
                   <div className="review">
                     <blockquote className="review__quote">
