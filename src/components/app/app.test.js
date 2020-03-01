@@ -3,6 +3,7 @@ import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import App from './app.jsx';
+import {ALL_GENRES_FILTER} from '../../reducer.js';
 
 const movies = [
   {
@@ -35,8 +36,9 @@ const mockStore = configureStore([]);
 
 it(`Render App`, () => {
   const store = mockStore({
-    genreFilter: `all`,
+    genreFilter: ALL_GENRES_FILTER,
     movies,
+    filteredMovies: movies,
   });
 
   const tree = renderer

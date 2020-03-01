@@ -91,12 +91,10 @@ App.propTypes = {
     name: PropTypes.string,
     poster: PropTypes.string,
   })),
-  genreFilter: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   movies: state.movies,
-  genreFilter: state.genreFilter,
 });
 
 export {App};

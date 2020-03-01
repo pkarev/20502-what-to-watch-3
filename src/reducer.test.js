@@ -1,11 +1,25 @@
 import {reducer} from './reducer.js';
 import movies from './mocks/movies';
+import {ALL_GENRES_FILTER} from './reducer.js';
+import {ActionType} from './reducer';
 
 const initialState = {
-  genreFilter: `all`,
+  genreFilter: ALL_GENRES_FILTER,
   movies,
+  filteredMovies: movies,
 };
 
 it(`Reducer without params should return initial state`, () => {
   expect(reducer(undefined, {})).toEqual(initialState);
+});
+
+it(`Reducer should set genreFilter with correct value`, () => {
+  expect(reducer(initialState, {
+    type: ActionType.SET_GENRE_FILTER,
+    payload: `Drama`
+  })).toEqual({
+    genreFilter: `Drama`,
+    movies,
+    filteredMovies: movies,
+  });
 });
