@@ -1,7 +1,7 @@
 import {reducer} from './reducer.js';
-import movies from './mocks/movies';
+import movies from './mocks/movies.js';
 import {ALL_GENRES_FILTER} from './reducer.js';
-import {ActionType} from './reducer';
+import {ActionType} from './reducer.js';
 
 const initialState = {
   genreFilter: ALL_GENRES_FILTER,

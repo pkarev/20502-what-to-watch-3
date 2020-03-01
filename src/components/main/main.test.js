@@ -1,8 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
-import Main from './main.jsx';
 import {Provider} from 'react-redux';
+import Main from './main.jsx';
 import {ALL_GENRES_FILTER} from '../../reducer.js';
 
 const movies = [

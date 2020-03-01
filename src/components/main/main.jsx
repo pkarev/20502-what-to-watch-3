@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import MoviesList from '../movies-list/movies-list.jsx';
 import GenresFilter from '../genres-filter/genres-filter.jsx';
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer';
+import {ActionCreator} from '../../reducer.js';
 
 const Main = ({
   currentMovie: {genre, releaseDate},
