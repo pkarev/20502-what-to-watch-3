@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {connect} from 'react-redux';
 import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
 import VideoPlayer from '../video-player/video-player.jsx';
@@ -90,6 +91,13 @@ App.propTypes = {
     name: PropTypes.string,
     poster: PropTypes.string,
   })),
+  genreFilter: PropTypes.string.isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  movies: state.movies,
+  genreFilter: state.genreFilter,
+});
+
+export {App};
+export default connect(mapStateToProps)(App);
