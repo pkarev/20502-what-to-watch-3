@@ -10,10 +10,10 @@ const withActiveTab = (Component) => {
         activeTab: 0,
       };
 
-      this._onTabClick = this._onTabClick.bind(this);
+      this._handleTabClick = this._handleTabClick.bind(this);
     }
 
-    _onTabClick(index) {
+    _handleTabClick(index) {
       this.setState({activeTab: index});
     }
 
@@ -25,7 +25,7 @@ const withActiveTab = (Component) => {
         <Component
           {...this.props}
           activeTab={activeTab}
-          onTabClick={this._onTabClick}
+          onTabClick={this._handleTabClick}
         >
           {children}
         </Component>
