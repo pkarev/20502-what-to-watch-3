@@ -1,11 +1,6 @@
 import React from 'react';
-import Enzyme, {mount} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import MoviesList from './movies-list';
-
-Enzyme.configure({
-  adapter: new Adapter(),
-});
+import renderer from 'react-test-renderer';
+import SimilarMovies from './similar-movies';
 
 const movies = [
   {
@@ -25,13 +20,21 @@ const movies = [
     name: `Moonrise kindom`,
     posterSmall: `/img/moonrise-kingdom.jpg`,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  },
+  {
+    id: 4,
+    name: `Moonrise kindom`,
+    posterSmall: `/img/moonrise-kingdom.jpg`,
+    trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   }
 ];
 
-it(`Should update activeCard on small card click`, () => {
-  const moviesList = mount(<MoviesList movies={movies} onCardClick={() => {}}/>);
-  const secondCard = moviesList.find(`.small-movie-card`).at(1);
+it(`Render SimilarMovies`, () => {
+  const tree = renderer
+    .create(<SimilarMovies movies={movies} onCardClick={() => {}}/>, {
+      createNodeMock: () => ({})
+    })
+    .toJSON();
 
-  secondCard.simulate(`click`, {preventDefault: () => {}});
-  expect(moviesList.state().activeCard).toMatchObject(movies[1]);
+  expect(tree).toMatchSnapshot();
 });

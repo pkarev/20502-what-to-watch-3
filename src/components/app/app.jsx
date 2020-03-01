@@ -4,6 +4,7 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
 import VideoPlayer from '../video-player/video-player.jsx';
+import Tabs from '../tabs/tabs.jsx';
 
 const AppState = {
   MAIN: 1,
@@ -22,7 +23,7 @@ class App extends PureComponent {
     this._handleCardClick = this._handleCardClick.bind(this);
   }
 
-  _handleCardClick({activeCard}) {
+  _handleCardClick(activeCard) {
     this.setState({
       currentMovie: activeCard,
       appState: AppState.MOVIE_PAGE,
@@ -39,14 +40,13 @@ class App extends PureComponent {
           <Main
             currentMovie={currentMovie}
             movies={movies}
-            onMovieCaptionClick={() => {}}
             onCardClick={this._handleCardClick}
           />
         );
 
       case AppState.MOVIE_PAGE:
         return (
-          <MoviePage movie={currentMovie}/>
+          <MoviePage movie={currentMovie} similarMovies={movies} onCardClick={this._handleCardClick}/>
         );
 
       default:
@@ -55,6 +55,7 @@ class App extends PureComponent {
   }
 
   render() {
+    const {movies} = this.props;
     const {currentMovie} = this.state;
     const {trailer, posterSmall} = currentMovie;
 
@@ -65,10 +66,17 @@ class App extends PureComponent {
             {this._renderScreen()}
           </Route>
           <Route exact path="/dev-movie-page">
-            <MoviePage movie={currentMovie}/>
+            <MoviePage movie={currentMovie} similarMovies={movies} onCardClick={this._handleCardClick}/>
           </Route>
           <Route exact path="/dev-player">
             <VideoPlayer src={`${trailer}`} poster={`${posterSmall}`} style={{width: `400px`, height: `240px`}}/>
+          </Route>
+          <Route exact path="/dev-tabs">
+            <Tabs activeTab="one">
+              <div name="one">1</div>
+              <div name="two">2</div>
+              <div name="three">3</div>
+            </Tabs>
           </Route>
         </Switch>
       </BrowserRouter>

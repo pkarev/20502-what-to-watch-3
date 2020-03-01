@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render SimilarMovies 1`] = `
+<section
+  className="catalog catalog--like-this"
+>
+  <h2
+    className="catalog__title"
+  >
+    More like this
+  </h2>
+  <div
+    className="catalog__movies-list"
+  >
+    <article
+      className="small-movie-card catalog__movies-card"
+      onClick={[Function]}
+    >
+      <video
+        className="small-movie-card__image"
+        controls={false}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        poster="/img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+        style={
+          Object {
+            "objectFit": "cover",
+            "width": "100%",
+          }
+        }
+      >
+        <source />
+      </video>
+      <h3
+        className="small-movie-card__title"
+      >
+        <a
+          className="small-movie-card__link"
+          href="movie-page.html"
+        >
+          Fantastic Beasts
+        </a>
+      </h3>
+    </article>
+    <article
+      className="small-movie-card catalog__movies-card"
+      onClick={[Function]}
+    >
+      <video
+        className="small-movie-card__image"
+        controls={false}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        poster="/img/bohemian-rhapsody.jpg"
+        style={
+          Object {
+            "objectFit": "cover",
+            "width": "100%",
+          }
+        }
+      >
+        <source />
+      </video>
+      <h3
+        className="small-movie-card__title"
+      >
+        <a
+          className="small-movie-card__link"
+          href="movie-page.html"
+        >
+          Bohemian Rhapsody
+        </a>
+      </h3>
+    </article>
+    <article
+      className="small-movie-card catalog__movies-card"
+      onClick={[Function]}
+    >
+      <video
+        className="small-movie-card__image"
+        controls={false}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        poster="/img/moonrise-kingdom.jpg"
+        style={
+          Object {
+            "objectFit": "cover",
+            "width": "100%",
+          }
+        }
+      >
+        <source />
+      </video>
+      <h3
+        className="small-movie-card__title"
+      >
+        <a
+          className="small-movie-card__link"
+          href="movie-page.html"
+        >
+          Moonrise kindom
+        </a>
+      </h3>
+    </article>
+    <article
+      className="small-movie-card catalog__movies-card"
+      onClick={[Function]}
+    >
+      <video
+        className="small-movie-card__image"
+        controls={false}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        poster="/img/moonrise-kingdom.jpg"
+        style={
+          Object {
+            "objectFit": "cover",
+            "width": "100%",
+          }
+        }
+      >
+        <source />
+      </video>
+      <h3
+        className="small-movie-card__title"
+      >
+        <a
+          className="small-movie-card__link"
+          href="movie-page.html"
+        >
+          Moonrise kindom
+        </a>
+      </h3>
+    </article>
+  </div>
+</section>
+`;
