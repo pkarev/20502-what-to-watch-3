@@ -6,7 +6,6 @@ import {ActionType} from './reducer.js';
 const initialState = {
   activeGenreFilter: ALL_GENRES_FILTER,
   movies,
-  filteredMovies: movies,
 };
 
 it(`Reducer without params should return initial state`, () => {
@@ -20,6 +19,5 @@ it(`Reducer should set genreFilter with correct value`, () => {
   })).toEqual({
     activeGenreFilter: `Drama`,
     movies,
-    filteredMovies: movies,
   });
 });

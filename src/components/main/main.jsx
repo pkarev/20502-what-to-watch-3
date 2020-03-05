@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import MoviesList from '../movies-list/movies-list.jsx';
 import GenresFilter from '../genres-filter/genres-filter.jsx';
-import {ActionCreator} from '../../reducer.js';
-import {ALL_GENRES_FILTER} from '../../reducer';
+import {ActionCreator, ALL_GENRES_FILTER} from '../../reducer.js';
 
 const Main = ({
   currentMovie: {genre, releaseDate},
@@ -134,14 +133,15 @@ Main.propTypes = {
 
 const mapStateToProps = (state) => ({
   movies: state.movies,
-  filteredMovies: state.filteredMovies,
+  filteredMovies: state.activeGenreFilter === ALL_GENRES_FILTER ?
+    state.movies :
+    state.movies.filter((movie) => movie.genre === state.activeGenreFilter),
   activeGenreFilter: state.activeGenreFilter,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onGenresFilterClick(filter) {
     dispatch(ActionCreator.setGenresFilter(filter));
-    dispatch(ActionCreator.getFilteredMovies(filter));
   }
 });
 
