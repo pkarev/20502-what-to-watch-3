@@ -39,6 +39,7 @@ it(`Render App`, () => {
     movies,
     activeGenreFilter: ALL_GENRES_FILTER,
     filteredMovies: movies,
+    genresList: [ALL_GENRES_FILTER, `Awesome genre`, `Drama`, `Some genre`],
   });
 
   const tree = renderer

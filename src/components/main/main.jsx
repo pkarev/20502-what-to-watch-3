@@ -7,18 +7,12 @@ import {ActionCreator, ALL_GENRES_FILTER} from '../../reducer.js';
 
 const Main = ({
   currentMovie: {genre, releaseDate},
-  movies,
   filteredMovies,
   activeGenreFilter,
   onCardClick,
-  onGenresFilterClick
+  onGenresFilterClick,
+  genresList
 }) => {
-  let genresList = [ALL_GENRES_FILTER];
-  movies.map((movie) => {
-    genresList.push(movie.genre);
-  });
-  genresList = Array.from(new Set(genresList)).sort();
-
   return (
     <React.Fragment>
       <section className="movie-card">
@@ -129,6 +123,7 @@ Main.propTypes = {
     name: PropTypes.string.isRequired,
     posterSmall: PropTypes.string.isRequired,
   })),
+  genresList: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -137,6 +132,7 @@ const mapStateToProps = (state) => ({
     state.movies :
     state.movies.filter((movie) => movie.genre === state.activeGenreFilter),
   activeGenreFilter: state.activeGenreFilter,
+  genresList: state.genresList,
 });
 
 const mapDispatchToProps = (dispatch) => ({
