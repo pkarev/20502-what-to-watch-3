@@ -1,25 +1,13 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import GenresFilter from './genres-filter.jsx';
+import {ALL_GENRES_FILTER} from '../../reducer';
 
-const movies = [
-  {
-    id: 1,
-    genre: `drama`,
-  },
-  {
-    id: 2,
-    genre: `comedy`,
-  },
-  {
-    id: 3,
-    genre: `action`,
-  }
-];
+const genresList = [ALL_GENRES_FILTER, `action`, `comedy`, `drama`];
 
 it(`Render GenresFilter`, () => {
   const tree = renderer
-    .create(<GenresFilter movies={movies} genreFilter="drama" onGenresFilterClick={() => {}}/>)
+    .create(<GenresFilter genresList={genresList} activeFilter="drama" onGenresFilterClick={() => {}}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

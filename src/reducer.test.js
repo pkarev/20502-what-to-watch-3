@@ -4,7 +4,7 @@ import {ALL_GENRES_FILTER} from './reducer.js';
 import {ActionType} from './reducer.js';
 
 const initialState = {
-  genreFilter: ALL_GENRES_FILTER,
+  activeGenreFilter: ALL_GENRES_FILTER,
   movies,
   filteredMovies: movies,
 };
@@ -18,7 +18,7 @@ it(`Reducer should set genreFilter with correct value`, () => {
     type: ActionType.SET_GENRE_FILTER,
     payload: `Drama`
   })).toEqual({
-    genreFilter: `Drama`,
+    activeGenreFilter: `Drama`,
     movies,
     filteredMovies: movies,
   });

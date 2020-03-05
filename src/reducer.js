@@ -3,7 +3,7 @@ import movies from './mocks/movies.js';
 const ALL_GENRES_FILTER = `All genres`;
 
 const initialState = {
-  genreFilter: ALL_GENRES_FILTER,
+  activeGenreFilter: ALL_GENRES_FILTER,
   movies,
   filteredMovies: movies,
 };
@@ -17,7 +17,7 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.SET_GENRE_FILTER:
       return (Object.assign({}, state, {
-        genreFilter: action.payload,
+        activeGenreFilter: action.payload,
       }));
     case ActionType.GET_FILTERED_MOVIES:
       return (Object.assign({}, state, {

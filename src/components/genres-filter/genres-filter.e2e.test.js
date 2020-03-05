@@ -8,27 +8,14 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-const movies = [
-  {
-    id: 3,
-    genre: `action`,
-  },
-  {
-    id: 2,
-    genre: `comedy`,
-  },
-  {
-    id: 1,
-    genre: `drama`,
-  },
-];
+const genresList = [ALL_GENRES_FILTER, `drama`, `comedy`, `action`];
 
 it(`On filter click it calls callsback with correct genre as argument`, () => {
   const onGenresFilterClick = jest.fn();
   const genresFilter = shallow(
       <GenresFilter
-        movies={movies}
-        genreFilter={movies[0].genre}
+        genresList={genresList}
+        activeFilter={ALL_GENRES_FILTER}
         onGenresFilterClick={onGenresFilterClick}
       />);
   const links = genresFilter.find(`.catalog__genres-link`);
@@ -37,5 +24,5 @@ it(`On filter click it calls callsback with correct genre as argument`, () => {
   links.at(1).simulate(`click`, {preventDefault: () => {}});
 
   expect(onGenresFilterClick.mock.calls[0][0]).toEqual(ALL_GENRES_FILTER);
-  expect(onGenresFilterClick.mock.calls[1][0]).toEqual(movies[0].genre);
+  expect(onGenresFilterClick.mock.calls[1][0]).toEqual(genresList[1]);
 });

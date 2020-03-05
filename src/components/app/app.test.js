@@ -36,8 +36,8 @@ const mockStore = configureStore([]);
 
 it(`Render App`, () => {
   const store = mockStore({
-    genreFilter: ALL_GENRES_FILTER,
     movies,
+    activeGenreFilter: ALL_GENRES_FILTER,
     filteredMovies: movies,
   });
 
