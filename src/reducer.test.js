@@ -15,7 +15,7 @@ it(`Reducer without params should return initial state`, () => {
 
 it(`Reducer should set genreFilter with correct value`, () => {
   expect(reducer(initialState, {
-    type: ActionType.SET_GENRE_FILTER,
+    type: ActionType.SET_GENRES_FILTER,
     payload: `Drama`
   })).toEqual({
     activeGenreFilter: `Drama`,

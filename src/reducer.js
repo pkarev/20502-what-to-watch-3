@@ -9,13 +9,13 @@ const initialState = {
 };
 
 const ActionType = {
-  SET_GENRE_FILTER: `SET_GENRE_FILTER`,
+  SET_GENRES_FILTER: `SET_GENRES_FILTER`,
   SET_GENRES_LIST: `SET_GENRES_LIST`,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.SET_GENRE_FILTER:
+    case ActionType.SET_GENRES_FILTER:
       return (Object.assign({}, state, {
         activeGenreFilter: action.payload,
       }));
@@ -30,19 +30,13 @@ const reducer = (state = initialState, action) => {
 
 const ActionCreator = {
   setGenresFilter: (genreFilter) => ({
-    type: ActionType.SET_GENRE_FILTER,
+    type: ActionType.SET_GENRES_FILTER,
     payload: genreFilter,
   }),
-  setGenresList: () => {
-    let genresList = [ALL_GENRES_FILTER];
-    movies.map((movie) => {
-      genresList.push(movie.genre);
-    });
-    genresList = Array.from(new Set(genresList)).sort();
-
+  setGenresList: (uniqueGenres) => {
     return {
       type: ActionType.SET_GENRES_LIST,
-      payload: genresList,
+      payload: uniqueGenres,
     };
   },
 };

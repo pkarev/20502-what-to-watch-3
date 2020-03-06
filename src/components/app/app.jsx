@@ -6,7 +6,7 @@ import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
 import VideoPlayer from '../video-player/video-player.jsx';
 import Tabs from '../tabs/tabs.jsx';
-import {ActionCreator} from '../../reducer';
+import {ActionCreator, ALL_GENRES_FILTER} from '../../reducer';
 
 const AppState = {
   MAIN: 1,
@@ -57,8 +57,14 @@ class App extends PureComponent {
   }
 
   componentDidMount() {
-    const {onAppDidMount} = this.props;
-    onAppDidMount();
+    const {setGenresList, movies} = this.props;
+    let genresList = [ALL_GENRES_FILTER];
+    movies.map((movie) => {
+      genresList.push(movie.genre);
+    });
+    genresList = Array.from(new Set(genresList)).sort();
+
+    setGenresList(genresList);
   }
 
   render() {
@@ -97,7 +103,7 @@ App.propTypes = {
     name: PropTypes.string,
     poster: PropTypes.string,
   })),
-  onAppDidMount: PropTypes.func.isRequired,
+  setGenresList: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -105,8 +111,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onAppDidMount() {
-    dispatch(ActionCreator.setGenresList());
+  setGenresList(genresList) {
+    dispatch(ActionCreator.setGenresList(genresList));
   }
 });
 
