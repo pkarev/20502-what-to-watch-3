@@ -40,7 +40,6 @@ it(`Render Main`, () => {
   const store = mockStore({
     activeGenreFilter: ALL_GENRES_FILTER,
     movies,
-    filteredMovies: movies,
     genresList: [ALL_GENRES_FILTER, `Awesome genre`, `Drama`, `Some genre`],
   });
 

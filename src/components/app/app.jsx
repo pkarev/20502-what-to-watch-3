@@ -41,7 +41,6 @@ class App extends PureComponent {
         return (
           <Main
             currentMovie={currentMovie}
-            movies={movies}
             onCardClick={this._handleCardClick}
           />
         );

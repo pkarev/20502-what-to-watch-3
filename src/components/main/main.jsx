@@ -110,11 +110,6 @@ Main.propTypes = {
     genre: PropTypes.string.isRequired,
     releaseDate: PropTypes.number.isRequired,
   }),
-  movies: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    posterSmall: PropTypes.string.isRequired,
-  })),
   onCardClick: PropTypes.func.isRequired,
   onGenresFilterClick: PropTypes.func.isRequired,
   activeGenreFilter: PropTypes.string.isRequired,
@@ -127,7 +122,6 @@ Main.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  movies: state.movies,
   filteredMovies: state.activeGenreFilter === ALL_GENRES_FILTER ?
     state.movies :
     state.movies.filter((movie) => movie.genre === state.activeGenreFilter),
