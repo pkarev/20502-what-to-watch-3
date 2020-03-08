@@ -23,7 +23,7 @@ const movies = [
     id: 2,
     name: `Bohemian Rhapsody`,
     trailer: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    genre: `Drama`,
+    genre: `Documental`,
     posterBig: `/img/bg-the-grand-budapest-hotel.jpg`,
     posterSmall: `/img/bohemian-rhapsody.jpg`,
     releaseDate: 2014,
@@ -42,7 +42,7 @@ const movies = [
   {
     id: 3,
     name: `Moonrise kindom`,
-    genre: `Drama`,
+    genre: `Comedy`,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     posterBig: `/img/bg-the-grand-budapest-hotel.jpg`,
     posterSmall: `/img/moonrise-kingdom.jpg`,

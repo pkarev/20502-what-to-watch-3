@@ -1,10 +1,12 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {connect} from 'react-redux';
 import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
 import VideoPlayer from '../video-player/video-player.jsx';
 import Tabs from '../tabs/tabs.jsx';
+import {ActionCreator, ALL_GENRES_FILTER} from '../../reducer';
 
 const AppState = {
   MAIN: 1,
@@ -39,7 +41,6 @@ class App extends PureComponent {
         return (
           <Main
             currentMovie={currentMovie}
-            movies={movies}
             onCardClick={this._handleCardClick}
           />
         );
@@ -52,6 +53,17 @@ class App extends PureComponent {
       default:
         return null;
     }
+  }
+
+  componentDidMount() {
+    const {setGenresList, movies} = this.props;
+    let genresList = [ALL_GENRES_FILTER];
+    movies.map((movie) => {
+      genresList.push(movie.genre);
+    });
+    genresList = Array.from(new Set(genresList)).sort();
+
+    setGenresList(genresList);
   }
 
   render() {
@@ -90,6 +102,19 @@ App.propTypes = {
     name: PropTypes.string,
     poster: PropTypes.string,
   })),
+  setGenresList: PropTypes.func.isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  movies: state.movies,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setGenresList(genresList) {
+    dispatch(ActionCreator.setGenresList(genresList));
+  }
+});
+
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
