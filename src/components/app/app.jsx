@@ -4,7 +4,6 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
-import VideoPlayer from '../video-player/video-player.jsx';
 import Tabs from '../tabs/tabs.jsx';
 import {ActionCreator, ALL_GENRES_FILTER} from '../../reducer';
 
@@ -69,7 +68,6 @@ class App extends PureComponent {
   render() {
     const {movies} = this.props;
     const {currentMovie} = this.state;
-    const {trailer, posterSmall} = currentMovie;
 
     return (
       <BrowserRouter>
@@ -79,9 +77,6 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/dev-movie-page">
             <MoviePage movie={currentMovie} similarMovies={movies} onCardClick={this._handleCardClick}/>
-          </Route>
-          <Route exact path="/dev-player">
-            <VideoPlayer src={`${trailer}`} poster={`${posterSmall}`} style={{width: `400px`, height: `240px`}}/>
           </Route>
           <Route exact path="/dev-tabs">
             <Tabs activeTab="one">

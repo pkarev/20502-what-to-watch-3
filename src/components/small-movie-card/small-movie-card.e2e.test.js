@@ -1,5 +1,5 @@
 import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
+import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import SmallMovieCard from './small-movie-card';
 
@@ -16,7 +16,14 @@ const movie = {
 
 it(`When user clicks card, callback gets current movie as argument`, () => {
   const captionHoverHandler = jest.fn();
-  const smallMovieCardComponent = shallow(<SmallMovieCard movie={movie} onCardClick={captionHoverHandler}/>);
+  const smallMovieCardComponent = mount(
+      <SmallMovieCard
+        movie={movie}
+        onCardClick={captionHoverHandler}
+      />, {
+        createNodeMock: () => ({})
+      }
+  );
   const smallMovieCard = smallMovieCardComponent.find(`.small-movie-card`);
 
   smallMovieCard.simulate(`click`, {preventDefault: () => {}, stopPropagation: () => {}});

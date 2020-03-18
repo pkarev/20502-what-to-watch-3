@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import VideoPlayer from '../video-player/video-player.jsx';
+import withVideo from '../../hocs/with-video/with-video.jsx';
 
 const SmallMovieCard = (props) => {
-  const {movie, onCardClick} = props;
+  const {movie, onCardClick, renderVideo} = props;
   const {name, posterSmall: poster, trailer} = movie;
 
   return (
@@ -12,7 +12,7 @@ const SmallMovieCard = (props) => {
       evt.stopPropagation();
       onCardClick(movie);
     }}>
-      <VideoPlayer className="small-movie-card__image" src={`${trailer}`} poster={`${poster}`}/>
+      {renderVideo(trailer, poster, `small-movie-card__image`)}
       <h3 className="small-movie-card__title">
         <a className="small-movie-card__link" href="movie-page.html">
           {name}
@@ -29,7 +29,8 @@ SmallMovieCard.propTypes = {
     posterSmall: PropTypes.string.isRequired,
     trailer: PropTypes.string.isRequired
   }),
+  renderVideo: PropTypes.func.isRequired,
   onCardClick: PropTypes.func.isRequired,
 };
 
-export default SmallMovieCard;
+export default withVideo(SmallMovieCard);
