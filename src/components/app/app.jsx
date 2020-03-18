@@ -18,22 +18,22 @@ class App extends PureComponent {
 
     this.state = {
       appState: AppState.MAIN,
-      currentMovie: props.movies[0],
     };
 
     this._handleCardClick = this._handleCardClick.bind(this);
   }
 
   _handleCardClick(activeCard) {
+    const {setCurrentMovie} = this.props;
+
+    setCurrentMovie(activeCard);
     this.setState({
-      currentMovie: activeCard,
       appState: AppState.MOVIE_PAGE,
     });
   }
 
   _renderScreen() {
-    const {movies} = this.props;
-    const {currentMovie} = this.state;
+    const {movies, currentMovie} = this.props;
 
     switch (this.state.appState) {
       case AppState.MAIN:
@@ -66,8 +66,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {movies} = this.props;
-    const {currentMovie} = this.state;
+    const {movies, currentMovie} = this.props;
 
     return (
       <BrowserRouter>
@@ -97,19 +96,28 @@ App.propTypes = {
     name: PropTypes.string,
     poster: PropTypes.string,
   })),
+  currentMovie: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    poster: PropTypes.string,
+  }),
   setGenresList: PropTypes.func.isRequired,
+  setCurrentMovie: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   movies: state.movies,
+  currentMovie: state.currentMovie
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setGenresList(genresList) {
     dispatch(ActionCreator.setGenresList(genresList));
+  },
+  setCurrentMovie(currentMovie) {
+    dispatch(ActionCreator.setCurrentMovie(currentMovie));
   }
 });
-
 
 export {App};
 export default connect(mapStateToProps, mapDispatchToProps)(App);
