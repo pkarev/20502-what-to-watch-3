@@ -33,4 +33,4 @@ SmallMovieCard.propTypes = {
   onCardClick: PropTypes.func.isRequired,
 };
 
-export default withVideo(SmallMovieCard);
+export default withVideo(React.memo(SmallMovieCard));

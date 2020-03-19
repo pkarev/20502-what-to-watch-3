@@ -30,4 +30,4 @@ SimilarMovies.propTypes = {
   onCardClick: PropTypes.func.isRequired,
 };
 
-export default SimilarMovies;
+export default React.memo(SimilarMovies);
