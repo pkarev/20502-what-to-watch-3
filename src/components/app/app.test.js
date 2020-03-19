@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import App from './app.jsx';
-import {ALL_GENRES_FILTER} from '../../reducer.js';
+import {ALL_GENRES_FILTER, Screen} from '../../reducer.js';
 
 const movies = [
   {
@@ -41,6 +41,7 @@ it(`Render App`, () => {
     filteredMovies: movies,
     genresList: [ALL_GENRES_FILTER, `Awesome genre`, `Drama`, `Some genre`],
     currentMovie: movies[0],
+    activeScreen: Screen.MAIN,
   });
 
   const tree = renderer

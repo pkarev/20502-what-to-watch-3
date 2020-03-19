@@ -2,17 +2,24 @@ import movies from './mocks/movies.js';
 
 const ALL_GENRES_FILTER = `All genres`;
 
+const Screen = {
+  MAIN: 1,
+  MOVIE_PAGE: 2,
+};
+
 const initialState = {
   activeGenreFilter: ALL_GENRES_FILTER,
   movies,
   genresList: [],
   currentMovie: movies[0],
+  activeScreen: Screen.MAIN,
 };
 
 const ActionType = {
   SET_GENRES_FILTER: `SET_GENRES_FILTER`,
   SET_GENRES_LIST: `SET_GENRES_LIST`,
   SET_CURRENT_MOVIE: `SET_CURRENT_MOVIE`,
+  SET_ACTIVE_SCREEN: `SET_ACTIVE_SCREEN`,
 };
 
 const reducer = (state = initialState, action) => {
@@ -28,6 +35,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_CURRENT_MOVIE:
       return (Object.assign({}, state, {
         currentMovie: action.payload,
+      }));
+    case ActionType.SET_ACTIVE_SCREEN:
+      return (Object.assign({}, state, {
+        activeScreen: action.payload,
       }));
   }
 
@@ -46,7 +57,11 @@ const ActionCreator = {
   setCurrentMovie: (currentMovie) => ({
     type: ActionType.SET_CURRENT_MOVIE,
     payload: currentMovie,
+  }),
+  setActiveScreen: (screen) => ({
+    type: ActionType.SET_ACTIVE_SCREEN,
+    payload: screen
   })
 };
 
-export {reducer, ActionCreator, ActionType, ALL_GENRES_FILTER};
+export {reducer, ActionCreator, ActionType, Screen, ALL_GENRES_FILTER};

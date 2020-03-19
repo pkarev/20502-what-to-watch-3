@@ -5,38 +5,27 @@ import {connect} from 'react-redux';
 import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
 import Tabs from '../tabs/tabs.jsx';
-import {ActionCreator, ALL_GENRES_FILTER} from '../../reducer';
-
-const AppState = {
-  MAIN: 1,
-  MOVIE_PAGE: 2,
-};
+import {ActionCreator, Screen, ALL_GENRES_FILTER} from '../../reducer';
 
 class App extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      appState: AppState.MAIN,
-    };
-
     this._handleCardClick = this._handleCardClick.bind(this);
   }
 
   _handleCardClick(activeCard) {
-    const {setCurrentMovie} = this.props;
+    const {setCurrentMovie, setActiveScreen} = this.props;
 
     setCurrentMovie(activeCard);
-    this.setState({
-      appState: AppState.MOVIE_PAGE,
-    });
+    setActiveScreen(Screen.MOVIE_PAGE);
   }
 
   _renderScreen() {
-    const {movies, currentMovie} = this.props;
+    const {movies, currentMovie, activeScreen} = this.props;
 
-    switch (this.state.appState) {
-      case AppState.MAIN:
+    switch (activeScreen) {
+      case Screen.MAIN:
         return (
           <Main
             currentMovie={currentMovie}
@@ -44,7 +33,7 @@ class App extends PureComponent {
           />
         );
 
-      case AppState.MOVIE_PAGE:
+      case Screen.MOVIE_PAGE:
         return (
           <MoviePage movie={currentMovie} similarMovies={movies} onCardClick={this._handleCardClick}/>
         );
@@ -79,9 +68,9 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/dev-tabs">
             <Tabs activeTab="one">
-              <div name="one">1</div>
-              <div name="two">2</div>
-              <div name="three">3</div>
+              <div>1</div>
+              <div>2</div>
+              <div>3</div>
             </Tabs>
           </Route>
         </Switch>
@@ -101,13 +90,16 @@ App.propTypes = {
     name: PropTypes.string,
     poster: PropTypes.string,
   }),
+  activeScreen: PropTypes.number.isRequired,
   setGenresList: PropTypes.func.isRequired,
   setCurrentMovie: PropTypes.func.isRequired,
+  setActiveScreen: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   movies: state.movies,
-  currentMovie: state.currentMovie
+  currentMovie: state.currentMovie,
+  activeScreen: state.activeScreen
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -116,6 +108,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   setCurrentMovie(currentMovie) {
     dispatch(ActionCreator.setCurrentMovie(currentMovie));
+  },
+  setActiveScreen(screen) {
+    dispatch(ActionCreator.setActiveScreen(screen));
   }
 });
 
