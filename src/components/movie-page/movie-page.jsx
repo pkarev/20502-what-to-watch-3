@@ -274,4 +274,4 @@ MoviePage.propTypes = {
   onCardClick: PropTypes.func.isRequired,
 };
 
-export default MoviePage;
+export default React.memo(MoviePage);

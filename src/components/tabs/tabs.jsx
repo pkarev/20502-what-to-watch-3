@@ -35,4 +35,4 @@ Tabs.propTypes = {
   onTabClick: PropTypes.func.isRequired,
 };
 
-export default withActiveTab(Tabs);
+export default withActiveTab(React.memo(Tabs));
