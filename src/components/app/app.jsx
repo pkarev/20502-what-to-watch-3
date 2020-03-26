@@ -45,11 +45,11 @@ class App extends PureComponent {
 
   componentDidMount() {
     const {setGenresList, movies} = this.props;
-    let genresList = [ALL_GENRES_FILTER];
+    let genresList = [];
     movies.map((movie) => {
       genresList.push(movie.genre);
     });
-    genresList = Array.from(new Set(genresList)).sort();
+    genresList = [ALL_GENRES_FILTER, ...Array.from(new Set(genresList)).sort()];
 
     setGenresList(genresList);
   }
