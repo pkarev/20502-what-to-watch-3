@@ -2,7 +2,7 @@ import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import GenresFilter from './genres-filter.jsx';
-import {ALL_GENRES_FILTER} from '../../reducer.js';
+import {ALL_GENRES_FILTER} from '../../reducer/app-state/app-state';
 
 Enzyme.configure({
   adapter: new Adapter(),

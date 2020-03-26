@@ -4,8 +4,9 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
 import App from './components/app/app.jsx';
-import {reducer, Operation} from './reducer.js';
+import reducer from './reducer/reducer.js';
 import {createAPI} from './api.js';
+import {Operation as DataOperation} from './reducer/data/data.js';
 
 const onUnauthorized = () => {};
 
@@ -19,7 +20,10 @@ const store = createStore(
     )
 );
 
-store.dispatch(Operation.loadMovies())
+Promise.all([
+  store.dispatch(DataOperation.loadMovies()),
+  store.dispatch(DataOperation.loadPromoMovie())
+])
   .then(() => {
     ReactDOM.render(
         <Provider store={store}>
