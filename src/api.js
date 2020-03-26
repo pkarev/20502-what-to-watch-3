@@ -1,33 +1,33 @@
 import axios from 'axios';
 
-const ResponseCode = {
+const ResponseStatusCode = {
   UNAUTHORIZED: 401,
 };
 
-const createAPI = (onUnauthorized) => {
+export const createAPI = (onUnauthorized) => {
   const api = axios.create({
     baseURL: `https://htmlacademy-react-3.appspot.com/wtw`,
-    timeout: 5000,
-    withCredentials: true
+    timeout: 1000 * 5,
+    withCredentials: true,
   });
 
-  const onSuccess = (responce) => {
-    return responce;
+  const onSuccess = (response) => {
+    return response;
   };
 
-  const onFail = (error) => {
-    const {response} = error;
+  const onFail = (err) => {
+    const {response} = err;
 
-    if (response.code === ResponseCode.UNAUTHORIZED) {
+    if (response.status === ResponseStatusCode.UNAUTHORIZED) {
       onUnauthorized();
 
-      throw error;
+      throw err;
     }
 
-    throw error;
+    throw err;
   };
 
   api.interceptors.response.use(onSuccess, onFail);
-};
 
-export default createAPI;
+  return api;
+};

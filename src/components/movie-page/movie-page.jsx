@@ -89,11 +89,7 @@ const MoviePage = (
                 </div>
 
                 <div className="movie-card__text">
-                  {description.map((para, index) => (
-                    <p key={`${index}-para`}>
-                      {para}
-                    </p>
-                  ))}
+                  <p>{description}</p>
 
                   <p className="movie-card__director">
                     <strong>Director: {director}</strong>
@@ -255,11 +251,11 @@ MoviePage.propTypes = {
     genre: PropTypes.string,
     releaseDate: PropTypes.number,
     rating: PropTypes.shape({
-      number: PropTypes.string,
-      name: PropTypes.string,
+      number: PropTypes.number,
+      name: PropTypes.number,
       count: PropTypes.number,
     }),
-    description: PropTypes.arrayOf(PropTypes.string),
+    description: PropTypes.string,
     director: PropTypes.string,
     stars: PropTypes.arrayOf(PropTypes.string),
     posterBig: PropTypes.string,
