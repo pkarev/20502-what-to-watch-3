@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
 import Tabs from '../tabs/tabs.jsx';
-import {ActionCreator, ALL_GENRES_FILTER, Screen} from '../../reducer/app-state/app-state.js';
+import {ActionCreator, Screen} from '../../reducer/app-state/app-state.js';
 import {getActiveScreen} from '../../reducer/app-state/selectors.js';
 import {getPromoMovie, getMovies} from '../../reducer/data/selectors';
 import {getActiveMovie} from '../../reducer/app-state/selectors.js';
@@ -44,17 +44,6 @@ class App extends PureComponent {
       default:
         return null;
     }
-  }
-
-  componentDidMount() {
-    const {setGenresList, movies} = this.props;
-    let genresList = [];
-    movies.map((movie) => {
-      genresList.push(movie.genre);
-    });
-    genresList = [ALL_GENRES_FILTER, ...Array.from(new Set(genresList)).sort()];
-
-    setGenresList(genresList);
   }
 
   render() {
@@ -99,7 +88,6 @@ App.propTypes = {
     poster: PropTypes.string,
   }),
   activeScreen: PropTypes.number.isRequired,
-  setGenresList: PropTypes.func.isRequired,
   setActiveMovie: PropTypes.func.isRequired,
   setActiveScreen: PropTypes.func.isRequired,
 };
@@ -112,9 +100,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setGenresList(genresList) {
-    dispatch(ActionCreator.setGenresList(genresList));
-  },
   setActiveMovie(movie) {
     dispatch(ActionCreator.setActiveMovie(movie));
   },

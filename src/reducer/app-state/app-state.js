@@ -24,10 +24,6 @@ const ActionCreator = {
     type: ActionType.SET_GENRES_FILTER,
     payload: genreFilter,
   }),
-  setGenresList: (uniqueGenres) => ({
-    type: ActionType.SET_GENRES_LIST,
-    payload: uniqueGenres,
-  }),
   setActiveMovie: (activeMovie) => ({
     type: ActionType.SET_ACTIVE_MOVIE,
     payload: activeMovie,

@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 import MoviesList from '../movies-list/movies-list.jsx';
 import GenresFilter from '../genres-filter/genres-filter.jsx';
 import {ActionCreator, ALL_GENRES_FILTER} from '../../reducer/app-state/app-state.js';
-import {getMovies} from '../../reducer/data/selectors';
-import {getActiveGenreFilter, getGenresList} from '../../reducer/app-state/selectors';
+import {getGenresList, getMovies} from '../../reducer/data/selectors.js';
+import {getActiveGenreFilter} from '../../reducer/app-state/selectors.js';
 
 const Main = ({
   promoMovie: {genre, releaseDate},
