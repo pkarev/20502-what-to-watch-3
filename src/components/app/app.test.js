@@ -9,7 +9,7 @@ const movies = [
   {
     id: 1,
     name: `Fantastic Beasts`,
-    posterSmall: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    previewImage: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     genre: `Awesome genre`,
     releaseDate: 2020,
@@ -17,7 +17,7 @@ const movies = [
   {
     id: 2,
     name: `Bohemian Rhapsody`,
-    posterSmall: `/img/bohemian-rhapsody.jpg`,
+    previewImage: `/img/bohemian-rhapsody.jpg`,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     genre: `Drama`,
     releaseDate: 2020,
@@ -25,7 +25,7 @@ const movies = [
   {
     id: 3,
     name: `Moonrise kindom`,
-    posterSmall: `/img/moonrise-kingdom.jpg`,
+    previewImage: `/img/moonrise-kingdom.jpg`,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     genre: `Some genre`,
     releaseDate: 2020,

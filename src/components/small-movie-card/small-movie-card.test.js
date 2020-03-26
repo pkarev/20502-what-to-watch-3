@@ -5,7 +5,7 @@ import SmallMovieCard from './small-movie-card';
 const movie = {
   id: 1,
   name: `Fantastic Beasts`,
-  posterSmall: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+  previewImage: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
   trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
 };
 

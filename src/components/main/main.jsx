@@ -114,7 +114,7 @@ Main.propTypes = {
   filteredMovies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    posterSmall: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
   })),
   genresList: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

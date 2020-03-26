@@ -48,7 +48,7 @@ const Operation = {
   loadMovies: () => (dispatch, getState, api) => {
     return api.get(`/films`)
       .then((response) => {
-        dispatch(ActionCreator.loadMovies(adaptFilmsToMovies(response.data)));
+        dispatch(ActionCreator.loadMovies(adaptFilmsToApp(response.data)));
       });
   }
 };
@@ -81,7 +81,7 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-const adaptFilmsToMovies = (films) => {
+const adaptFilmsToApp = (films) => {
   return films.map((film) => {
     const {
       id,
@@ -91,16 +91,14 @@ const adaptFilmsToMovies = (films) => {
       director,
       starring: stars,
       released: releaseDate,
+      video_link: trailer,
 
       poster_image: poster,
-      preview_image: posterSmall,
+      preview_image: previewImage,
       background_image: posterBig,
 
       rating: ratingNumber,
-      rating: ratingName,
       scores_count: ratingCount,
-
-      video_link: trailer,
     } = film;
     return {
       id,
@@ -111,16 +109,51 @@ const adaptFilmsToMovies = (films) => {
       stars,
       releaseDate,
       poster,
-      posterSmall,
+      previewImage,
       posterBig,
       trailer,
       rating: {
         number: ratingNumber,
-        name: ratingName,
+        name: getRatingName(ratingNumber),
         count: ratingCount,
       }
     };
   });
+};
+
+const RatingNameUpperBoundary = {
+  BAD: 3,
+  NORMAL: 5,
+  GOOD: 8,
+  VERY_GOOD: 10,
+};
+
+const RatingName = {
+  BAD: `Bad`,
+  NORMAL: `Normal`,
+  GOOD: `Good`,
+  VERY_GOOD: `Very good`,
+  AWESOME: `Awesome`,
+};
+
+const getRatingName = (value) => {
+  if (value < RatingNameUpperBoundary.BAD) {
+    return RatingName.BAD;
+  }
+
+  if (value < RatingNameUpperBoundary.NORMAL) {
+    return RatingName.NORMAL;
+  }
+
+  if (value < RatingNameUpperBoundary.GOOD) {
+    return RatingName.GOOD;
+  }
+
+  if (value < RatingNameUpperBoundary.VERY_GOOD) {
+    return RatingName.VERY_GOOD;
+  }
+
+  return RatingName.AWESOME;
 };
 
 export {reducer, ActionCreator, ActionType, Screen, ALL_GENRES_FILTER, Operation};

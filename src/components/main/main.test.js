@@ -9,21 +9,21 @@ const movies = [
   {
     id: 1,
     name: `Fantastic Beasts`,
-    posterSmall: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    previewImage: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
     genre: `Awesome genre`,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
     id: 2,
     name: `Bohemian Rhapsody`,
-    posterSmall: `/img/bohemian-rhapsody.jpg`,
+    previewImage: `/img/bohemian-rhapsody.jpg`,
     genre: `Drama`,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
     id: 3,
     name: `Moonrise kindom`,
-    posterSmall: `/img/moonrise-kingdom.jpg`,
+    previewImage: `/img/moonrise-kingdom.jpg`,
     genre: `Some genre`,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
   },
