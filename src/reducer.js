@@ -1,5 +1,3 @@
-import movies from './mocks/movies.js';
-
 const ALL_GENRES_FILTER = `All genres`;
 
 const Screen = {
