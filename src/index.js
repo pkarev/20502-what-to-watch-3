@@ -7,6 +7,7 @@ import App from './components/app/app.jsx';
 import reducer from './reducer/reducer.js';
 import {createAPI} from './api.js';
 import {Operation as DataOperation} from './reducer/data/data.js';
+import {ActionCreator, Screen} from './reducer/app-state/app-state.js';
 
 const onUnauthorized = () => {};
 
@@ -24,7 +25,10 @@ Promise.all([
   store.dispatch(DataOperation.loadMovies()),
   store.dispatch(DataOperation.loadPromoMovie())
 ])
-  .then(() => {
+  .catch(() => {
+    store.dispatch(ActionCreator.setActiveScreen(Screen.ERROR_PAGE));
+  })
+  .finally(() => {
     ReactDOM.render(
         <Provider store={store}>
           <App/>

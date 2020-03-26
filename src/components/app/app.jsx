@@ -4,6 +4,7 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
+import ErrorPage from '../error-page/error-page.jsx';
 import Tabs from '../tabs/tabs.jsx';
 import {ActionCreator, Screen} from '../../reducer/app-state/app-state.js';
 import {getActiveScreen} from '../../reducer/app-state/selectors.js';
@@ -40,6 +41,9 @@ class App extends PureComponent {
         return (
           <MoviePage movie={activeMovie} similarMovies={movies} onCardClick={this._handleCardClick}/>
         );
+
+      case Screen.ERROR_PAGE:
+        return <ErrorPage/>;
 
       default:
         return null;
