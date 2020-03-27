@@ -107,9 +107,9 @@ const Main = ({
 
 Main.propTypes = {
   promoMovie: PropTypes.shape({
-    genre: PropTypes.string.isRequired,
-    releaseDate: PropTypes.number.isRequired,
-  }),
+    genre: PropTypes.string,
+    releaseDate: PropTypes.number,
+  }).isRequired,
   onCardClick: PropTypes.func.isRequired,
   onGenresFilterClick: PropTypes.func.isRequired,
   activeGenreFilter: PropTypes.string.isRequired,
