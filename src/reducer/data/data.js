@@ -52,41 +52,24 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-const formatMovie = (movie) => {
-  const {
-    id,
-    name,
-    genre,
-    description,
-    director,
-    starring: stars,
-    released: releaseDate,
-    video_link: trailer,
-    poster_image: poster,
-    preview_image: previewImage,
-    background_image: posterBig,
-    rating: ratingNumber,
-    scores_count: ratingCount,
-  } = movie;
-  return {
-    id,
-    name,
-    genre,
-    description,
-    director,
-    stars,
-    releaseDate,
-    poster,
-    previewImage,
-    posterBig,
-    trailer,
-    rating: {
-      number: ratingNumber,
-      name: getRatingName(ratingNumber),
-      count: ratingCount,
-    }
-  };
-};
+const formatMovie = (movie) => ({
+  id: movie.id,
+  name: movie.name,
+  genre: movie.genre,
+  description: movie.description,
+  director: movie.director,
+  stars: movie.starring,
+  releaseDate: movie.released,
+  trailer: movie.video_link,
+  poster: movie.poster_image,
+  previewImage: movie.preview_image,
+  posterBig: movie.background_image,
+  rating: {
+    number: movie.rating,
+    count: movie.scores_count,
+    name: getRatingName(movie.rating),
+  }
+});
 
 const RatingNameUpperBoundary = {
   BAD: 3,
