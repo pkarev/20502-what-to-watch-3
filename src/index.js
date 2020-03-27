@@ -4,12 +4,16 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
 import App from './components/app/app.jsx';
-import reducer from './reducer/reducer.js';
 import {createAPI} from './api.js';
+import reducer from './reducer/reducer.js';
 import {Operation as DataOperation} from './reducer/data/data.js';
-import {ActionCreator, Screen} from './reducer/app-state/app-state.js';
+import {ActionCreator as UserActionCreator, AuthStatus, Operation as UserOperation} from './reducer/user/user.js';
+import {ActionCreator as AppStateActionCreator, Screen} from './reducer/app-state/app-state.js';
+import {ResponseStatusCode} from './api';
 
-const onUnauthorized = () => {};
+const onUnauthorized = () => {
+  store.dispatch(UserActionCreator.setAuthStatus(AuthStatus.NO_AUTH));
+};
 
 const api = createAPI(onUnauthorized);
 
@@ -22,11 +26,14 @@ const store = createStore(
 );
 
 Promise.all([
+  store.dispatch(UserOperation.checkAuth()),
   store.dispatch(DataOperation.loadMovies()),
-  store.dispatch(DataOperation.loadPromoMovie())
+  store.dispatch(DataOperation.loadPromoMovie()),
 ])
-  .catch(() => {
-    store.dispatch(ActionCreator.setActiveScreen(Screen.ERROR_PAGE));
+  .catch(({response}) => {
+    if (response.status === ResponseStatusCode.NOT_FOUND) {
+      store.dispatch(AppStateActionCreator.setActiveScreen(Screen.ERROR_PAGE));
+    }
   })
   .finally(() => {
     ReactDOM.render(

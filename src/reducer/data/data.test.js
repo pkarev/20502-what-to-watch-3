@@ -23,7 +23,7 @@ const movies = [
 
 const initialState = {
   movies: [],
-  promoMovie: null,
+  promoMovie: {},
 };
 
 it(`Reducer without params should return initial state`, () => {
@@ -33,7 +33,7 @@ it(`Reducer without params should return initial state`, () => {
 it(`Reducer should set movies`, () => {
   expect(reducer(initialState, ActionCreator.setMovies(movies))).toMatchObject({
     movies,
-    promoMovie: null,
+    promoMovie: {},
   });
 });
 

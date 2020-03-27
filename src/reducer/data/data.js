@@ -1,6 +1,6 @@
 const initialState = {
   movies: [],
-  promoMovie: null,
+  promoMovie: {},
 };
 
 const ActionType = {
@@ -24,9 +24,7 @@ const Operation = {
   loadMovies: () => (dispatch, getState, api) => {
     return api.get(`/films`)
       .then((response) => {
-        dispatch(ActionCreator.setMovies(response.data.map((film) => {
-          return formatMovie(film);
-        })));
+        dispatch(ActionCreator.setMovies(response.data.map((film) => formatMovie(film))));
       });
   },
   loadPromoMovie: () => (dispatch, getStore, api) => {
