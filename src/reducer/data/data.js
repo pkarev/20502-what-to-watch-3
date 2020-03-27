@@ -105,4 +105,4 @@ const getRatingName = (value) => {
 };
 
 
-export {reducer, ActionCreator, ActionType, Operation};
+export {reducer, ActionCreator, ActionType, Operation, formatMovie};
