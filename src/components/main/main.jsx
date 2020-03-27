@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import MoviesList from '../movies-list/movies-list.jsx';
 import GenresFilter from '../genres-filter/genres-filter.jsx';
-import {ActionCreator, ALL_GENRES_FILTER} from '../../reducer/app-state/app-state.js';
-import {getGenresList, getMovies} from '../../reducer/data/selectors.js';
+import {ActionCreator} from '../../reducer/app-state/app-state.js';
 import {getActiveGenreFilter} from '../../reducer/app-state/selectors.js';
+import {getGenresList, getFilteredMovies} from '../../reducer/data/selectors.js';
 
 const Main = ({
   promoMovie: {genre, releaseDate},
@@ -122,9 +122,7 @@ Main.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  filteredMovies: getActiveGenreFilter(state) === ALL_GENRES_FILTER ?
-    getMovies(state) :
-    getMovies(state).filter((movie) => movie.genre === getActiveGenreFilter(state)),
+  filteredMovies: getFilteredMovies(state),
   activeGenreFilter: getActiveGenreFilter(state),
   genresList: getGenresList(state),
 });
