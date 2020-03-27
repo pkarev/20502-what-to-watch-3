@@ -6,6 +6,7 @@ import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
 import ErrorPage from '../error-page/error-page.jsx';
 import Tabs from '../tabs/tabs.jsx';
+import SignIn from '../sign-in/sign-in.jsx';
 import {ActionCreator, Screen} from '../../reducer/app-state/app-state.js';
 import {getActiveScreen} from '../../reducer/app-state/selectors.js';
 import {getPromoMovie, getMovies} from '../../reducer/data/selectors';
@@ -68,6 +69,9 @@ class App extends PureComponent {
               <div>2</div>
               <div>3</div>
             </Tabs>
+          </Route>
+          <Route exact path="/dev-sign-in">
+            <SignIn/>
           </Route>
         </Switch>
       </BrowserRouter>
