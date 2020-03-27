@@ -24,7 +24,7 @@ SimilarMovies.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    posterSmall: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
     trailer: PropTypes.string.isRequired
   })),
   onCardClick: PropTypes.func.isRequired,

@@ -1,6 +1,4 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import SimilarMovies from './similar-movies';
+import {reducer, ActionCreator} from './data.js';
 
 const movies = [
   {
@@ -20,21 +18,29 @@ const movies = [
     name: `Moonrise kindom`,
     previewImage: `/img/moonrise-kingdom.jpg`,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-  },
-  {
-    id: 4,
-    name: `Moonrise kindom`,
-    previewImage: `/img/moonrise-kingdom.jpg`,
-    trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   }
 ];
 
-it(`Render SimilarMovies`, () => {
-  const tree = renderer
-    .create(<SimilarMovies movies={movies} onCardClick={() => {}}/>, {
-      createNodeMock: () => ({})
-    })
-    .toJSON();
+const initialState = {
+  movies: [],
+  promoMovie: null,
+};
 
-  expect(tree).toMatchSnapshot();
+it(`Reducer without params should return initial state`, () => {
+  expect(reducer(undefined, {})).toEqual(initialState);
 });
+
+it(`Reducer should set movies`, () => {
+  expect(reducer(initialState, ActionCreator.setMovies(movies))).toMatchObject({
+    movies,
+    promoMovie: null,
+  });
+});
+
+it(`Reducer should set promo movie`, () => {
+  expect(reducer(initialState, ActionCreator.setPromoMovie(movies[0]))).toMatchObject({
+    movies: [],
+    promoMovie: movies[0],
+  });
+});
+

@@ -14,7 +14,7 @@ const MoviePage = (
         director,
         stars,
         posterBig,
-        posterSmall,
+        poster,
       },
       similarMovies,
       onCardClick,
@@ -74,7 +74,7 @@ const MoviePage = (
       <div className="movie-card__wrap movie-card__translate-top">
         <div className="movie-card__info">
           <div className="movie-card__poster movie-card__poster--big">
-            <img src={posterSmall} alt="The Grand Budapest Hotel poster" width="218" height="327"/>
+            <img src={poster} alt="The Grand Budapest Hotel poster" width="218" height="327"/>
           </div>
 
           <div className="movie-card__desc">
@@ -89,11 +89,7 @@ const MoviePage = (
                 </div>
 
                 <div className="movie-card__text">
-                  {description.map((para, index) => (
-                    <p key={`${index}-para`}>
-                      {para}
-                    </p>
-                  ))}
+                  <p>{description}</p>
 
                   <p className="movie-card__director">
                     <strong>Director: {director}</strong>
@@ -255,20 +251,20 @@ MoviePage.propTypes = {
     genre: PropTypes.string,
     releaseDate: PropTypes.number,
     rating: PropTypes.shape({
-      number: PropTypes.string,
+      number: PropTypes.number,
       name: PropTypes.string,
       count: PropTypes.number,
     }),
-    description: PropTypes.arrayOf(PropTypes.string),
+    description: PropTypes.string,
     director: PropTypes.string,
     stars: PropTypes.arrayOf(PropTypes.string),
     posterBig: PropTypes.string,
-    posterSmall: PropTypes.string,
+    poster: PropTypes.string,
   }).isRequired,
   similarMovies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    posterSmall: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
     trailer: PropTypes.string.isRequired
   })).isRequired,
   onCardClick: PropTypes.func.isRequired,

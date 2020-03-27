@@ -4,8 +4,12 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
+import ErrorPage from '../error-page/error-page.jsx';
 import Tabs from '../tabs/tabs.jsx';
-import {ActionCreator, Screen, ALL_GENRES_FILTER} from '../../reducer';
+import {ActionCreator, Screen} from '../../reducer/app-state/app-state.js';
+import {getActiveScreen} from '../../reducer/app-state/selectors.js';
+import {getPromoMovie, getMovies} from '../../reducer/data/selectors';
+import {getActiveMovie} from '../../reducer/app-state/selectors.js';
 
 class App extends PureComponent {
   constructor(props) {
@@ -15,47 +19,39 @@ class App extends PureComponent {
   }
 
   _handleCardClick(activeCard) {
-    const {setCurrentMovie, setActiveScreen} = this.props;
+    const {setActiveMovie, setActiveScreen} = this.props;
 
-    setCurrentMovie(activeCard);
+    setActiveMovie(activeCard);
     setActiveScreen(Screen.MOVIE_PAGE);
   }
 
   _renderScreen() {
-    const {movies, currentMovie, activeScreen} = this.props;
+    const {movies, promoMovie, activeMovie, activeScreen} = this.props;
 
     switch (activeScreen) {
       case Screen.MAIN:
         return (
           <Main
-            currentMovie={currentMovie}
+            promoMovie={promoMovie}
             onCardClick={this._handleCardClick}
           />
         );
 
       case Screen.MOVIE_PAGE:
         return (
-          <MoviePage movie={currentMovie} similarMovies={movies} onCardClick={this._handleCardClick}/>
+          <MoviePage movie={activeMovie} similarMovies={movies} onCardClick={this._handleCardClick}/>
         );
+
+      case Screen.ERROR_PAGE:
+        return <ErrorPage/>;
 
       default:
         return null;
     }
   }
 
-  componentDidMount() {
-    const {setGenresList, movies} = this.props;
-    let genresList = [ALL_GENRES_FILTER];
-    movies.map((movie) => {
-      genresList.push(movie.genre);
-    });
-    genresList = Array.from(new Set(genresList)).sort();
-
-    setGenresList(genresList);
-  }
-
   render() {
-    const {movies, currentMovie} = this.props;
+    const {movies, activeMovie} = this.props;
 
     return (
       <BrowserRouter>
@@ -64,7 +60,7 @@ class App extends PureComponent {
             {this._renderScreen()}
           </Route>
           <Route exact path="/dev-movie-page">
-            <MoviePage movie={currentMovie} similarMovies={movies} onCardClick={this._handleCardClick}/>
+            <MoviePage movie={activeMovie} similarMovies={movies} onCardClick={this._handleCardClick}/>
           </Route>
           <Route exact path="/dev-tabs">
             <Tabs activeTab="one">
@@ -85,29 +81,31 @@ App.propTypes = {
     name: PropTypes.string,
     poster: PropTypes.string,
   })),
-  currentMovie: PropTypes.shape({
+  activeMovie: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    poster: PropTypes.string,
+  }),
+  promoMovie: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
     poster: PropTypes.string,
   }),
   activeScreen: PropTypes.number.isRequired,
-  setGenresList: PropTypes.func.isRequired,
-  setCurrentMovie: PropTypes.func.isRequired,
+  setActiveMovie: PropTypes.func.isRequired,
   setActiveScreen: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  movies: state.movies,
-  currentMovie: state.currentMovie,
-  activeScreen: state.activeScreen
+  movies: getMovies(state),
+  activeMovie: getActiveMovie(state),
+  promoMovie: getPromoMovie(state),
+  activeScreen: getActiveScreen(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setGenresList(genresList) {
-    dispatch(ActionCreator.setGenresList(genresList));
-  },
-  setCurrentMovie(currentMovie) {
-    dispatch(ActionCreator.setCurrentMovie(currentMovie));
+  setActiveMovie(movie) {
+    dispatch(ActionCreator.setActiveMovie(movie));
   },
   setActiveScreen(screen) {
     dispatch(ActionCreator.setActiveScreen(screen));

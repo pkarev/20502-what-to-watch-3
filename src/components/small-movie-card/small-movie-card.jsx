@@ -4,7 +4,7 @@ import withVideo from '../../hocs/with-video/with-video.jsx';
 
 const SmallMovieCard = (props) => {
   const {movie, onCardClick, renderVideo} = props;
-  const {name, posterSmall: poster, trailer} = movie;
+  const {name, previewImage: poster, trailer} = movie;
 
   return (
     <article className="small-movie-card catalog__movies-card" onClick={(evt) => {
@@ -26,7 +26,7 @@ SmallMovieCard.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    posterSmall: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
     trailer: PropTypes.string.isRequired
   }),
   renderVideo: PropTypes.func.isRequired,

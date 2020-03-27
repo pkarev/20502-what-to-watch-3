@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import MoviesList from '../movies-list/movies-list.jsx';
 import GenresFilter from '../genres-filter/genres-filter.jsx';
-import {ActionCreator, ALL_GENRES_FILTER} from '../../reducer.js';
+import {ActionCreator, ALL_GENRES_FILTER} from '../../reducer/app-state/app-state.js';
+import {getGenresList, getMovies} from '../../reducer/data/selectors.js';
+import {getActiveGenreFilter} from '../../reducer/app-state/selectors.js';
 
 const Main = ({
-  currentMovie: {genre, releaseDate},
+  promoMovie: {genre, releaseDate},
   filteredMovies,
   activeGenreFilter,
   onCardClick,
@@ -104,7 +106,7 @@ const Main = ({
 );
 
 Main.propTypes = {
-  currentMovie: PropTypes.shape({
+  promoMovie: PropTypes.shape({
     genre: PropTypes.string.isRequired,
     releaseDate: PropTypes.number.isRequired,
   }),
@@ -114,17 +116,17 @@ Main.propTypes = {
   filteredMovies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    posterSmall: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
   })),
   genresList: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  filteredMovies: state.activeGenreFilter === ALL_GENRES_FILTER ?
-    state.movies :
-    state.movies.filter((movie) => movie.genre === state.activeGenreFilter),
-  activeGenreFilter: state.activeGenreFilter,
-  genresList: state.genresList,
+  filteredMovies: getActiveGenreFilter(state) === ALL_GENRES_FILTER ?
+    getMovies(state) :
+    getMovies(state).filter((movie) => movie.genre === getActiveGenreFilter(state)),
+  activeGenreFilter: getActiveGenreFilter(state),
+  genresList: getGenresList(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

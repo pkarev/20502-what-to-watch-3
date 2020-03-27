@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import GenresFilter from './genres-filter.jsx';
-import {ALL_GENRES_FILTER} from '../../reducer';
+import {ALL_GENRES_FILTER} from '../../reducer/app-state/app-state';
 
 const genresList = [ALL_GENRES_FILTER, `action`, `comedy`, `drama`];
 

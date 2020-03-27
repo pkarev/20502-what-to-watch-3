@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render ErrorScreen 1`] = `
+<section>
+  <p>
+    Упс, ошибочка!!!
+  </p>
+  <p>
+    Попробуйте позднее
+  </p>
+</section>
+`;

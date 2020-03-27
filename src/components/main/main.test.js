@@ -3,33 +3,34 @@ import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
 import {Provider} from 'react-redux';
 import Main from './main.jsx';
-import {ALL_GENRES_FILTER} from '../../reducer.js';
+import {ALL_GENRES_FILTER, Screen} from '../../reducer/app-state/app-state';
+import NameSpace from '../../reducer/name-space';
 
 const movies = [
   {
     id: 1,
     name: `Fantastic Beasts`,
-    posterSmall: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    previewImage: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
     genre: `Awesome genre`,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
     id: 2,
     name: `Bohemian Rhapsody`,
-    posterSmall: `/img/bohemian-rhapsody.jpg`,
+    previewImage: `/img/bohemian-rhapsody.jpg`,
     genre: `Drama`,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
     id: 3,
     name: `Moonrise kindom`,
-    posterSmall: `/img/moonrise-kingdom.jpg`,
+    previewImage: `/img/moonrise-kingdom.jpg`,
     genre: `Some genre`,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
   },
 ];
 
-const currentMovie = {
+const promoMovie = {
   genre: `Awesome genre`,
   releaseDate: 2020
 };
@@ -38,15 +39,23 @@ const mockStore = configureStore([]);
 
 it(`Render Main`, () => {
   const store = mockStore({
-    activeGenreFilter: ALL_GENRES_FILTER,
-    movies,
-    genresList: [ALL_GENRES_FILTER, `Awesome genre`, `Drama`, `Some genre`],
+    [NameSpace.APP_STATE]: {
+      activeGenreFilter: ALL_GENRES_FILTER,
+      filteredMovies: movies,
+      genresList: [ALL_GENRES_FILTER, `Awesome genre`, `Drama`, `Some genre`],
+      activeScreen: Screen.MAIN,
+      currentMovie: movies[0],
+    },
+    [NameSpace.DATA]: {
+      movies,
+      promoMovie: movies[0],
+    }
   });
 
   const tree = renderer
     .create(
         <Provider store={store}>
-          <Main currentMovie={currentMovie} onCardClick={() => {}}/>
+          <Main promoMovie={promoMovie} onCardClick={() => {}}/>
         </Provider>, {
           createNodeMock: () => ({})
         })
