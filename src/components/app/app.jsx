@@ -27,13 +27,12 @@ class App extends PureComponent {
   }
 
   _renderScreen() {
-    const {movies, promoMovie, activeMovie, activeScreen} = this.props;
+    const {movies, activeMovie, activeScreen} = this.props;
 
     switch (activeScreen) {
       case Screen.MAIN:
         return (
           <Main
-            promoMovie={promoMovie}
             onCardClick={this._handleCardClick}
           />
         );

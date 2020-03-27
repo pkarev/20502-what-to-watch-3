@@ -5,7 +5,7 @@ import MoviesList from '../movies-list/movies-list.jsx';
 import GenresFilter from '../genres-filter/genres-filter.jsx';
 import {ActionCreator} from '../../reducer/app-state/app-state.js';
 import {getActiveGenreFilter} from '../../reducer/app-state/selectors.js';
-import {getGenresList, getFilteredMovies} from '../../reducer/data/selectors.js';
+import {getGenresList, getFilteredMovies, getPromoMovie} from '../../reducer/data/selectors.js';
 
 const Main = ({
   promoMovie: {genre, releaseDate},
@@ -125,6 +125,7 @@ const mapStateToProps = (state) => ({
   filteredMovies: getFilteredMovies(state),
   activeGenreFilter: getActiveGenreFilter(state),
   genresList: getGenresList(state),
+  promoMovie: getPromoMovie(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
