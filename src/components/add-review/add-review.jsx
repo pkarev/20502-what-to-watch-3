@@ -2,14 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {useForm} from 'react-hook-form';
 
-const AddReview = ({onAddReview}) => {
+const AddReview = ({id, onCommentPost}) => {
   const {register, handleSubmit, formState} = useForm({
     mode: `onChange`,
   });
 
+  const _handleCommentPost = (data) => {
+    onCommentPost(id, data);
+  };
+
   return (
     <div className="add-review">
-      <form action="#" className="add-review__form" onSubmit={handleSubmit(onAddReview)}>
+      <form action="#" className="add-review__form" onSubmit={handleSubmit(_handleCommentPost)}>
         <div className="rating">
           <div className="rating__stars">
             <input className="rating__input" id="star-1" type="radio" name="rating" value="1" ref={register({required: true})}/>
@@ -36,23 +40,23 @@ const AddReview = ({onAddReview}) => {
               minLength: 50,
               maxLength: 400,
             })}
-            name="review-text"
+            name="comment"
             id="review-text"
             placeholder="Review text"
           />
           <div className="add-review__submit">
-            <button className="add-review__btn" type="submit" disabled={!formState.isValid}>Post</button>
+            <button className="add-review__btn" type="submit" disabled={!formState.isValid || formState.isSubmitting}>Post</button>
           </div>
         </div>
       </form>
     </div>
   );
-}
+};
 
 
 AddReview.propTypes = {
   id: PropTypes.number.isRequired,
-  onAddReview: PropTypes.func.isRequired,
+  onCommentPost: PropTypes.func.isRequired
 };
 
 export default AddReview;

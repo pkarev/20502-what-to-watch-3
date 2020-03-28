@@ -27,8 +27,8 @@ const Operation = {
   },
   tryAuth: (email, password) => (dispatch, getState, api) => {
     return api.post(`/login`, {email, password})
-      .then(() => {
-        dispatch(ActionCreator.setAuthStatus(AuthStatus.AUTH));
+      .catch((err) => {
+        throw err;
       });
   }
 };

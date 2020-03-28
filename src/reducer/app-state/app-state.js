@@ -4,7 +4,8 @@ const Screen = {
   MAIN: 1,
   MOVIE_PAGE: 2,
   ERROR_PAGE: 3,
-  SIGN_IN_PAGE: 4
+  SIGN_IN_PAGE: 4,
+  ADD_REVIEW_PAGE: 5,
 };
 
 const initialState = {

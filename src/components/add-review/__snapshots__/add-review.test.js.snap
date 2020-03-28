@@ -89,7 +89,7 @@ exports[`Render Component 1`] = `
       <textarea
         className="add-review__textarea"
         id="review-text"
-        name="review-text"
+        name="comment"
         placeholder="Review text"
       />
       <div

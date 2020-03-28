@@ -4,7 +4,7 @@ import AddReview from './add-review';
 
 it(`Render Component`, () => {
   const tree = renderer
-    .create(<AddReview id={1} onAddReview={() => {}}/>)
+    .create(<AddReview id={1} onCommentPost={() => {}}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

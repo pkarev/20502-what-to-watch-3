@@ -31,29 +31,6 @@ describe(`Operation work correctly`, () => {
     return authCkecker(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.SET_AUTH_STATUS,
-          payload: true,
-        });
-      });
-  });
-
-  it(`Should make a correct API call to /login`, function () {
-    const apiMock = new MockAdapter(api);
-    const dispatch = jest.fn();
-    const authenticator = Operation.tryAuth();
-
-    apiMock
-      .onPost(`/login`, {})
-      .reply(200, {});
-
-    return authenticator(dispatch, () => {}, api)
-      .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.SET_AUTH_STATUS,
-          payload: true,
-        });
       });
   });
 });
