@@ -1,4 +1,8 @@
-import {reducer, ActionCreator} from './data.js';
+import MockAdapter from 'axios-mock-adapter';
+import {reducer, formatMovie, ActionCreator, ActionType, Operation} from './data.js';
+import {createAPI} from '../../api.js';
+
+const api = createAPI(() => {});
 
 const movies = [
   {
@@ -23,7 +27,7 @@ const movies = [
 
 const initialState = {
   movies: [],
-  promoMovie: null,
+  promoMovie: {},
 };
 
 it(`Reducer without params should return initial state`, () => {
@@ -33,7 +37,7 @@ it(`Reducer without params should return initial state`, () => {
 it(`Reducer should set movies`, () => {
   expect(reducer(initialState, ActionCreator.setMovies(movies))).toMatchObject({
     movies,
-    promoMovie: null,
+    promoMovie: {},
   });
 });
 
@@ -44,3 +48,42 @@ it(`Reducer should set promo movie`, () => {
   });
 });
 
+describe(`Operation work correctly`, () => {
+  it(`Should make a correct API call to /flims`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const moviesLoader = Operation.loadMovies();
+
+    apiMock
+      .onGet(`/films`)
+      .reply(200, []);
+
+    return moviesLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_MOVIES,
+          payload: [],
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /flims/promo`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const promoMovieLoader = Operation.loadPromoMovie();
+
+    apiMock
+    .onGet(`/films/promo`)
+    .reply(200, {});
+
+    return promoMovieLoader(dispatch, () => {}, api)
+    .then(() => {
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: ActionType.LOAD_PROMO_MOVIE,
+        payload: formatMovie({}),
+      });
+    });
+  });
+});

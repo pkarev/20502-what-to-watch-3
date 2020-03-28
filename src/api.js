@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-const ResponseStatusCode = {
+export const ResponseStatusCode = {
   UNAUTHORIZED: 401,
+  NOT_FOUND: 404,
 };
 
 export const createAPI = (onUnauthorized) => {

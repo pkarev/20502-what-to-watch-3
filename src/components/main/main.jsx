@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import MoviesList from '../movies-list/movies-list.jsx';
 import GenresFilter from '../genres-filter/genres-filter.jsx';
-import {ActionCreator, ALL_GENRES_FILTER} from '../../reducer/app-state/app-state.js';
-import {getGenresList, getMovies} from '../../reducer/data/selectors.js';
+import {ActionCreator, Screen} from '../../reducer/app-state/app-state.js';
 import {getActiveGenreFilter} from '../../reducer/app-state/selectors.js';
+import {getGenresList, getFilteredMovies, getPromoMovie} from '../../reducer/data/selectors.js';
+import {getAuthStatus} from '../../reducer/user/selectors.js';
 
 const Main = ({
   promoMovie: {genre, releaseDate},
@@ -13,7 +14,9 @@ const Main = ({
   activeGenreFilter,
   onCardClick,
   onGenresFilterClick,
-  genresList
+  genresList,
+  isUserAuthorized,
+  onSignInClick
 }) => (
   <React.Fragment>
     <section className="movie-card">
@@ -33,9 +36,13 @@ const Main = ({
         </div>
 
         <div className="user-block">
-          <div className="user-block__avatar">
-            <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-          </div>
+          {
+            isUserAuthorized ?
+              <div className="user-block__avatar">
+                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
+              </div> :
+              <a href="#" onClick={onSignInClick}>Sign in</a>
+          }
         </div>
       </header>
 
@@ -107,10 +114,11 @@ const Main = ({
 
 Main.propTypes = {
   promoMovie: PropTypes.shape({
-    genre: PropTypes.string.isRequired,
-    releaseDate: PropTypes.number.isRequired,
-  }),
+    genre: PropTypes.string,
+    releaseDate: PropTypes.number,
+  }).isRequired,
   onCardClick: PropTypes.func.isRequired,
+  onSignInClick: PropTypes.func.isRequired,
   onGenresFilterClick: PropTypes.func.isRequired,
   activeGenreFilter: PropTypes.string.isRequired,
   filteredMovies: PropTypes.arrayOf(PropTypes.shape({
@@ -119,19 +127,24 @@ Main.propTypes = {
     previewImage: PropTypes.string.isRequired,
   })),
   genresList: PropTypes.arrayOf(PropTypes.string).isRequired,
+  isUserAuthorized: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  filteredMovies: getActiveGenreFilter(state) === ALL_GENRES_FILTER ?
-    getMovies(state) :
-    getMovies(state).filter((movie) => movie.genre === getActiveGenreFilter(state)),
+  filteredMovies: getFilteredMovies(state),
   activeGenreFilter: getActiveGenreFilter(state),
   genresList: getGenresList(state),
+  promoMovie: getPromoMovie(state),
+  isUserAuthorized: getAuthStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onGenresFilterClick(filter) {
     dispatch(ActionCreator.setGenresFilter(filter));
+  },
+  onSignInClick(evt) {
+    evt.preventDefault();
+    dispatch(ActionCreator.setActiveScreen(Screen.SIGN_IN_PAGE));
   }
 });
 

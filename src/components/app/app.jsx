@@ -6,10 +6,12 @@ import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
 import ErrorPage from '../error-page/error-page.jsx';
 import Tabs from '../tabs/tabs.jsx';
-import {ActionCreator, Screen} from '../../reducer/app-state/app-state.js';
+import SignIn from '../sign-in/sign-in.jsx';
+import {ActionCreator as AppStateActionCreator, Screen} from '../../reducer/app-state/app-state.js';
 import {getActiveScreen} from '../../reducer/app-state/selectors.js';
 import {getPromoMovie, getMovies} from '../../reducer/data/selectors';
 import {getActiveMovie} from '../../reducer/app-state/selectors.js';
+import {Operation} from '../../reducer/user/user';
 
 class App extends PureComponent {
   constructor(props) {
@@ -26,13 +28,12 @@ class App extends PureComponent {
   }
 
   _renderScreen() {
-    const {movies, promoMovie, activeMovie, activeScreen} = this.props;
+    const {movies, activeMovie, activeScreen, onSignInSubmit} = this.props;
 
     switch (activeScreen) {
       case Screen.MAIN:
         return (
           <Main
-            promoMovie={promoMovie}
             onCardClick={this._handleCardClick}
           />
         );
@@ -44,6 +45,9 @@ class App extends PureComponent {
 
       case Screen.ERROR_PAGE:
         return <ErrorPage/>;
+
+      case Screen.SIGN_IN_PAGE:
+        return <SignIn onSignInSubmit={onSignInSubmit}/>;
 
       default:
         return null;
@@ -68,6 +72,9 @@ class App extends PureComponent {
               <div>2</div>
               <div>3</div>
             </Tabs>
+          </Route>
+          <Route exact path="/dev-sign-in">
+            <SignIn/>
           </Route>
         </Switch>
       </BrowserRouter>
@@ -94,6 +101,7 @@ App.propTypes = {
   activeScreen: PropTypes.number.isRequired,
   setActiveMovie: PropTypes.func.isRequired,
   setActiveScreen: PropTypes.func.isRequired,
+  onSignInSubmit: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -105,11 +113,15 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setActiveMovie(movie) {
-    dispatch(ActionCreator.setActiveMovie(movie));
+    dispatch(AppStateActionCreator.setActiveMovie(movie));
   },
   setActiveScreen(screen) {
-    dispatch(ActionCreator.setActiveScreen(screen));
-  }
+    dispatch(AppStateActionCreator.setActiveScreen(screen));
+  },
+  onSignInSubmit(email, password) {
+    dispatch(Operation.tryAuth(email, password))
+      .then(dispatch(AppStateActionCreator.setActiveScreen(Screen.MAIN)));
+  },
 });
 
 export {App};

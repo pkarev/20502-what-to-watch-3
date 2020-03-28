@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
 import {Provider} from 'react-redux';
 import Main from './main.jsx';
-import {ALL_GENRES_FILTER, Screen} from '../../reducer/app-state/app-state';
+import {ALL_GENRES_FILTER, Screen} from '../../reducer/app-state/app-state.js';
 import NameSpace from '../../reducer/name-space';
 
 const movies = [
@@ -12,6 +12,7 @@ const movies = [
     name: `Fantastic Beasts`,
     previewImage: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
     genre: `Awesome genre`,
+    releaseDate: 2020,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
@@ -19,6 +20,7 @@ const movies = [
     name: `Bohemian Rhapsody`,
     previewImage: `/img/bohemian-rhapsody.jpg`,
     genre: `Drama`,
+    releaseDate: 2020,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
@@ -26,14 +28,10 @@ const movies = [
     name: `Moonrise kindom`,
     previewImage: `/img/moonrise-kingdom.jpg`,
     genre: `Some genre`,
+    releaseDate: 2020,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
   },
 ];
-
-const promoMovie = {
-  genre: `Awesome genre`,
-  releaseDate: 2020
-};
 
 const mockStore = configureStore([]);
 
@@ -49,13 +47,16 @@ it(`Render Main`, () => {
     [NameSpace.DATA]: {
       movies,
       promoMovie: movies[0],
+    },
+    [NameSpace.USER]: {
+      isAuthorized: true,
     }
   });
 
   const tree = renderer
     .create(
         <Provider store={store}>
-          <Main promoMovie={promoMovie} onCardClick={() => {}}/>
+          <Main onCardClick={() => {}}/>
         </Provider>, {
           createNodeMock: () => ({})
         })

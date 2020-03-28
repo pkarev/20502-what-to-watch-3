@@ -47,13 +47,16 @@ it(`Render App`, () => {
     [NameSpace.DATA]: {
       movies,
       promoMovie: movies[0],
+    },
+    [NameSpace.USER]: {
+      isAuthorized: true,
     }
   });
 
   const tree = renderer
     .create(
         <Provider store={store}>
-          <App/>
+          <App onSignInSubmit={() => {}}/>
         </Provider>, {
           createNodeMock: () => ({})
         })
