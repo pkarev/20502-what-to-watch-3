@@ -30,6 +30,11 @@ const initialState = {
   promoMovie: {},
 };
 
+const commentPost = {
+  rating: 8,
+  comment: `Bla bla la`
+};
+
 it(`Reducer without params should return initial state`, () => {
   expect(reducer(undefined, {})).toEqual(initialState);
 });
@@ -74,16 +79,16 @@ describe(`Operation work correctly`, () => {
     const promoMovieLoader = Operation.loadPromoMovie();
 
     apiMock
-    .onGet(`/films/promo`)
-    .reply(200, {});
+      .onGet(`/films/promo`)
+      .reply(200, {});
 
     return promoMovieLoader(dispatch, () => {}, api)
-    .then(() => {
-      expect(dispatch).toHaveBeenCalledTimes(1);
-      expect(dispatch).toHaveBeenNthCalledWith(1, {
-        type: ActionType.LOAD_PROMO_MOVIE,
-        payload: formatMovie({}),
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_PROMO_MOVIE,
+          payload: formatMovie({}),
+        });
       });
-    });
   });
 });

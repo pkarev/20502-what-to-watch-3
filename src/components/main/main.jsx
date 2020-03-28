@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import MoviesList from '../movies-list/movies-list.jsx';
 import GenresFilter from '../genres-filter/genres-filter.jsx';
+import UserBlock from '../user-block/user-block.jsx';
 import {ActionCreator, Screen} from '../../reducer/app-state/app-state.js';
 import {getActiveGenreFilter} from '../../reducer/app-state/selectors.js';
 import {getGenresList, getFilteredMovies, getPromoMovie} from '../../reducer/data/selectors.js';
@@ -15,8 +16,7 @@ const Main = ({
   onCardClick,
   onGenresFilterClick,
   genresList,
-  isUserAuthorized,
-  onSignInClick
+  isAuthorized,
 }) => (
   <React.Fragment>
     <section className="movie-card">
@@ -35,15 +35,7 @@ const Main = ({
           </a>
         </div>
 
-        <div className="user-block">
-          {
-            isUserAuthorized ?
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-              </div> :
-              <a href="#" onClick={onSignInClick}>Sign in</a>
-          }
-        </div>
+        <UserBlock/>
       </header>
 
       <div className="movie-card__wrap">
@@ -118,7 +110,6 @@ Main.propTypes = {
     releaseDate: PropTypes.number,
   }).isRequired,
   onCardClick: PropTypes.func.isRequired,
-  onSignInClick: PropTypes.func.isRequired,
   onGenresFilterClick: PropTypes.func.isRequired,
   activeGenreFilter: PropTypes.string.isRequired,
   filteredMovies: PropTypes.arrayOf(PropTypes.shape({
@@ -127,7 +118,7 @@ Main.propTypes = {
     previewImage: PropTypes.string.isRequired,
   })),
   genresList: PropTypes.arrayOf(PropTypes.string).isRequired,
-  isUserAuthorized: PropTypes.bool.isRequired,
+  isAuthorized: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -135,16 +126,12 @@ const mapStateToProps = (state) => ({
   activeGenreFilter: getActiveGenreFilter(state),
   genresList: getGenresList(state),
   promoMovie: getPromoMovie(state),
-  isUserAuthorized: getAuthStatus(state),
+  isAuthorized: getAuthStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onGenresFilterClick(filter) {
     dispatch(ActionCreator.setGenresFilter(filter));
-  },
-  onSignInClick(evt) {
-    evt.preventDefault();
-    dispatch(ActionCreator.setActiveScreen(Screen.SIGN_IN_PAGE));
   }
 });
 

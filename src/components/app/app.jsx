@@ -7,11 +7,13 @@ import MoviePage from '../movie-page/movie-page.jsx';
 import ErrorPage from '../error-page/error-page.jsx';
 import Tabs from '../tabs/tabs.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
+import AddReview from '../add-review/add-review.jsx';
 import {ActionCreator as AppStateActionCreator, Screen} from '../../reducer/app-state/app-state.js';
-import {getActiveScreen} from '../../reducer/app-state/selectors.js';
-import {getPromoMovie, getMovies} from '../../reducer/data/selectors';
-import {getActiveMovie} from '../../reducer/app-state/selectors.js';
-import {Operation} from '../../reducer/user/user';
+import {getActiveScreen, getActiveMovie} from '../../reducer/app-state/selectors.js';
+import {Operation as DataOperation} from '../../reducer/data/data.js';
+import {getPromoMovie, getMovies} from '../../reducer/data/selectors.js';
+import {Operation} from '../../reducer/user/user.js';
+import {ActionCreator, AuthStatus} from '../../reducer/user/user';
 
 class App extends PureComponent {
   constructor(props) {
@@ -28,7 +30,7 @@ class App extends PureComponent {
   }
 
   _renderScreen() {
-    const {movies, activeMovie, activeScreen, onSignInSubmit} = this.props;
+    const {movies, activeMovie, activeScreen, onSignInSubmit, onCommentPost} = this.props;
 
     switch (activeScreen) {
       case Screen.MAIN:
@@ -48,6 +50,9 @@ class App extends PureComponent {
 
       case Screen.SIGN_IN_PAGE:
         return <SignIn onSignInSubmit={onSignInSubmit}/>;
+
+      case Screen.ADD_REVIEW_PAGE:
+        return <AddReview movie={activeMovie} onCommentPost={onCommentPost}/>;
 
       default:
         return null;
@@ -74,7 +79,10 @@ class App extends PureComponent {
             </Tabs>
           </Route>
           <Route exact path="/dev-sign-in">
-            <SignIn/>
+            <SignIn onSignInSubmit={() => {}}/>
+          </Route>
+          <Route exact path="/dev-review">
+            <AddReview id={1} onCommentPost={() => {}}/>
           </Route>
         </Switch>
       </BrowserRouter>
@@ -102,6 +110,7 @@ App.propTypes = {
   setActiveMovie: PropTypes.func.isRequired,
   setActiveScreen: PropTypes.func.isRequired,
   onSignInSubmit: PropTypes.func.isRequired,
+  onCommentPost: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -119,8 +128,21 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(AppStateActionCreator.setActiveScreen(screen));
   },
   onSignInSubmit(email, password) {
-    dispatch(Operation.tryAuth(email, password))
-      .then(dispatch(AppStateActionCreator.setActiveScreen(Screen.MAIN)));
+    return dispatch(Operation.tryAuth(email, password))
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(ActionCreator.setAuthStatus(AuthStatus.AUTH));
+          dispatch(AppStateActionCreator.setActiveScreen(Screen.MAIN));
+        }
+      });
+  },
+  onCommentPost(id, commentPost) {
+    return dispatch(DataOperation.postComment(id, commentPost))
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(AppStateActionCreator.setActiveScreen(Screen.MOVIE_PAGE));
+        }
+      });
   },
 });
 

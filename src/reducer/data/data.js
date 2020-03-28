@@ -32,7 +32,13 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.setPromoMovie(formatMovie(response.data)));
       });
-  }
+  },
+  postComment: (id, commentPost) => (dispatch, getState, api) => {
+    return api.post(`/comments/${id}`, commentPost)
+      .catch((err) => {
+        throw err;
+      });
+  },
 };
 
 const reducer = (state = initialState, action) => {
