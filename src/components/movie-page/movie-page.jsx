@@ -1,10 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import Tabs from '../tabs/tabs.jsx';
 import SimilarMovies from '../similar-movies/similar-movies.jsx';
+import UserBlock from '../user-block/user-block.jsx';
+import {getAuthStatus} from '../../reducer/user/selectors';
+import {Operation as DataOperation} from '../../reducer/data/data.js';
+import {ActionCreator, Screen} from '../../reducer/app-state/app-state.js';
 
 const MoviePage = (
     {
+      isAuthorized,
       movie: {
         name,
         genre,
@@ -18,6 +24,8 @@ const MoviePage = (
       },
       similarMovies,
       onCardClick,
+      onSignInClick,
+      onAddReviewClick,
     }) => (
   <React.Fragment>
     <section className="movie-card movie-card--full">
@@ -37,11 +45,7 @@ const MoviePage = (
             </a>
           </div>
 
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-            </div>
-          </div>
+          <UserBlock isAuthorized={isAuthorized} onSignInClick={onSignInClick}/>
         </header>
 
         <div className="movie-card__wrap">
@@ -65,7 +69,15 @@ const MoviePage = (
                 </svg>
                 <span>My list</span>
               </button>
-              <a href="add-review.html" className="btn movie-card__button">Add review</a>
+              {isAuthorized ?
+                <a href="add-review.html" className="btn movie-card__button"
+                  onClick={(evt) => {
+                    evt.preventDefault();
+                    onAddReviewClick();
+                  }}
+                >Add review</a> :
+                null
+              }
             </div>
           </div>
         </div>
@@ -268,6 +280,23 @@ MoviePage.propTypes = {
     trailer: PropTypes.string.isRequired
   })).isRequired,
   onCardClick: PropTypes.func.isRequired,
+  isAuthorized: PropTypes.bool.isRequired,
+  onSignInClick: PropTypes.func.isRequired,
+  onAddReviewClick: PropTypes.func.isRequired,
 };
 
-export default React.memo(MoviePage);
+const mapStateToProps = (state) => ({
+  isAuthorized: getAuthStatus(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onAddReviewClick() {
+    dispatch(ActionCreator.setActiveScreen(Screen.ADD_REVIEW_PAGE));
+  },
+  onSignInClick() {
+    dispatch(ActionCreator.setActiveScreen(Screen.SIGN_IN_PAGE));
+  }
+});
+
+export {MoviePage};
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(MoviePage));
