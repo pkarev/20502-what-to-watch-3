@@ -17,7 +17,6 @@ const Main = ({
   onGenresFilterClick,
   genresList,
   isAuthorized,
-  onSignInClick
 }) => (
   <React.Fragment>
     <section className="movie-card">
@@ -36,7 +35,7 @@ const Main = ({
           </a>
         </div>
 
-        <UserBlock isAuthorized={isAuthorized} onSignInClick={onSignInClick}/>
+        <UserBlock/>
       </header>
 
       <div className="movie-card__wrap">
@@ -119,7 +118,6 @@ Main.propTypes = {
     previewImage: PropTypes.string.isRequired,
   })),
   genresList: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onSignInClick: PropTypes.func.isRequired,
   isAuthorized: PropTypes.bool.isRequired,
 };
 
@@ -134,9 +132,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onGenresFilterClick(filter) {
     dispatch(ActionCreator.setGenresFilter(filter));
-  },
-  onSignInClick() {
-    dispatch(ActionCreator.setActiveScreen(Screen.SIGN_IN_PAGE));
   }
 });
 

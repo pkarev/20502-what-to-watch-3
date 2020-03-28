@@ -5,7 +5,6 @@ import Tabs from '../tabs/tabs.jsx';
 import SimilarMovies from '../similar-movies/similar-movies.jsx';
 import UserBlock from '../user-block/user-block.jsx';
 import {getAuthStatus} from '../../reducer/user/selectors';
-import {Operation as DataOperation} from '../../reducer/data/data.js';
 import {ActionCreator, Screen} from '../../reducer/app-state/app-state.js';
 
 const MoviePage = (
@@ -24,7 +23,6 @@ const MoviePage = (
       },
       similarMovies,
       onCardClick,
-      onSignInClick,
       onAddReviewClick,
     }) => (
   <React.Fragment>
@@ -45,7 +43,7 @@ const MoviePage = (
             </a>
           </div>
 
-          <UserBlock isAuthorized={isAuthorized} onSignInClick={onSignInClick}/>
+          <UserBlock/>
         </header>
 
         <div className="movie-card__wrap">
@@ -281,7 +279,6 @@ MoviePage.propTypes = {
   })).isRequired,
   onCardClick: PropTypes.func.isRequired,
   isAuthorized: PropTypes.bool.isRequired,
-  onSignInClick: PropTypes.func.isRequired,
   onAddReviewClick: PropTypes.func.isRequired,
 };
 
@@ -293,9 +290,6 @@ const mapDispatchToProps = (dispatch) => ({
   onAddReviewClick() {
     dispatch(ActionCreator.setActiveScreen(Screen.ADD_REVIEW_PAGE));
   },
-  onSignInClick() {
-    dispatch(ActionCreator.setActiveScreen(Screen.SIGN_IN_PAGE));
-  }
 });
 
 export {MoviePage};

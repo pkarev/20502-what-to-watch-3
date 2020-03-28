@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {getAuthStatus} from '../../reducer/user/selectors.js';
+import {ActionCreator, Screen} from '../../reducer/app-state/app-state.js';
 
 const UserBlock = ({isAuthorized, onSignInClick}) => (
   <div className="user-block">
@@ -21,4 +24,14 @@ UserBlock.propTypes = {
   onSignInClick: PropTypes.func.isRequired,
 };
 
-export default UserBlock;
+const mapStateToProps = (state) => ({
+  isAuthorized: getAuthStatus(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onSignInClick() {
+    dispatch(ActionCreator.setActiveScreen(Screen.SIGN_IN_PAGE));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(UserBlock));

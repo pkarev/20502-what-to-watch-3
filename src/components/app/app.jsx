@@ -52,7 +52,7 @@ class App extends PureComponent {
         return <SignIn onSignInSubmit={onSignInSubmit}/>;
 
       case Screen.ADD_REVIEW_PAGE:
-        return <AddReview id={activeMovie.id} onCommentPost={onCommentPost}/>;
+        return <AddReview movie={activeMovie} onCommentPost={onCommentPost}/>;
 
       default:
         return null;
