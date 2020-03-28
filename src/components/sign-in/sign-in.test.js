@@ -4,8 +4,8 @@ import SignIn from './sign-in.jsx';
 
 it(`Render Component`, () => {
   const tree = renderer
-  .create(<SignIn/>)
-  .toJSON();
+    .create(<SignIn onSignInSubmit={() => {}}/>)
+    .toJSON();
 
   expect(tree).toMatchSnapshot();
 });

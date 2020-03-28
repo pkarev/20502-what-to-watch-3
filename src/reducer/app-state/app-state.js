@@ -3,7 +3,8 @@ const ALL_GENRES_FILTER = `All genres`;
 const Screen = {
   MAIN: 1,
   MOVIE_PAGE: 2,
-  ERROR_PAGE: 3
+  ERROR_PAGE: 3,
+  SIGN_IN_PAGE: 4
 };
 
 const initialState = {

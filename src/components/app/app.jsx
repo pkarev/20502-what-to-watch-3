@@ -7,10 +7,11 @@ import MoviePage from '../movie-page/movie-page.jsx';
 import ErrorPage from '../error-page/error-page.jsx';
 import Tabs from '../tabs/tabs.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
-import {ActionCreator, Screen} from '../../reducer/app-state/app-state.js';
+import {ActionCreator as AppStateActionCreator, Screen} from '../../reducer/app-state/app-state.js';
 import {getActiveScreen} from '../../reducer/app-state/selectors.js';
 import {getPromoMovie, getMovies} from '../../reducer/data/selectors';
 import {getActiveMovie} from '../../reducer/app-state/selectors.js';
+import {Operation} from '../../reducer/user/user';
 
 class App extends PureComponent {
   constructor(props) {
@@ -27,7 +28,7 @@ class App extends PureComponent {
   }
 
   _renderScreen() {
-    const {movies, activeMovie, activeScreen} = this.props;
+    const {movies, activeMovie, activeScreen, onSignInSubmit} = this.props;
 
     switch (activeScreen) {
       case Screen.MAIN:
@@ -44,6 +45,9 @@ class App extends PureComponent {
 
       case Screen.ERROR_PAGE:
         return <ErrorPage/>;
+
+      case Screen.SIGN_IN_PAGE:
+        return <SignIn onSignInSubmit={onSignInSubmit}/>;
 
       default:
         return null;
@@ -97,6 +101,7 @@ App.propTypes = {
   activeScreen: PropTypes.number.isRequired,
   setActiveMovie: PropTypes.func.isRequired,
   setActiveScreen: PropTypes.func.isRequired,
+  onSignInSubmit: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -108,11 +113,15 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setActiveMovie(movie) {
-    dispatch(ActionCreator.setActiveMovie(movie));
+    dispatch(AppStateActionCreator.setActiveMovie(movie));
   },
   setActiveScreen(screen) {
-    dispatch(ActionCreator.setActiveScreen(screen));
-  }
+    dispatch(AppStateActionCreator.setActiveScreen(screen));
+  },
+  onSignInSubmit(email, password) {
+    dispatch(Operation.tryAuth(email, password))
+      .then(dispatch(AppStateActionCreator.setActiveScreen(Screen.MAIN)));
+  },
 });
 
 export {App};

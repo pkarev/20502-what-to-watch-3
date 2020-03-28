@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import MoviesList from '../movies-list/movies-list.jsx';
 import GenresFilter from '../genres-filter/genres-filter.jsx';
-import {ActionCreator} from '../../reducer/app-state/app-state.js';
+import {ActionCreator, Screen} from '../../reducer/app-state/app-state.js';
 import {getActiveGenreFilter} from '../../reducer/app-state/selectors.js';
 import {getGenresList, getFilteredMovies, getPromoMovie} from '../../reducer/data/selectors.js';
-import {getAuthStatus} from '../../reducer/user/selectors';
+import {getAuthStatus} from '../../reducer/user/selectors.js';
 
 const Main = ({
   promoMovie: {genre, releaseDate},
@@ -15,7 +15,8 @@ const Main = ({
   onCardClick,
   onGenresFilterClick,
   genresList,
-  isUserAuthorized
+  isUserAuthorized,
+  onSignInClick
 }) => (
   <React.Fragment>
     <section className="movie-card">
@@ -40,7 +41,7 @@ const Main = ({
               <div className="user-block__avatar">
                 <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
               </div> :
-              <a href="#">Sign in</a>
+              <a href="#" onClick={onSignInClick}>Sign in</a>
           }
         </div>
       </header>
@@ -117,6 +118,7 @@ Main.propTypes = {
     releaseDate: PropTypes.number,
   }).isRequired,
   onCardClick: PropTypes.func.isRequired,
+  onSignInClick: PropTypes.func.isRequired,
   onGenresFilterClick: PropTypes.func.isRequired,
   activeGenreFilter: PropTypes.string.isRequired,
   filteredMovies: PropTypes.arrayOf(PropTypes.shape({
@@ -139,6 +141,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onGenresFilterClick(filter) {
     dispatch(ActionCreator.setGenresFilter(filter));
+  },
+  onSignInClick(evt) {
+    evt.preventDefault();
+    dispatch(ActionCreator.setActiveScreen(Screen.SIGN_IN_PAGE));
   }
 });
 

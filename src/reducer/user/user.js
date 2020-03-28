@@ -25,6 +25,12 @@ const Operation = {
         dispatch(ActionCreator.setAuthStatus(AuthStatus.AUTH));
       });
   },
+  tryAuth: (email, password) => (dispatch, getState, api) => {
+    return api.post(`/login`, {email, password})
+      .then(() => {
+        dispatch(ActionCreator.setAuthStatus(AuthStatus.AUTH));
+      });
+  }
 };
 
 const reducer = (state = initialState, action) => {
