@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reder UserBlock Render sign in link if not authorized 1`] = `
+<div
+  className="user-block"
+>
+  <a
+    href="#"
+    onClick={[Function]}
+  >
+    Sign in
+  </a>
+</div>
+`;
+
+exports[`Reder UserBlock Render user avatar if authorized 1`] = `
+<div
+  className="user-block"
+>
+  <div
+    className="user-block__avatar"
+  >
+    <img
+      alt="User avatar"
+      height="63"
+      src="img/avatar.jpg"
+      width="63"
+    />
+  </div>
+</div>
+`;
