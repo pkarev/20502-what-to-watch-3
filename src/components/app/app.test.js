@@ -47,6 +47,9 @@ it(`Render App`, () => {
     [NameSpace.DATA]: {
       movies,
       promoMovie: movies[0],
+    },
+    [NameSpace.USER]: {
+      isAuthorized: true,
     }
   });
 

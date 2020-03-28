@@ -6,6 +6,7 @@ import GenresFilter from '../genres-filter/genres-filter.jsx';
 import {ActionCreator} from '../../reducer/app-state/app-state.js';
 import {getActiveGenreFilter} from '../../reducer/app-state/selectors.js';
 import {getGenresList, getFilteredMovies, getPromoMovie} from '../../reducer/data/selectors.js';
+import {getAuthStatus} from '../../reducer/user/selectors';
 
 const Main = ({
   promoMovie: {genre, releaseDate},
@@ -13,7 +14,8 @@ const Main = ({
   activeGenreFilter,
   onCardClick,
   onGenresFilterClick,
-  genresList
+  genresList,
+  isUserAuthorized
 }) => (
   <React.Fragment>
     <section className="movie-card">
@@ -33,9 +35,13 @@ const Main = ({
         </div>
 
         <div className="user-block">
-          <div className="user-block__avatar">
-            <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-          </div>
+          {
+            isUserAuthorized ?
+              <div className="user-block__avatar">
+                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
+              </div> :
+              <a href="#">Sign in</a>
+          }
         </div>
       </header>
 
@@ -119,6 +125,7 @@ Main.propTypes = {
     previewImage: PropTypes.string.isRequired,
   })),
   genresList: PropTypes.arrayOf(PropTypes.string).isRequired,
+  isUserAuthorized: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -126,6 +133,7 @@ const mapStateToProps = (state) => ({
   activeGenreFilter: getActiveGenreFilter(state),
   genresList: getGenresList(state),
   promoMovie: getPromoMovie(state),
+  isUserAuthorized: getAuthStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
