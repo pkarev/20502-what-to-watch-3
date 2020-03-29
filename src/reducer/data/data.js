@@ -1,3 +1,7 @@
+import {ResponseStatusCode} from '../../api';
+import history from '../../history';
+import {AppRoute} from '../../routes';
+
 const initialState = {
   movies: [],
   promoMovie: {},
@@ -6,6 +10,7 @@ const initialState = {
 const ActionType = {
   LOAD_MOVIES: `LOAD_MOVIES`,
   LOAD_PROMO_MOVIE: `LOAD_PROMO_MOVIE`,
+  TOGGLE_FAVORITE_STATUS: `TOGGLE_FAVORITE_STATUS`,
 };
 
 const ActionCreator = {
@@ -13,11 +18,14 @@ const ActionCreator = {
     type: ActionType.LOAD_MOVIES,
     payload: movies,
   }),
-  setPromoMovie: (movie) => (
-    {
-      type: ActionType.LOAD_PROMO_MOVIE,
-      payload: movie,
-    }),
+  setPromoMovie: (movie) => ({
+    type: ActionType.LOAD_PROMO_MOVIE,
+    payload: movie,
+  }),
+  updateFavoriteStatus: (movie) => ({
+    type: ActionType.TOGGLE_FAVORITE_STATUS,
+    payload: movie,
+  }),
 };
 
 const Operation = {
@@ -39,6 +47,19 @@ const Operation = {
         throw err;
       });
   },
+  addToFavorites: (id, isFavorite) => (dispatch, getstate, api) => {
+    return api.post(`/favorite/${id}/${Number(isFavorite) ? 0 : 1}`)
+      .then((response) => {
+        dispatch(ActionCreator.updateFavoriteStatus(formatMovie(response.data)));
+      })
+      .catch((err) => {
+        if (err.response.status === ResponseStatusCode.UNAUTHORIZED) {
+          history.push(AppRoute.SIGN_IN);
+        }
+
+        throw err;
+      });
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -50,6 +71,21 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_PROMO_MOVIE:
       return (Object.assign({}, state, {
         promoMovie: action.payload,
+      }));
+    case ActionType.TOGGLE_FAVORITE_STATUS:
+      return (Object.assign({}, state, {
+        movies: state.movies.map((movie) => {
+          if (movie.id === action.payload.id) {
+            return Object.assign({}, movie, {
+              isFavorite: !movie.isFavorite,
+            });
+          }
+
+          return movie;
+        }),
+        promoMovie: Object.assign({}, state.promoMovie, {
+          isFavorite: !state.promoMovie.isFavorite
+        }),
       }));
   }
 
@@ -68,6 +104,7 @@ const formatMovie = (movie) => ({
   poster: movie.poster_image,
   previewImage: movie.preview_image,
   posterBig: movie.background_image,
+  isFavorite: movie.is_favorite,
   rating: {
     number: movie.rating,
     count: movie.scores_count,

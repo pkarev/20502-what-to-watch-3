@@ -5,12 +5,14 @@ import Tabs from '../tabs/tabs.jsx';
 import SimilarMovies from '../similar-movies/similar-movies.jsx';
 import UserBlock from '../user-block/user-block.jsx';
 import {getAuthStatus} from '../../reducer/user/selectors';
-import {ActionCreator, Screen} from '../../reducer/app-state/app-state.js';
+import {AppDynamicRoute} from '../../routes.js';
+import history from '../../history.js';
 
 const MoviePage = (
     {
       isAuthorized,
       movie: {
+        id,
         name,
         genre,
         releaseDate,
@@ -21,9 +23,9 @@ const MoviePage = (
         posterBig,
         poster,
       },
+      onAddReviewClick,
       similarMovies,
       onCardClick,
-      onAddReviewClick,
     }) => (
   <React.Fragment>
     <section className="movie-card movie-card--full">
@@ -71,7 +73,7 @@ const MoviePage = (
                 <a href="add-review.html" className="btn movie-card__button"
                   onClick={(evt) => {
                     evt.preventDefault();
-                    onAddReviewClick();
+                    onAddReviewClick(id);
                   }}
                 >Add review</a> :
                 null
@@ -257,6 +259,7 @@ const MoviePage = (
 
 MoviePage.propTypes = {
   movie: PropTypes.shape({
+    id: PropTypes.number,
     name: PropTypes.string,
     genre: PropTypes.string,
     releaseDate: PropTypes.number,
@@ -277,18 +280,18 @@ MoviePage.propTypes = {
     previewImage: PropTypes.string.isRequired,
     trailer: PropTypes.string.isRequired
   })).isRequired,
+  onAddReviewClick: PropTypes.func.isRequired,
   onCardClick: PropTypes.func.isRequired,
   isAuthorized: PropTypes.bool.isRequired,
-  onAddReviewClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   isAuthorized: getAuthStatus(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onAddReviewClick() {
-    dispatch(ActionCreator.setActiveScreen(Screen.ADD_REVIEW_PAGE));
+const mapDispatchToProps = () => ({
+  onAddReviewClick(id) {
+    history.push(AppDynamicRoute.addReview(id));
   },
 });
 

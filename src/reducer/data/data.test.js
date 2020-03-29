@@ -10,18 +10,45 @@ const movies = [
     name: `Fantastic Beasts`,
     previewImage: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    isFavorite: false,
   },
   {
     id: 2,
     name: `Bohemian Rhapsody`,
     previewImage: `/img/bohemian-rhapsody.jpg`,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    isFavorite: false,
   },
   {
     id: 3,
     name: `Moonrise kindom`,
     previewImage: `/img/moonrise-kingdom.jpg`,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    isFavorite: false,
+  }
+];
+
+const toggledFavoriteMovies = [
+  {
+    id: 1,
+    name: `Fantastic Beasts`,
+    previewImage: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    isFavorite: true,
+  },
+  {
+    id: 2,
+    name: `Bohemian Rhapsody`,
+    previewImage: `/img/bohemian-rhapsody.jpg`,
+    trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    isFavorite: false,
+  },
+  {
+    id: 3,
+    name: `Moonrise kindom`,
+    previewImage: `/img/moonrise-kingdom.jpg`,
+    trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    isFavorite: false,
   }
 ];
 
@@ -30,9 +57,9 @@ const initialState = {
   promoMovie: {},
 };
 
-const commentPost = {
-  rating: 8,
-  comment: `Bla bla la`
+const mockState = {
+  movies,
+  promoMovie: movies[0],
 };
 
 it(`Reducer without params should return initial state`, () => {
@@ -50,6 +77,13 @@ it(`Reducer should set promo movie`, () => {
   expect(reducer(initialState, ActionCreator.setPromoMovie(movies[0]))).toMatchObject({
     movies: [],
     promoMovie: movies[0],
+  });
+});
+
+it(`Reducer should toggle favorite status`, () => {
+  expect(reducer(mockState, ActionCreator.updateFavoriteStatus(toggledFavoriteMovies[0]))).toMatchObject({
+    movies: toggledFavoriteMovies,
+    promoMovie: toggledFavoriteMovies[0],
   });
 });
 

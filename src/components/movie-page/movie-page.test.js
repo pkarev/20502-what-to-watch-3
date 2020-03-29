@@ -1,9 +1,11 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
+import {Router} from 'react-router-dom';
 import configureStore from 'redux-mock-store';
 import MoviePage from './movie-page.jsx';
 import NameSpace from '../../reducer/name-space';
+import history from '../../history.js';
 
 const movie = {
   name: `The Grand Budapest Hotel`,
@@ -53,9 +55,11 @@ it(`Render MoviePage`, () => {
   });
   const tree = renderer
     .create(
-        <Provider store={store}>
-          <MoviePage movie={movie} similarMovies={movies} onCardClick={() => {}}/>
-        </Provider>,
+        <Router history={history}>
+          <Provider store={store}>
+            <MoviePage movie={movie} similarMovies={movies} onCardClick={() => {}}/>
+          </Provider>
+        </Router>,
         {
           createNodeMock: () => ({})
         }
