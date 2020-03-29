@@ -78,7 +78,7 @@ exports[`Render Component 1`] = `
         className="user-block"
       >
         <a
-          href="#"
+          href="/login"
           onClick={[Function]}
         >
           Sign in

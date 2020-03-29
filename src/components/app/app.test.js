@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import App from './app.jsx';
-import {Screen, ALL_GENRES_FILTER} from '../../reducer/app-state/app-state.js';
+import {ALL_GENRES_FILTER} from '../../reducer/app-state/app-state.js';
 import NameSpace from '../../reducer/name-space.js';
 
 const movies = [
@@ -39,10 +39,6 @@ it(`Render App`, () => {
   const store = mockStore({
     [NameSpace.APP_STATE]: {
       activeGenreFilter: ALL_GENRES_FILTER,
-      filteredMovies: movies,
-      genresList: [ALL_GENRES_FILTER, `Awesome genre`, `Drama`, `Some genre`],
-      activeScreen: Screen.MAIN,
-      currentMovie: movies[0],
     },
     [NameSpace.DATA]: {
       movies,

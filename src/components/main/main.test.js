@@ -1,10 +1,12 @@
 import React from 'react';
+import {Router} from 'react-router-dom';
 import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
 import {Provider} from 'react-redux';
 import Main from './main.jsx';
-import {ALL_GENRES_FILTER, Screen} from '../../reducer/app-state/app-state.js';
+import {ALL_GENRES_FILTER} from '../../reducer/app-state/app-state.js';
 import NameSpace from '../../reducer/name-space';
+import history from '../../history.js';
 
 const movies = [
   {
@@ -39,10 +41,6 @@ it(`Render Main`, () => {
   const store = mockStore({
     [NameSpace.APP_STATE]: {
       activeGenreFilter: ALL_GENRES_FILTER,
-      filteredMovies: movies,
-      genresList: [ALL_GENRES_FILTER, `Awesome genre`, `Drama`, `Some genre`],
-      activeScreen: Screen.MAIN,
-      currentMovie: movies[0],
     },
     [NameSpace.DATA]: {
       movies,
@@ -55,9 +53,12 @@ it(`Render Main`, () => {
 
   const tree = renderer
     .create(
-        <Provider store={store}>
-          <Main onCardClick={() => {}}/>
-        </Provider>, {
+        <Router history={history}>
+          <Provider store={store}>
+            <Main onCardClick={() => {}}/>
+          </Provider>
+        </Router>,
+        {
           createNodeMock: () => ({})
         })
     .toJSON();

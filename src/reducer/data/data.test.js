@@ -30,11 +30,6 @@ const initialState = {
   promoMovie: {},
 };
 
-const commentPost = {
-  rating: 8,
-  comment: `Bla bla la`
-};
-
 it(`Reducer without params should return initial state`, () => {
   expect(reducer(undefined, {})).toEqual(initialState);
 });

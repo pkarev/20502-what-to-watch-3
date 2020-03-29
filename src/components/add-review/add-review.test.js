@@ -1,9 +1,11 @@
 import React from 'react';
+import {Router} from 'react-router-dom';
 import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
 import {Provider} from 'react-redux';
 import AddReview from './add-review.jsx';
 import NameSpace from '../../reducer/name-space';
+import history from '../../history.js';
 
 const mockStore = configureStore([]);
 
@@ -23,9 +25,12 @@ it(`Render Component`, () => {
 
   const tree = renderer
     .create(
-        <Provider store={store}>
-          <AddReview movie={movie} onCommentPost={() => {}}/>
-        </Provider>)
+        <Router history={history}>
+          <Provider store={store}>
+            <AddReview movie={movie} onCommentPost={() => {}}/>
+          </Provider>
+        </Router>
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();

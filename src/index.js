@@ -8,8 +8,9 @@ import {createAPI} from './api.js';
 import reducer from './reducer/reducer.js';
 import {Operation as DataOperation} from './reducer/data/data.js';
 import {ActionCreator as UserActionCreator, AuthStatus, Operation as UserOperation} from './reducer/user/user.js';
-import {ActionCreator as AppStateActionCreator, Screen} from './reducer/app-state/app-state.js';
-import {ResponseStatusCode} from './api';
+import {ResponseStatusCode} from './api.js';
+import history from './history.js';
+import {AppRoute} from './routes.js';
 
 const onUnauthorized = () => {
   store.dispatch(UserActionCreator.setAuthStatus(AuthStatus.NO_AUTH));
@@ -32,7 +33,7 @@ Promise.all([
 ])
   .catch(({response}) => {
     if (response.status === ResponseStatusCode.NOT_FOUND) {
-      store.dispatch(AppStateActionCreator.setActiveScreen(Screen.ERROR_PAGE));
+      history.push(AppRoute.ERROR);
     }
   })
   .finally(() => {

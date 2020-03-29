@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import MoviesList from '../movies-list/movies-list.jsx';
 import GenresFilter from '../genres-filter/genres-filter.jsx';
 import UserBlock from '../user-block/user-block.jsx';
-import {ActionCreator, Screen} from '../../reducer/app-state/app-state.js';
+import {ActionCreator} from '../../reducer/app-state/app-state.js';
 import {getActiveGenreFilter} from '../../reducer/app-state/selectors.js';
 import {getGenresList, getFilteredMovies, getPromoMovie} from '../../reducer/data/selectors.js';
 import {getAuthStatus} from '../../reducer/user/selectors.js';
@@ -16,7 +16,6 @@ const Main = ({
   onCardClick,
   onGenresFilterClick,
   genresList,
-  isAuthorized,
 }) => (
   <React.Fragment>
     <section className="movie-card">
