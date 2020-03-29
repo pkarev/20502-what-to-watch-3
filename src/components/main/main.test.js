@@ -16,6 +16,7 @@ const movies = [
     genre: `Awesome genre`,
     releaseDate: 2020,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    isFavorite: false,
   },
   {
     id: 2,
@@ -24,6 +25,7 @@ const movies = [
     genre: `Drama`,
     releaseDate: 2020,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    isFavorite: false,
   },
   {
     id: 3,
@@ -31,7 +33,8 @@ const movies = [
     previewImage: `/img/moonrise-kingdom.jpg`,
     genre: `Some genre`,
     releaseDate: 2020,
-    trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
+    trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    isFavorite: false,
   },
 ];
 

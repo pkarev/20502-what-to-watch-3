@@ -16,12 +16,6 @@ export const getFilteredMovies = (state) => {
     movies.filter((movie) => movie.genre === getActiveGenreFilter(state));
 };
 
-export const getMovieById = (state, id) => {
-  const movies = getMovies(state);
-
-  return movies.find((movie) => movie.id === id);
-};
-
 export const getGenresList = createSelector(
     getMovies,
     (movies) => {

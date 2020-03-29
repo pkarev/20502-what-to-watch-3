@@ -14,6 +14,7 @@ const movies = [
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     genre: `Awesome genre`,
     releaseDate: 2020,
+    isFavorite: false,
   },
   {
     id: 2,
@@ -22,6 +23,7 @@ const movies = [
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     genre: `Drama`,
     releaseDate: 2020,
+    isFavorite: false,
   },
   {
     id: 3,
@@ -30,6 +32,7 @@ const movies = [
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     genre: `Some genre`,
     releaseDate: 2020,
+    isFavorite: false,
   },
 ];
 
