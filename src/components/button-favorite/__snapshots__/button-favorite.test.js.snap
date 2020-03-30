@@ -12,7 +12,7 @@ exports[`Render ButtonFavorite render isFavorite 1`] = `
     width="19"
   >
     <use
-      xlinkHref="#add"
+      xlinkHref="#in-list"
     />
   </svg>
   <span>
@@ -33,7 +33,7 @@ exports[`Render ButtonFavorite render isNotFavorite 1`] = `
     width="18"
   >
     <use
-      xlinkHref="#in-list"
+      xlinkHref="#add"
     />
   </svg>
   <span>

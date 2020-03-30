@@ -3,6 +3,7 @@ import axios from 'axios';
 export const ResponseStatusCode = {
   UNAUTHORIZED: 401,
   NOT_FOUND: 404,
+  OK: 200,
 };
 
 export const createAPI = (onUnauthorized) => {

@@ -9,12 +9,14 @@ import SignIn from '../sign-in/sign-in.jsx';
 import AddReview from '../add-review/add-review.jsx';
 import Player from '../player/player.jsx';
 import PrivateRoute from '../private-route/private-route.jsx';
+import MyList from '../my-list/my-list.jsx';
 import {Operation as DataOperation, ActionCreator as DataActionCreator} from '../../reducer/data/data.js';
-import {getPromoMovie, getMovies} from '../../reducer/data/selectors.js';
-import {Operation, ActionCreator, AuthStatus} from '../../reducer/user/user.js';
+import {getPromoMovie, getMovies, getFavoriteMovies} from '../../reducer/data/selectors.js';
+import {Operation as UserOperatopn, ActionCreator, AuthStatus} from '../../reducer/user/user.js';
 import {getAuthStatus} from '../../reducer/user/selectors.js';
 import history from '../../history.js';
-import {AppRoute, AppDynamicRoute} from '../../routes.js';
+import {AppDynamicRoute} from '../../routes.js';
+import {ResponseStatusCode} from '../../api';
 
 class App extends PureComponent {
   constructor(props) {
@@ -33,7 +35,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {movies, onSignInSubmit, isAuthorized, onButtonFavoriteClick} = this.props;
+    const {movies, favoriteMovies, onSignInSubmit, isAuthorized, onButtonFavoriteClick} = this.props;
 
     return (
       <Router history={history}>
@@ -50,7 +52,6 @@ class App extends PureComponent {
           </Route>
           <PrivateRoute exact path="/films/:id/review"
             isAuthorized={isAuthorized}
-            component={AddReview}
             render={(props) => {
               return (
                 <AddReview
@@ -70,6 +71,7 @@ class App extends PureComponent {
                   onButtonPlayClick={() => {
                     this._handlePlayClick(props.match.params.id);
                   }}
+                  onButtonFavoriteClick={onButtonFavoriteClick}
                 />
               );
             }}
@@ -82,6 +84,12 @@ class App extends PureComponent {
               />
             )}
           />
+          <PrivateRoute isAuthorized={isAuthorized} path="/mylist" exact render={() => (
+            <MyList
+              movies={favoriteMovies}
+              onCardClick={this._handleCardClick}
+            />
+          )}/>
           <Route exact path="/error">
             <ErrorPage/>
           </Route>
@@ -94,6 +102,11 @@ class App extends PureComponent {
 App.propTypes = {
   isAuthorized: PropTypes.bool.isRequired,
   movies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    poster: PropTypes.string,
+  })),
+  favoriteMovies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
     poster: PropTypes.string,
@@ -112,6 +125,7 @@ App.propTypes = {
 const mapStateToProps = (state) => ({
   movies: getMovies(state),
   promoMovie: getPromoMovie(state),
+  favoriteMovies: getFavoriteMovies(state),
   isAuthorized: getAuthStatus(state),
 });
 
@@ -120,21 +134,17 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(DataActionCreator.setPromoMovie((movie)));
   },
   onSignInSubmit(email, password) {
-    return dispatch(Operation.tryAuth(email, password))
+    return dispatch(UserOperatopn.tryAuth(email, password))
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === ResponseStatusCode.OK) {
           dispatch(ActionCreator.setAuthStatus(AuthStatus.AUTH));
+          dispatch(DataOperation.getFavorites());
           history.goBack();
         }
       });
   },
   onCommentPost(id, commentPost) {
-    return dispatch(DataOperation.postComment(id, commentPost))
-      .then((response) => {
-        if (response.status === 200) {
-          history.push(AppRoute.MAIN);
-        }
-      });
+    return dispatch(DataOperation.postComment(id, commentPost));
   },
   onButtonFavoriteClick(id, isFavorite) {
     dispatch(DataOperation.addToFavorites(id, isFavorite));

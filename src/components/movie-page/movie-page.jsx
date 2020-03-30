@@ -5,6 +5,7 @@ import Tabs from '../tabs/tabs.jsx';
 import SimilarMovies from '../similar-movies/similar-movies.jsx';
 import UserBlock from '../user-block/user-block.jsx';
 import ButtonPlay from '../button-play/button-play.jsx';
+import ButtonFavorite from '../button-favorite/button-favorite.jsx';
 import {getAuthStatus} from '../../reducer/user/selectors';
 import {AppDynamicRoute} from '../../routes.js';
 import history from '../../history.js';
@@ -23,11 +24,13 @@ const MoviePage = (
         stars,
         posterBig,
         poster,
+        isFavorite
       },
       onAddReviewClick,
       similarMovies,
       onCardClick,
       onButtonPlayClick,
+      onButtonFavoriteClick,
     }) => (
   <React.Fragment>
     <section className="movie-card movie-card--full">
@@ -60,12 +63,9 @@ const MoviePage = (
 
             <div className="movie-card__buttons">
               <ButtonPlay onClick={onButtonPlayClick}/>
-              <button className="btn btn--list movie-card__button" type="button">
-                <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use xlinkHref="#add"></use>
-                </svg>
-                <span>My list</span>
-              </button>
+              <ButtonFavorite isFavorite={isFavorite} onButtonFavoriteClick={() => {
+                onButtonFavoriteClick(id, isFavorite);
+              }}/>
               {isAuthorized ?
                 <a href="add-review.html" className="btn movie-card__button"
                   onClick={(evt) => {
@@ -257,6 +257,7 @@ const MoviePage = (
 MoviePage.propTypes = {
   isAuthorized: PropTypes.bool.isRequired,
   movie: PropTypes.shape({
+    isFavorite: PropTypes.bool,
     id: PropTypes.number,
     name: PropTypes.string,
     genre: PropTypes.string,
@@ -281,6 +282,7 @@ MoviePage.propTypes = {
   onAddReviewClick: PropTypes.func.isRequired,
   onCardClick: PropTypes.func.isRequired,
   onButtonPlayClick: PropTypes.func.isRequired,
+  onButtonFavoriteClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

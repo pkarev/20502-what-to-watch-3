@@ -30,7 +30,7 @@ SmallMovieCard.propTypes = {
     trailer: PropTypes.string.isRequired
   }),
   renderVideo: PropTypes.func.isRequired,
-  onCardClick: PropTypes.func.isRequired,
+  onCardClick: PropTypes.func,
 };
 
 export default withVideo(React.memo(SmallMovieCard));

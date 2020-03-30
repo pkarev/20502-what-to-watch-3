@@ -23,7 +23,7 @@ PrivateRoute.propTypes = {
   isAuthorized: PropTypes.bool.isRequired,
   render: PropTypes.func.isRequired,
   path: PropTypes.string.isRequired,
-  exact: PropTypes.bool.isRequired,
+  exact: PropTypes.bool,
 };
 
 export default PrivateRoute;

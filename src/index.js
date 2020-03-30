@@ -26,7 +26,10 @@ const store = createStore(
     )
 );
 
-store.dispatch(UserOperation.checkAuth());
+store.dispatch(UserOperation.checkAuth())
+  .then(() => {
+    store.dispatch(DataOperation.getFavorites());
+  });
 
 Promise.all([
   store.dispatch(DataOperation.loadMovies()),
