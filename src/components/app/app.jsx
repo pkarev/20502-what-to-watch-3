@@ -21,10 +21,15 @@ class App extends PureComponent {
     super(props);
 
     this._handleCardClick = this._handleCardClick.bind(this);
+    this._handlePlayClick = this._handlePlayClick.bind(this);
   }
 
   _handleCardClick(movie) {
     history.push(AppDynamicRoute.film(movie.id));
+  }
+
+  _handlePlayClick(id) {
+    history.push(AppDynamicRoute.player(id));
   }
 
   render() {
@@ -34,7 +39,7 @@ class App extends PureComponent {
       <Router history={history}>
         <Switch>
           <Route exact path="/">
-            <Main onCardClick={this._handleCardClick}/>
+            <Main onCardClick={this._handleCardClick} onButtonPlayClick={this._handlePlayClick}/>
           </Route>
           <Route exact path="/login">
             <SignIn onSignInSubmit={onSignInSubmit}/>
@@ -58,6 +63,9 @@ class App extends PureComponent {
                   movie={movies.find((movie) => movie.id === Number(props.match.params.id))}
                   similarMovies={movies}
                   onCardClick={this._handleCardClick}
+                  onButtonPlayClick={() => {
+                    this._handlePlayClick(props.match.params.id);
+                  }}
                 />
               );
             }}

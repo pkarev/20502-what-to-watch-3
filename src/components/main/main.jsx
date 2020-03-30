@@ -5,6 +5,7 @@ import MoviesList from '../movies-list/movies-list.jsx';
 import GenresFilter from '../genres-filter/genres-filter.jsx';
 import UserBlock from '../user-block/user-block.jsx';
 import AddToFavorite from '../add-to-favorite/add-to-favorite.jsx';
+import ButtonPlay from '../button-play/button-play.jsx';
 import {ActionCreator} from '../../reducer/app-state/app-state.js';
 import {getActiveGenreFilter} from '../../reducer/app-state/selectors.js';
 import {getGenresList, getFilteredMovies, getPromoMovie} from '../../reducer/data/selectors.js';
@@ -19,6 +20,7 @@ const Main = ({
   onGenresFilterClick,
   genresList,
   onAddToFavoriteClick,
+  onButtonPlayClick,
 }) => {
   const handleAddToList = () => {
     onAddToFavoriteClick(id, isFavorite);
@@ -59,12 +61,9 @@ const Main = ({
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
+                <ButtonPlay onClick={() => {
+                  onButtonPlayClick(id);
+                }}/>
                 <AddToFavorite isFavorite={isFavorite} onAddToFavoriteClick={handleAddToList}/>
               </div>
             </div>
@@ -125,6 +124,7 @@ Main.propTypes = {
   onCardClick: PropTypes.func.isRequired,
   onGenresFilterClick: PropTypes.func.isRequired,
   onAddToFavoriteClick: PropTypes.func.isRequired,
+  onButtonPlayClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

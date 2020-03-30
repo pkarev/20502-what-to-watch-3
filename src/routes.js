@@ -11,6 +11,9 @@ const AppDynamicRoute = {
   },
   film(id) {
     return `/films/${id}`;
+  },
+  player(id) {
+    return `/player/${id}`;
   }
 };
 

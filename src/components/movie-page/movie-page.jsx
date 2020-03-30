@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import Tabs from '../tabs/tabs.jsx';
 import SimilarMovies from '../similar-movies/similar-movies.jsx';
 import UserBlock from '../user-block/user-block.jsx';
+import ButtonPlay from '../button-play/button-play.jsx';
 import {getAuthStatus} from '../../reducer/user/selectors';
 import {AppDynamicRoute} from '../../routes.js';
 import history from '../../history.js';
@@ -26,6 +27,7 @@ const MoviePage = (
       onAddReviewClick,
       similarMovies,
       onCardClick,
+      onButtonPlayClick,
     }) => (
   <React.Fragment>
     <section className="movie-card movie-card--full">
@@ -57,12 +59,7 @@ const MoviePage = (
             </p>
 
             <div className="movie-card__buttons">
-              <button className="btn btn--play movie-card__button" type="button">
-                <svg viewBox="0 0 19 19" width="19" height="19">
-                  <use xlinkHref="#play-s"></use>
-                </svg>
-                <span>Play</span>
-              </button>
+              <ButtonPlay onClick={onButtonPlayClick}/>
               <button className="btn btn--list movie-card__button" type="button">
                 <svg viewBox="0 0 19 20" width="19" height="20">
                   <use xlinkHref="#add"></use>
@@ -258,6 +255,7 @@ const MoviePage = (
 );
 
 MoviePage.propTypes = {
+  isAuthorized: PropTypes.bool.isRequired,
   movie: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
@@ -282,7 +280,7 @@ MoviePage.propTypes = {
   })).isRequired,
   onAddReviewClick: PropTypes.func.isRequired,
   onCardClick: PropTypes.func.isRequired,
-  isAuthorized: PropTypes.bool.isRequired,
+  onButtonPlayClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

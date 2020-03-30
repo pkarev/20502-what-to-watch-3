@@ -57,7 +57,7 @@ it(`Render MoviePage`, () => {
     .create(
         <Router history={history}>
           <Provider store={store}>
-            <MoviePage movie={movie} similarMovies={movies} onCardClick={() => {}}/>
+            <MoviePage movie={movie} similarMovies={movies} onCardClick={() => {}} onButtonPlayClick={() => {}}/>
           </Provider>
         </Router>,
         {

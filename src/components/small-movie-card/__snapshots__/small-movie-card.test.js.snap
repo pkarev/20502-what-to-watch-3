@@ -7,7 +7,6 @@ exports[`Render SmallMovieCard 1`] = `
 >
   <video
     className="small-movie-card__image"
-    controls={false}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     poster="/img/fantastic-beasts-the-crimes-of-grindelwald.jpg"

@@ -98,6 +98,7 @@ Array [
           >
             <button
               className="btn btn--play movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -273,7 +274,6 @@ Array [
         >
           <video
             className="small-movie-card__image"
-            controls={false}
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
             poster="/img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
@@ -305,7 +305,6 @@ Array [
         >
           <video
             className="small-movie-card__image"
-            controls={false}
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
             poster="/img/bohemian-rhapsody.jpg"
@@ -337,7 +336,6 @@ Array [
         >
           <video
             className="small-movie-card__image"
-            controls={false}
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
             poster="/img/moonrise-kingdom.jpg"
