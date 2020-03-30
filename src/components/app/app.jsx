@@ -7,6 +7,7 @@ import MoviePage from '../movie-page/movie-page.jsx';
 import ErrorPage from '../error-page/error-page.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
 import AddReview from '../add-review/add-review.jsx';
+import Player from '../player/player.jsx';
 import PrivateRoute from '../private-route/private-route.jsx';
 import {Operation as DataOperation, ActionCreator as DataActionCreator} from '../../reducer/data/data.js';
 import {getPromoMovie, getMovies} from '../../reducer/data/selectors.js';
@@ -60,6 +61,14 @@ class App extends PureComponent {
                 />
               );
             }}
+          />
+          <Route exact path="/player/:id"
+            render={(props) => (
+              <Player
+                movie={movies.find((movie) => movie.id === Number(props.match.params.id))}
+                onPlayerExitClick={history.goBack}
+              />
+            )}
           />
           <Route exact path="/error">
             <ErrorPage/>
