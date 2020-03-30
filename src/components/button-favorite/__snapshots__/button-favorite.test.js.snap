@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render AddToFavorite render isFavorite 1`] = `
+exports[`Render ButtonFavorite render isFavorite 1`] = `
 <button
   className="btn btn--list movie-card__button"
   onClick={[Function]}
@@ -21,7 +21,7 @@ exports[`Render AddToFavorite render isFavorite 1`] = `
 </button>
 `;
 
-exports[`Render AddToFavorite render isNotFavorite 1`] = `
+exports[`Render ButtonFavorite render isNotFavorite 1`] = `
 <button
   className="btn btn--list movie-card__button"
   onClick={[Function]}

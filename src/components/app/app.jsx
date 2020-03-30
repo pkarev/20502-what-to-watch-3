@@ -33,13 +33,17 @@ class App extends PureComponent {
   }
 
   render() {
-    const {movies, onSignInSubmit, isAuthorized} = this.props;
+    const {movies, onSignInSubmit, isAuthorized, onButtonFavoriteClick} = this.props;
 
     return (
       <Router history={history}>
         <Switch>
           <Route exact path="/">
-            <Main onCardClick={this._handleCardClick} onButtonPlayClick={this._handlePlayClick}/>
+            <Main
+              onCardClick={this._handleCardClick}
+              onButtonPlayClick={this._handlePlayClick}
+              onButtonFavoriteClick={onButtonFavoriteClick}
+            />
           </Route>
           <Route exact path="/login">
             <SignIn onSignInSubmit={onSignInSubmit}/>
@@ -102,6 +106,7 @@ App.propTypes = {
   setPromoMovie: PropTypes.func.isRequired,
   onSignInSubmit: PropTypes.func.isRequired,
   onCommentPost: PropTypes.func.isRequired,
+  onButtonFavoriteClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -130,6 +135,9 @@ const mapDispatchToProps = (dispatch) => ({
           history.push(AppRoute.MAIN);
         }
       });
+  },
+  onButtonFavoriteClick(id, isFavorite) {
+    dispatch(DataOperation.addToFavorites(id, isFavorite));
   },
 });
 

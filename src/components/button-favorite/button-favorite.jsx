@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const AddToFavorite = ({isFavorite, onAddToFavoriteClick}) => (
+const ButtonFavorite = ({isFavorite, onButtonFavoriteClick}) => (
   <button className="btn btn--list movie-card__button" type="button" onClick={(evt) => {
     evt.preventDefault();
-    onAddToFavoriteClick();
+    onButtonFavoriteClick();
   }}>
     {isFavorite ?
       <svg viewBox="0 0 19 20" width="19" height="20">
@@ -18,9 +18,9 @@ const AddToFavorite = ({isFavorite, onAddToFavoriteClick}) => (
   </button>
 );
 
-AddToFavorite.propTypes = {
+ButtonFavorite.propTypes = {
   isFavorite: PropTypes.bool.isRequired,
-  onAddToFavoriteClick: PropTypes.func.isRequired,
+  onButtonFavoriteClick: PropTypes.func.isRequired,
 };
 
-export default AddToFavorite;
+export default ButtonFavorite;
