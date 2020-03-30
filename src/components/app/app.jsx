@@ -7,11 +7,13 @@ import MoviePage from '../movie-page/movie-page.jsx';
 import ErrorPage from '../error-page/error-page.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
 import AddReview from '../add-review/add-review.jsx';
+import PrivateRoute from '../private-route/private-route.jsx';
 import {Operation as DataOperation, ActionCreator as DataActionCreator} from '../../reducer/data/data.js';
 import {getPromoMovie, getMovies} from '../../reducer/data/selectors.js';
 import {Operation, ActionCreator, AuthStatus} from '../../reducer/user/user.js';
+import {getAuthStatus} from '../../reducer/user/selectors.js';
 import history from '../../history.js';
-import {AppRoute} from '../../routes.js';
+import {AppRoute, AppDynamicRoute} from '../../routes.js';
 
 class App extends PureComponent {
   constructor(props) {
@@ -21,14 +23,11 @@ class App extends PureComponent {
   }
 
   _handleCardClick(movie) {
-    const {setPromoMovie} = this.props;
-
-    setPromoMovie(movie);
-    history.push(AppRoute.MOVIE_PAGE);
+    history.push(AppDynamicRoute.film(movie.id));
   }
 
   render() {
-    const {movies, promoMovie, onSignInSubmit} = this.props;
+    const {movies, onSignInSubmit, isAuthorized} = this.props;
 
     return (
       <Router history={history}>
@@ -36,18 +35,28 @@ class App extends PureComponent {
           <Route exact path="/">
             <Main onCardClick={this._handleCardClick}/>
           </Route>
-          <Route exact path="/movie-page">
-            <MoviePage movie={promoMovie} similarMovies={movies} onCardClick={this._handleCardClick}/>
-          </Route>
           <Route exact path="/login">
             <SignIn onSignInSubmit={onSignInSubmit}/>
           </Route>
-          <Route exact path="/review/:id"
+          <PrivateRoute exact path="/films/:id/review"
+            isAuthorized={isAuthorized}
+            component={AddReview}
             render={(props) => {
               return (
                 <AddReview
                   movie={movies.find((movie) => movie.id === Number(props.match.params.id))}
                   onCommentPost={() => {}}
+                />
+              );
+            }}
+          />
+          <Route exact path="/films/:id"
+            render={(props) => {
+              return (
+                <MoviePage
+                  movie={movies.find((movie) => movie.id === Number(props.match.params.id))}
+                  similarMovies={movies}
+                  onCardClick={this._handleCardClick}
                 />
               );
             }}
@@ -62,6 +71,7 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
+  isAuthorized: PropTypes.bool.isRequired,
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
@@ -80,6 +90,7 @@ App.propTypes = {
 const mapStateToProps = (state) => ({
   movies: getMovies(state),
   promoMovie: getPromoMovie(state),
+  isAuthorized: getAuthStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

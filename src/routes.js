@@ -7,7 +7,10 @@ const AppRoute = {
 
 const AppDynamicRoute = {
   addReview(id) {
-    return `/review/${id}`;
+    return `/films/${id}/review`;
+  },
+  film(id) {
+    return `/films/${id}`;
   }
 };
 
