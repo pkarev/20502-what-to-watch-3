@@ -26,6 +26,6 @@ export const getGenresList = createSelector(
         genresList.push(movie.genre);
       });
 
-      return [ALL_GENRES_FILTER, ...Array.from(new Set(genresList)).sort()];
+      return [ALL_GENRES_FILTER, ...Array.from(new Set(genresList)).sort().slice(0, 10)];
     }
 );
