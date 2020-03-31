@@ -13,8 +13,8 @@ export const getFilteredMovies = (state) => {
   const movies = getMovies(state);
 
   return getActiveGenreFilter(state) === ALL_GENRES_FILTER ?
-    movies :
-    movies.filter((movie) => movie.genre === getActiveGenreFilter(state));
+    movies.slice() :
+    movies.slice().filter((movie) => movie.genre === getActiveGenreFilter(state));
 };
 
 export const getGenresList = createSelector(
