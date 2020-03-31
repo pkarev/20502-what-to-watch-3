@@ -48,7 +48,7 @@ Array [
         className="user-block"
       >
         <a
-          href="/"
+          href="/mylist"
           onClick={[Function]}
         >
           <div
@@ -233,7 +233,8 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/films/1"
+              onClick={[Function]}
             >
               Fantastic Beasts
             </a>
@@ -264,7 +265,8 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/films/2"
+              onClick={[Function]}
             >
               Bohemian Rhapsody
             </a>
@@ -295,7 +297,8 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/films/3"
+              onClick={[Function]}
             >
               Moonrise kindom
             </a>

@@ -37,7 +37,8 @@ exports[`Render SimilarMovies 1`] = `
       >
         <a
           className="small-movie-card__link"
-          href="movie-page.html"
+          href="/films/1"
+          onClick={[Function]}
         >
           Fantastic Beasts
         </a>
@@ -68,7 +69,8 @@ exports[`Render SimilarMovies 1`] = `
       >
         <a
           className="small-movie-card__link"
-          href="movie-page.html"
+          href="/films/2"
+          onClick={[Function]}
         >
           Bohemian Rhapsody
         </a>
@@ -99,7 +101,8 @@ exports[`Render SimilarMovies 1`] = `
       >
         <a
           className="small-movie-card__link"
-          href="movie-page.html"
+          href="/films/3"
+          onClick={[Function]}
         >
           Moonrise kindom
         </a>
@@ -130,7 +133,8 @@ exports[`Render SimilarMovies 1`] = `
       >
         <a
           className="small-movie-card__link"
-          href="movie-page.html"
+          href="/films/4"
+          onClick={[Function]}
         >
           Moonrise kindom
         </a>

@@ -29,7 +29,8 @@ Array [
         >
           <a
             className="logo__link"
-            href="main.html"
+            href="/"
+            onClick={[Function]}
           >
             <span
               className="logo__letter logo__letter--1"
@@ -52,7 +53,7 @@ Array [
           className="user-block"
         >
           <a
-            href="/"
+            href="/mylist"
             onClick={[Function]}
           >
             <div
@@ -134,7 +135,7 @@ Array [
             </button>
             <a
               className="btn movie-card__button"
-              href="add-review.html"
+              href="/films/undefined/review"
               onClick={[Function]}
             >
               Add review
@@ -294,7 +295,8 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/films/1"
+              onClick={[Function]}
             >
               Fantastic Beasts
             </a>
@@ -325,7 +327,8 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/films/2"
+              onClick={[Function]}
             >
               Bohemian Rhapsody
             </a>
@@ -356,7 +359,8 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/films/3"
+              onClick={[Function]}
             >
               Moonrise kindom
             </a>

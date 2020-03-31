@@ -1,7 +1,9 @@
 import React from 'react';
 import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import SmallMovieCard from './small-movie-card';
+import {Router} from 'react-router-dom';
+import SmallMovieCard from './small-movie-card.jsx';
+import history from '../../history';
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -17,10 +19,12 @@ const movie = {
 it(`When user clicks card, callback gets current movie as argument`, () => {
   const captionHoverHandler = jest.fn();
   const smallMovieCardComponent = mount(
-      <SmallMovieCard
-        movie={movie}
-        onCardClick={captionHoverHandler}
-      />, {
+      <Router history={history}>
+        <SmallMovieCard
+          movie={movie}
+          onCardClick={captionHoverHandler}
+        />
+      </Router>, {
         createNodeMock: () => ({})
       }
   );

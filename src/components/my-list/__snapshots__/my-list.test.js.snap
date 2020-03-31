@@ -12,7 +12,8 @@ exports[`Render MyList 1`] = `
     >
       <a
         className="logo__link"
-        href="main.html"
+        href="/"
+        onClick={[Function]}
       >
         <span
           className="logo__letter logo__letter--1"
@@ -87,7 +88,8 @@ exports[`Render MyList 1`] = `
         >
           <a
             className="small-movie-card__link"
-            href="movie-page.html"
+            href="/films/1"
+            onClick={[Function]}
           >
             Fantastic Beasts
           </a>
@@ -118,7 +120,8 @@ exports[`Render MyList 1`] = `
         >
           <a
             className="small-movie-card__link"
-            href="movie-page.html"
+            href="/films/2"
+            onClick={[Function]}
           >
             Bohemian Rhapsody
           </a>
@@ -149,7 +152,8 @@ exports[`Render MyList 1`] = `
         >
           <a
             className="small-movie-card__link"
-            href="movie-page.html"
+            href="/films/3"
+            onClick={[Function]}
           >
             Moonrise kindom
           </a>
@@ -165,7 +169,8 @@ exports[`Render MyList 1`] = `
     >
       <a
         className="logo__link logo__link--light"
-        href="main.html"
+        href="/"
+        onClick={[Function]}
       >
         <span
           className="logo__letter logo__letter--1"

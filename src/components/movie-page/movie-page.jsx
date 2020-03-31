@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import Tabs from '../tabs/tabs.jsx';
 import SimilarMovies from '../similar-movies/similar-movies.jsx';
 import UserBlock from '../user-block/user-block.jsx';
 import ButtonPlay from '../button-play/button-play.jsx';
 import ButtonFavorite from '../button-favorite/button-favorite.jsx';
+import HomeLink from '../home-link/home-link.jsx';
 import {getAuthStatus} from '../../reducer/user/selectors';
 import {AppDynamicRoute} from '../../routes.js';
-import history from '../../history.js';
 
 const MoviePage = (
     {
@@ -26,7 +27,6 @@ const MoviePage = (
         poster,
         isFavorite
       },
-      onAddReviewClick,
       similarMovies,
       onCardClick,
       onButtonPlayClick,
@@ -42,13 +42,7 @@ const MoviePage = (
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header movie-card__head">
-          <div className="logo">
-            <a href="main.html" className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <HomeLink/>
 
           <UserBlock/>
         </header>
@@ -67,12 +61,11 @@ const MoviePage = (
                 onButtonFavoriteClick(id, isFavorite);
               }}/>
               {isAuthorized ?
-                <a href="add-review.html" className="btn movie-card__button"
-                  onClick={(evt) => {
-                    evt.preventDefault();
-                    onAddReviewClick(id);
-                  }}
-                >Add review</a> :
+                <Link className="btn movie-card__button"
+                  to={AppDynamicRoute.addReview(id)}
+                >
+                  Add review
+                </Link> :
                 null
               }
             </div>
@@ -279,7 +272,6 @@ MoviePage.propTypes = {
     previewImage: PropTypes.string.isRequired,
     trailer: PropTypes.string.isRequired
   })).isRequired,
-  onAddReviewClick: PropTypes.func.isRequired,
   onCardClick: PropTypes.func.isRequired,
   onButtonPlayClick: PropTypes.func.isRequired,
   onButtonFavoriteClick: PropTypes.func.isRequired,
@@ -289,11 +281,5 @@ const mapStateToProps = (state) => ({
   isAuthorized: getAuthStatus(state),
 });
 
-const mapDispatchToProps = () => ({
-  onAddReviewClick(id) {
-    history.push(AppDynamicRoute.addReview(id));
-  },
-});
-
 export {MoviePage};
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(MoviePage));
+export default connect(mapStateToProps)(React.memo(MoviePage));

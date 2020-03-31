@@ -1,6 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {Router} from 'react-router-dom';
 import MyList from './my-list.jsx';
+import history from '../../history.js';
 
 const movies = [
   {
@@ -26,7 +28,9 @@ const movies = [
 it(`Render MyList`, () => {
   const tree = renderer
     .create(
-        <MyList movies={movies} onCardClick={() => {}}/>, {
+        <Router history={history}>
+          <MyList movies={movies} onCardClick={() => {}}/>
+        </Router>, {
           createNodeMock: () => ({})
         }
     )

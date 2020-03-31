@@ -1,6 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import SimilarMovies from './similar-movies';
+import {Router} from 'react-router-dom';
+import SimilarMovies from './similar-movies.jsx';
+import history from '../../history.js';
 
 const movies = [
   {
@@ -31,9 +33,12 @@ const movies = [
 
 it(`Render SimilarMovies`, () => {
   const tree = renderer
-    .create(<SimilarMovies movies={movies} onCardClick={() => {}}/>, {
-      createNodeMock: () => ({})
-    })
+    .create(
+        <Router history={history}>
+          <SimilarMovies movies={movies} onCardClick={() => {}}/>
+        </Router>, {
+          createNodeMock: () => ({})
+        })
     .toJSON();
 
   expect(tree).toMatchSnapshot();
