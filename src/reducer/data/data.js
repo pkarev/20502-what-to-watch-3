@@ -74,6 +74,9 @@ const Operation = {
         dispatch(ActionCreator.setFavoriteMovies(response.data.map((film) => formatMovie(film))));
       });
   },
+  getComments: (id) => (dispatch, getstate, api) => {
+    return api.get(`/comments/${id}`);
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -119,6 +122,7 @@ const formatMovie = (movie) => ({
   previewImage: movie.preview_image,
   posterBig: movie.background_image,
   isFavorite: movie.is_favorite,
+  duration: formatDuration(movie.run_time),
   rating: {
     number: movie.rating,
     count: movie.scores_count,
@@ -159,6 +163,13 @@ const getRatingName = (value) => {
   }
 
   return RatingName.AWESOME;
+};
+
+const formatDuration = (duration) => {
+  const hours = Math.floor(duration / 60);
+  const minutes = duration % 60;
+
+  return `${hours}h ${minutes}m`;
 };
 
 const updateFavoriteMovies = (movies, candidate) => {
