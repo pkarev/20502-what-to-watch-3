@@ -9,8 +9,8 @@ Array [
       className="movie-card__bg"
     >
       <img
-        alt="The Grand Budapest Hotel"
-        src="img/bg-the-grand-budapest-hotel.jpg"
+        alt="Fantastic Beasts"
+        src="/demo/poster/big"
       />
     </div>
     <h1
@@ -74,9 +74,9 @@ Array [
           className="movie-card__poster"
         >
           <img
-            alt="The Grand Budapest Hotel poster"
+            alt="Fantastic Beasts"
             height="327"
-            src="img/the-grand-budapest-hotel-poster.jpg"
+            src="/demo/poster"
             width="218"
           />
         </div>
@@ -86,7 +86,7 @@ Array [
           <h2
             className="movie-card__title"
           >
-            The Grand Budapest Hotel
+            Fantastic Beasts
           </h2>
           <p
             className="movie-card__meta"
