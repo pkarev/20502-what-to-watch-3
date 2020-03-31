@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {Switch, Route, Router} from 'react-router-dom';
 import {connect} from 'react-redux';
+import shuffle from 'lodash/shuffle.js';
 import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
 import ErrorPage from '../error-page/error-page.jsx';
@@ -11,7 +12,7 @@ import Player from '../player/player.jsx';
 import PrivateRoute from '../private-route/private-route.jsx';
 import MyList from '../my-list/my-list.jsx';
 import {Operation as DataOperation, ActionCreator as DataActionCreator} from '../../reducer/data/data.js';
-import {getPromoMovie, getMovies, getFavoriteMovies} from '../../reducer/data/selectors.js';
+import {getPromoMovie, getMovies, getFavoriteMovies, getSimilarMovies} from '../../reducer/data/selectors.js';
 import {Operation as UserOperatopn, ActionCreator, AuthStatus} from '../../reducer/user/user.js';
 import {getAuthStatus} from '../../reducer/user/selectors.js';
 import history from '../../history.js';
@@ -35,7 +36,13 @@ class App extends PureComponent {
   }
 
   render() {
-    const {movies, favoriteMovies, onSignInSubmit, isAuthorized, onButtonFavoriteClick} = this.props;
+    const {
+      isAuthorized,
+      movies,
+      favoriteMovies,
+      onSignInSubmit,
+      onButtonFavoriteClick,
+    } = this.props;
 
     return (
       <Router history={history}>
@@ -63,10 +70,14 @@ class App extends PureComponent {
           />
           <Route exact path="/films/:id"
             render={(props) => {
+              const currentMovie = movies.find((movie) => movie.id === Number(props.match.params.id));
+              const similarMovies = movies.filter((movie) => {
+                return currentMovie.genre === movie.genre && currentMovie.id !== movie.id;
+              });
               return (
                 <MoviePage
-                  movie={movies.find((movie) => movie.id === Number(props.match.params.id))}
-                  similarMovies={movies}
+                  movie={currentMovie}
+                  similarMovies={shuffle(similarMovies)}
                   onCardClick={this._handleCardClick}
                   onButtonPlayClick={() => {
                     this._handlePlayClick(props.match.params.id);
@@ -123,10 +134,10 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  isAuthorized: getAuthStatus(state),
   movies: getMovies(state),
   promoMovie: getPromoMovie(state),
   favoriteMovies: getFavoriteMovies(state),
-  isAuthorized: getAuthStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
