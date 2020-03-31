@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Player = ({movie: {trailer, posterBig}, onPlayerExitClick}) => (
+const Player = ({movie: {video, posterBig}, onPlayerExitClick}) => (
   <div className="player">
-    <video src={trailer} className="player__video" poster={posterBig} controls={true}></video>
+    <video src={video} className="player__video" poster={posterBig} controls={true}></video>
 
     <button type="button" className="player__exit" onClick={(evt) => {
       evt.preventDefault();
@@ -14,7 +14,7 @@ const Player = ({movie: {trailer, posterBig}, onPlayerExitClick}) => (
 
 Player.propTypes = {
   movie: PropTypes.shape({
-    trailer: PropTypes.string.isRequired,
+    video: PropTypes.string.isRequired,
     posterBig: PropTypes.string.isRequired,
   }).isRequired,
   onPlayerExitClick: PropTypes.func.isRequired,
