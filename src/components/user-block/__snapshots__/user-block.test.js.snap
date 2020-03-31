@@ -27,7 +27,7 @@ exports[`Reder UserBlock Render user avatar if authorized 1`] = `
       <img
         alt="User avatar"
         height="63"
-        src="img/avatar.jpg"
+        src="avatar-test/url"
         width="63"
       />
     </div>

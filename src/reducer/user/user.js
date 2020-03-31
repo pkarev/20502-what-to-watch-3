@@ -5,15 +5,21 @@ const AuthStatus = {
 
 const initialState = {
   isAuthorized: AuthStatus.NO_AUTH,
+  user: {},
 };
 
 const ActionType = {
   SET_AUTH_STATUS: `SET_AUTH_STATUS`,
+  SET_USER: `SET_USER`,
 };
 
 const ActionCreator = {
   setAuthStatus: (val) => ({
     type: ActionType.SET_AUTH_STATUS,
+    payload: val,
+  }),
+  setUser: (val) => ({
+    type: ActionType.SET_USER,
     payload: val,
   }),
 };
@@ -38,6 +44,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_AUTH_STATUS:
       return (Object.assign({}, state, {
         isAuthorized: action.payload,
+      }));
+    case ActionType.SET_USER:
+      return (Object.assign({}, state, {
+        user: action.payload,
       }));
   }
 

@@ -15,6 +15,9 @@ describe(`Reder UserBlock`, () => {
     const store = mockStore({
       [NameSpace.USER]: {
         isAuthorized: false,
+        user: {
+          [`avatar_url`]: `avatar-test/url`,
+        },
       }
     });
 
@@ -35,6 +38,9 @@ describe(`Reder UserBlock`, () => {
     const store = mockStore({
       [NameSpace.USER]: {
         isAuthorized: true,
+        user: {
+          [`avatar_url`]: `avatar-test/url`,
+        },
       }
     });
 

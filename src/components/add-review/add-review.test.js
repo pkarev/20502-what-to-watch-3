@@ -20,6 +20,9 @@ it(`Render Component`, () => {
   const store = mockStore({
     [NameSpace.USER]: {
       isAuthorized: false,
+      user: {
+        [`avatar_url`]: `avatar-test/url`,
+      },
     }
   });
 

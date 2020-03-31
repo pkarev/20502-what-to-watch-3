@@ -51,6 +51,9 @@ it(`Render Main`, () => {
     },
     [NameSpace.USER]: {
       isAuthorized: true,
+      user: {
+        [`avatar_url`]: `avatar-test/url`,
+      },
     }
   });
 

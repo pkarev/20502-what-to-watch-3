@@ -137,6 +137,7 @@ const mapDispatchToProps = (dispatch) => ({
     return dispatch(UserOperatopn.tryAuth(email, password))
       .then((response) => {
         if (response.status === ResponseStatusCode.OK) {
+          dispatch(ActionCreator.setUser(response.data));
           dispatch(ActionCreator.setAuthStatus(AuthStatus.AUTH));
           dispatch(DataOperation.getFavorites());
           history.goBack();
