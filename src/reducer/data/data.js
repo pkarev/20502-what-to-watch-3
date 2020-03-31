@@ -5,12 +5,14 @@ import {AppRoute} from '../../routes';
 const initialState = {
   movies: [],
   promoMovie: {},
+  favoriteMovies: [],
 };
 
 const ActionType = {
   LOAD_MOVIES: `LOAD_MOVIES`,
   LOAD_PROMO_MOVIE: `LOAD_PROMO_MOVIE`,
-  TOGGLE_FAVORITE_STATUS: `TOGGLE_FAVORITE_STATUS`,
+  UPDATE_FAVORITE_STATUS: `UPDATE_FAVORITE_STATUS`,
+  SET_FAVORITE_MOVIES: `SET_FAVORITE_MOVIES`,
 };
 
 const ActionCreator = {
@@ -23,8 +25,12 @@ const ActionCreator = {
     payload: movie,
   }),
   updateFavoriteStatus: (movie) => ({
-    type: ActionType.TOGGLE_FAVORITE_STATUS,
+    type: ActionType.UPDATE_FAVORITE_STATUS,
     payload: movie,
+  }),
+  setFavoriteMovies: (movies) => ({
+    type: ActionType.SET_FAVORITE_MOVIES,
+    payload: movies,
   }),
 };
 
@@ -43,23 +49,31 @@ const Operation = {
   },
   postComment: (id, commentPost) => (dispatch, getState, api) => {
     return api.post(`/comments/${id}`, commentPost)
-      .catch((err) => {
-        throw err;
+      .then((response) => {
+        if (response.status === ResponseStatusCode.OK) {
+          history.push(AppRoute.MOVIE_PAGE);
+        }
       });
   },
   addToFavorites: (id, isFavorite) => (dispatch, getstate, api) => {
     return api.post(`/favorite/${id}/${Number(isFavorite) ? 0 : 1}`)
       .then((response) => {
-        dispatch(ActionCreator.updateFavoriteStatus(formatMovie(response.data)));
+        if (response.status === ResponseStatusCode.OK) {
+          dispatch(ActionCreator.updateFavoriteStatus(formatMovie(response.data)));
+        }
       })
       .catch((err) => {
         if (err.response.status === ResponseStatusCode.UNAUTHORIZED) {
           history.push(AppRoute.SIGN_IN);
         }
-
-        throw err;
       });
-  }
+  },
+  getFavorites: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        dispatch(ActionCreator.setFavoriteMovies(response.data.map((film) => formatMovie(film))));
+      });
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -72,20 +86,19 @@ const reducer = (state = initialState, action) => {
       return (Object.assign({}, state, {
         promoMovie: action.payload,
       }));
-    case ActionType.TOGGLE_FAVORITE_STATUS:
-      return (Object.assign({}, state, {
-        movies: state.movies.map((movie) => {
-          if (movie.id === action.payload.id) {
-            return Object.assign({}, movie, {
-              isFavorite: !movie.isFavorite,
-            });
-          }
+    case ActionType.UPDATE_FAVORITE_STATUS:
+      const movies = updateMoviesFavoriteStatus(state.movies, action.payload);
+      const favoriteMovies = updateFavoriteMovies(state.favoriteMovies, action.payload);
+      const promoMovie = updatePromoMovie(state.promoMovie, action.payload);
 
-          return movie;
-        }),
-        promoMovie: Object.assign({}, state.promoMovie, {
-          isFavorite: !state.promoMovie.isFavorite
-        }),
+      return (Object.assign({}, state, {
+        movies,
+        promoMovie,
+        favoriteMovies,
+      }));
+    case ActionType.SET_FAVORITE_MOVIES:
+      return (Object.assign({}, state, {
+        favoriteMovies: action.payload,
       }));
   }
 
@@ -145,6 +158,38 @@ const getRatingName = (value) => {
   }
 
   return RatingName.AWESOME;
+};
+
+const updateFavoriteMovies = (movies, candidate) => {
+  let updatedMovies = movies;
+  const indexOfCandidate = movies.indexOf(updatedMovies.find((movie) => movie.id === candidate.id));
+
+  if (indexOfCandidate > -1) {
+    updatedMovies = [...movies.slice(0, indexOfCandidate), ...movies.slice(indexOfCandidate + 1)];
+  } else {
+    updatedMovies.push(candidate);
+  }
+
+  return updatedMovies;
+};
+
+const updateMoviesFavoriteStatus = (movies, updatedMovie) => {
+  let updatedMovies = movies;
+  const indexOfCandidate = movies.indexOf(movies.find((movie) => movie.id === updatedMovie.id));
+
+  if (indexOfCandidate > -1) {
+    updatedMovies = updatedMovies = [...movies.slice(0, indexOfCandidate), updatedMovie, ...movies.slice(indexOfCandidate + 1)];
+  }
+
+  return updatedMovies;
+};
+
+const updatePromoMovie = (movie, updatedMovie) => {
+  if (movie.id === updatedMovie.id) {
+    return updatedMovie;
+  }
+
+  return movie;
 };
 
 

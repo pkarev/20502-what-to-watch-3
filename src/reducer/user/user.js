@@ -23,13 +23,13 @@ const Operation = {
     return api.get(`/login`)
       .then(() => {
         dispatch(ActionCreator.setAuthStatus(AuthStatus.AUTH));
-      });
-  },
-  tryAuth: (email, password) => (dispatch, getState, api) => {
-    return api.post(`/login`, {email, password})
+      })
       .catch((err) => {
         throw err;
       });
+  },
+  tryAuth: (email, password) => (dispatch, getState, api) => {
+    return api.post(`/login`, {email, password});
   }
 };
 

@@ -58,7 +58,7 @@ it(`Render Main`, () => {
     .create(
         <Router history={history}>
           <Provider store={store}>
-            <Main onCardClick={() => {}}/>
+            <Main onCardClick={() => {}} onButtonPlayClick={() => {}} onButtonFavoriteClick={() => {}}/>
           </Provider>
         </Router>,
         {

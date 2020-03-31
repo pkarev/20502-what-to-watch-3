@@ -55,21 +55,24 @@ const toggledFavoriteMovies = [
 const initialState = {
   movies: [],
   promoMovie: {},
+  favoriteMovies: [],
 };
 
 const mockState = {
   movies,
   promoMovie: movies[0],
+  favoriteMovies: [],
 };
 
 it(`Reducer without params should return initial state`, () => {
-  expect(reducer(undefined, {})).toEqual(initialState);
+  expect(reducer(undefined, {})).toMatchObject(initialState);
 });
 
 it(`Reducer should set movies`, () => {
   expect(reducer(initialState, ActionCreator.setMovies(movies))).toMatchObject({
     movies,
     promoMovie: {},
+    favoriteMovies: [],
   });
 });
 
@@ -77,6 +80,7 @@ it(`Reducer should set promo movie`, () => {
   expect(reducer(initialState, ActionCreator.setPromoMovie(movies[0]))).toMatchObject({
     movies: [],
     promoMovie: movies[0],
+    favoriteMovies: [],
   });
 });
 
@@ -84,6 +88,15 @@ it(`Reducer should toggle favorite status`, () => {
   expect(reducer(mockState, ActionCreator.updateFavoriteStatus(toggledFavoriteMovies[0]))).toMatchObject({
     movies: toggledFavoriteMovies,
     promoMovie: toggledFavoriteMovies[0],
+    favoriteMovies: [toggledFavoriteMovies[0]],
+  });
+});
+
+it(`Reducer should set favorite movies`, () => {
+  expect(reducer(initialState, ActionCreator.setFavoriteMovies(movies))).toMatchObject({
+    movies: [],
+    promoMovie: {},
+    favoriteMovies: movies,
   });
 });
 
@@ -122,6 +135,25 @@ describe(`Operation work correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_PROMO_MOVIE,
           payload: formatMovie({}),
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /favorite`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const favoriteLoader = Operation.getFavorites();
+
+    apiMock
+      .onGet(`/favorite`)
+      .reply(200, []);
+
+    return favoriteLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.SET_FAVORITE_MOVIES,
+          payload: [],
         });
       });
   });

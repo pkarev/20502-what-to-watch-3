@@ -10,7 +10,6 @@ exports[`Render MoviesList 1`] = `
   >
     <video
       className="small-movie-card__image"
-      controls={false}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       poster="/img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
@@ -30,7 +29,8 @@ exports[`Render MoviesList 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/films/1"
+        onClick={[Function]}
       >
         Fantastic Beasts
       </a>
@@ -42,7 +42,6 @@ exports[`Render MoviesList 1`] = `
   >
     <video
       className="small-movie-card__image"
-      controls={false}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       poster="/img/bohemian-rhapsody.jpg"
@@ -62,7 +61,8 @@ exports[`Render MoviesList 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/films/2"
+        onClick={[Function]}
       >
         Bohemian Rhapsody
       </a>
@@ -74,7 +74,6 @@ exports[`Render MoviesList 1`] = `
   >
     <video
       className="small-movie-card__image"
-      controls={false}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       poster="/img/moonrise-kingdom.jpg"
@@ -94,7 +93,8 @@ exports[`Render MoviesList 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/films/3"
+        onClick={[Function]}
       >
         Moonrise kindom
       </a>

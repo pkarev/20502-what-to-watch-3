@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 import withVideo from '../../hocs/with-video/with-video.jsx';
+import {AppDynamicRoute} from '../../routes';
 
 const SmallMovieCard = (props) => {
   const {movie, onCardClick, renderVideo} = props;
-  const {name, previewImage: poster, trailer} = movie;
+  const {name, previewImage: poster, trailer, id} = movie;
 
   return (
     <article className="small-movie-card catalog__movies-card" onClick={(evt) => {
@@ -14,9 +16,9 @@ const SmallMovieCard = (props) => {
     }}>
       {renderVideo(trailer, poster, `small-movie-card__image`)}
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href="movie-page.html">
+        <Link className="small-movie-card__link" to={AppDynamicRoute.film(id)}>
           {name}
-        </a>
+        </Link>
       </h3>
     </article>
   );
@@ -30,7 +32,7 @@ SmallMovieCard.propTypes = {
     trailer: PropTypes.string.isRequired
   }),
   renderVideo: PropTypes.func.isRequired,
-  onCardClick: PropTypes.func.isRequired,
+  onCardClick: PropTypes.func,
 };
 
 export default withVideo(React.memo(SmallMovieCard));

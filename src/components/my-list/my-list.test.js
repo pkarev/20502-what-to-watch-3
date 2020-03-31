@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {Router} from 'react-router-dom';
-import SimilarMovies from './similar-movies.jsx';
+import MyList from './my-list.jsx';
 import history from '../../history.js';
 
 const movies = [
@@ -22,23 +22,18 @@ const movies = [
     name: `Moonrise kindom`,
     previewImage: `/img/moonrise-kingdom.jpg`,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-  },
-  {
-    id: 4,
-    name: `Moonrise kindom`,
-    previewImage: `/img/moonrise-kingdom.jpg`,
-    trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   }
 ];
 
-it(`Render SimilarMovies`, () => {
+it(`Render MyList`, () => {
   const tree = renderer
     .create(
         <Router history={history}>
-          <SimilarMovies movies={movies} onCardClick={() => {}}/>
+          <MyList movies={movies} onCardClick={() => {}}/>
         </Router>, {
           createNodeMock: () => ({})
-        })
+        }
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();

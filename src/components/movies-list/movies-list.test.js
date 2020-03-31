@@ -1,6 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {Router} from 'react-router-dom';
 import MoviesList from './movies-list';
+import history from '../../history';
 
 const movies = [
   {
@@ -25,9 +27,12 @@ const movies = [
 
 it(`Render MoviesList`, () => {
   const tree = renderer
-    .create(<MoviesList movies={movies} onCardClick={() => {}}/>, {
-      createNodeMock: () => ({})
-    })
+    .create(
+        <Router history={history}>
+          <MoviesList movies={movies} onCardClick={() => {}}/>
+        </Router>, {
+          createNodeMock: () => ({})
+        })
     .toJSON();
 
   expect(tree).toMatchSnapshot();

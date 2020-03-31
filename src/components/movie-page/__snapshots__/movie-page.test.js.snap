@@ -29,7 +29,8 @@ Array [
         >
           <a
             className="logo__link"
-            href="main.html"
+            href="/"
+            onClick={[Function]}
           >
             <span
               className="logo__letter logo__letter--1"
@@ -52,7 +53,7 @@ Array [
           className="user-block"
         >
           <a
-            href="/"
+            href="/mylist"
             onClick={[Function]}
           >
             <div
@@ -98,6 +99,7 @@ Array [
           >
             <button
               className="btn btn--play movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -115,12 +117,13 @@ Array [
             </button>
             <button
               className="btn btn--list movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
-                height="20"
-                viewBox="0 0 19 20"
-                width="19"
+                height="14"
+                viewBox="0 0 18 14"
+                width="18"
               >
                 <use
                   xlinkHref="#add"
@@ -132,7 +135,7 @@ Array [
             </button>
             <a
               className="btn movie-card__button"
-              href="add-review.html"
+              href="/films/undefined/review"
               onClick={[Function]}
             >
               Add review
@@ -273,7 +276,6 @@ Array [
         >
           <video
             className="small-movie-card__image"
-            controls={false}
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
             poster="/img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
@@ -293,7 +295,8 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/films/1"
+              onClick={[Function]}
             >
               Fantastic Beasts
             </a>
@@ -305,7 +308,6 @@ Array [
         >
           <video
             className="small-movie-card__image"
-            controls={false}
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
             poster="/img/bohemian-rhapsody.jpg"
@@ -325,7 +327,8 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/films/2"
+              onClick={[Function]}
             >
               Bohemian Rhapsody
             </a>
@@ -337,7 +340,6 @@ Array [
         >
           <video
             className="small-movie-card__image"
-            controls={false}
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
             poster="/img/moonrise-kingdom.jpg"
@@ -357,7 +359,8 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/films/3"
+              onClick={[Function]}
             >
               Moonrise kindom
             </a>

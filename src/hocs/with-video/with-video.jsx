@@ -62,7 +62,6 @@ const withVideo = (Component) => {
               style={Object.assign({}, defaultStyle)}
               className={className}
               poster={poster}
-              controls={isPlaying}
               muted={isMuted}
               onMouseEnter={() => {
                 playerTimeout = setTimeout(() => {

@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {useForm} from 'react-hook-form';
+import {Link} from 'react-router-dom';
 import UserBlock from '../user-block/user-block.jsx';
+import HomeLink from '../home-link/home-link.jsx';
+import {AppDynamicRoute} from '../../routes.js';
 
 const AddReview = ({movie, onCommentPost}) => {
   const {id, name, poster, posterBig} = movie;
@@ -23,18 +26,16 @@ const AddReview = ({movie, onCommentPost}) => {
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header">
-          <div className="logo">
-            <a href="main.html" className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <HomeLink/>
 
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href="movie-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+                <Link className="breadcrumbs__link"
+                  to={AppDynamicRoute.film(id)}
+                >
+                  The Grand Budapest Hotel
+                </Link>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>

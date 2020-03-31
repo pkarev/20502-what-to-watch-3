@@ -48,7 +48,7 @@ Array [
         className="user-block"
       >
         <a
-          href="/"
+          href="/mylist"
           onClick={[Function]}
         >
           <div
@@ -107,6 +107,7 @@ Array [
           >
             <button
               className="btn btn--play movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -133,7 +134,7 @@ Array [
                 width="18"
               >
                 <use
-                  xlinkHref="#in-list"
+                  xlinkHref="#add"
                 />
               </svg>
               <span>
@@ -213,7 +214,6 @@ Array [
         >
           <video
             className="small-movie-card__image"
-            controls={false}
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
             poster="/img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
@@ -233,7 +233,8 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/films/1"
+              onClick={[Function]}
             >
               Fantastic Beasts
             </a>
@@ -245,7 +246,6 @@ Array [
         >
           <video
             className="small-movie-card__image"
-            controls={false}
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
             poster="/img/bohemian-rhapsody.jpg"
@@ -265,7 +265,8 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/films/2"
+              onClick={[Function]}
             >
               Bohemian Rhapsody
             </a>
@@ -277,7 +278,6 @@ Array [
         >
           <video
             className="small-movie-card__image"
-            controls={false}
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
             poster="/img/moonrise-kingdom.jpg"
@@ -297,7 +297,8 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/films/3"
+              onClick={[Function]}
             >
               Moonrise kindom
             </a>
