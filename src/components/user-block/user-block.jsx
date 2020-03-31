@@ -8,7 +8,7 @@ const UserBlock = ({isAuthorized}) => (
   <div className="user-block">
     {
       isAuthorized ?
-        <Link to="/">
+        <Link to="/mylist">
           <div className="user-block__avatar">
             <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
           </div>
