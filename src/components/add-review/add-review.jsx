@@ -7,7 +7,12 @@ import HomeLink from '../home-link/home-link.jsx';
 import {AppDynamicRoute} from '../../routes.js';
 
 const AddReview = ({movie, onCommentPost}) => {
-  const {id, name, poster, posterBig} = movie;
+  const {
+    id,
+    name,
+    poster,
+    posterBig
+  } = movie;
   const {register, handleSubmit, formState} = useForm({
     mode: `onChange`,
   });
@@ -34,7 +39,7 @@ const AddReview = ({movie, onCommentPost}) => {
                 <Link className="breadcrumbs__link"
                   to={AppDynamicRoute.film(id)}
                 >
-                  The Grand Budapest Hotel
+                  {name}
                 </Link>
               </li>
               <li className="breadcrumbs__item">
