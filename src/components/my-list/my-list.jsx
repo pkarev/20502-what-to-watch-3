@@ -27,7 +27,7 @@ const MyList = ({movies, onCardClick}) => (
       <HomeLink linkClass="logo__link--light"/>
 
       <div className="copyright">
-        <p>© 2019 What to watch Ltd.</p>
+        <p>© 2020 What to watch Ltd.</p>
       </div>
     </footer>
   </div>
