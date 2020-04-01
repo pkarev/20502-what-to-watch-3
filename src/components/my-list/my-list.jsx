@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MoviesList from '../movies-list/movies-list.jsx';
 import HomeLink from '../home-link/home-link.jsx';
+import UserBlock from '../user-block/user-block.jsx';
 
 const MyList = ({movies, onCardClick}) => (
   <div className="user-page">
@@ -10,11 +11,7 @@ const MyList = ({movies, onCardClick}) => (
 
       <h1 className="page-title user-page__title">My list</h1>
 
-      <div className="user-block">
-        <div className="user-block__avatar">
-          <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-        </div>
-      </div>
+      <UserBlock/>
     </header>
 
     <section className="catalog">
