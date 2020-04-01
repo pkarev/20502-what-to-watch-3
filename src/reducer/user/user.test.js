@@ -39,12 +39,12 @@ describe(`Operation work correctly`, () => {
     const authCkecker = Operation.checkAuth();
 
     apiMock
-    .onGet(`/login`)
-    .reply(200, {});
+      .onGet(`/login`)
+      .reply(200, {});
 
     return authCkecker(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(2);
       });
   });
 });

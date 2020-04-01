@@ -1,3 +1,6 @@
+import {Operation as DataOperation} from '../data/data';
+import history from '../../history.js';
+
 const AuthStatus = {
   AUTH: true,
   NO_AUTH: false,
@@ -27,15 +30,25 @@ const ActionCreator = {
 const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
-      .then(() => {
+      .then((response) => {
         dispatch(ActionCreator.setAuthStatus(AuthStatus.AUTH));
+        dispatch(ActionCreator.setUser(response.data));
       })
       .catch((err) => {
         throw err;
       });
   },
   tryAuth: (email, password) => (dispatch, getState, api) => {
-    return api.post(`/login`, {email, password});
+    return api.post(`/login`, {email, password})
+      .then((response) => {
+        dispatch(ActionCreator.setAuthStatus(AuthStatus.AUTH));
+        dispatch(ActionCreator.setUser(response.data));
+        dispatch(DataOperation.getFavorites());
+        history.goBack();
+      })
+      .catch((err) => {
+        throw err;
+      });
   }
 };
 

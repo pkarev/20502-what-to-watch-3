@@ -13,11 +13,10 @@ import PrivateRoute from '../private-route/private-route.jsx';
 import MyList from '../my-list/my-list.jsx';
 import {Operation as DataOperation, ActionCreator as DataActionCreator} from '../../reducer/data/data.js';
 import {getPromoMovie, getMovies, getFavoriteMovies} from '../../reducer/data/selectors.js';
-import {Operation as UserOperatopn, ActionCreator, AuthStatus} from '../../reducer/user/user.js';
+import {Operation as UserOperatopn} from '../../reducer/user/user.js';
 import {getAuthStatus} from '../../reducer/user/selectors.js';
 import history from '../../history.js';
 import {AppDynamicRoute} from '../../routes.js';
-import {ResponseStatusCode} from '../../api';
 
 class App extends PureComponent {
   constructor(props) {
@@ -146,15 +145,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(DataActionCreator.setPromoMovie((movie)));
   },
   onSignInSubmit(email, password) {
-    dispatch(UserOperatopn.tryAuth(email, password))
-      .then((response) => {
-        if (response.status === ResponseStatusCode.OK) {
-          dispatch(ActionCreator.setUser(response.data));
-          dispatch(ActionCreator.setAuthStatus(AuthStatus.AUTH));
-          dispatch(DataOperation.getFavorites());
-          history.goBack();
-        }
-      });
+    dispatch(UserOperatopn.tryAuth(email, password));
   },
   onCommentPost(id, commentPost) {
     dispatch(DataOperation.postComment(id, commentPost));
