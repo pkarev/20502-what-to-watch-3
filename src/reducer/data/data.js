@@ -1,6 +1,6 @@
 import {ResponseStatusCode} from '../../api';
 import history from '../../history';
-import {AppRoute} from '../../routes';
+import {AppDynamicRoute, AppRoute} from '../../routes';
 
 const initialState = {
   movies: [],
@@ -51,7 +51,7 @@ const Operation = {
     return api.post(`/comments/${id}`, commentPost)
       .then((response) => {
         if (response.status === ResponseStatusCode.OK) {
-          history.push(AppRoute.MOVIE_PAGE);
+          history.push(AppDynamicRoute.film(id));
         }
       });
   },
@@ -73,6 +73,9 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.setFavoriteMovies(response.data.map((film) => formatMovie(film))));
       });
+  },
+  getComments: (id) => (dispatch, getstate, api) => {
+    return api.get(`/comments/${id}`);
   },
 };
 
@@ -113,11 +116,13 @@ const formatMovie = (movie) => ({
   director: movie.director,
   stars: movie.starring,
   releaseDate: movie.released,
-  trailer: movie.video_link,
+  trailer: movie.preview_video_link,
+  video: movie.video_link,
   poster: movie.poster_image,
   previewImage: movie.preview_image,
   posterBig: movie.background_image,
   isFavorite: movie.is_favorite,
+  duration: formatDuration(movie.run_time),
   rating: {
     number: movie.rating,
     count: movie.scores_count,
@@ -158,6 +163,13 @@ const getRatingName = (value) => {
   }
 
   return RatingName.AWESOME;
+};
+
+const formatDuration = (duration) => {
+  const hours = Math.floor(duration / 60);
+  const minutes = duration % 60;
+
+  return `${hours}h ${minutes}m`;
 };
 
 const updateFavoriteMovies = (movies, candidate) => {

@@ -17,6 +17,8 @@ const movies = [
     releaseDate: 2020,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     isFavorite: false,
+    poster: `/demo/poster`,
+    posterBig: `/demo/poster/big`,
   },
   {
     id: 2,
@@ -26,6 +28,8 @@ const movies = [
     releaseDate: 2020,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     isFavorite: false,
+    poster: `/demo/poster`,
+    posterBig: `/demo/poster/big`,
   },
   {
     id: 3,
@@ -35,6 +39,8 @@ const movies = [
     releaseDate: 2020,
     trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     isFavorite: false,
+    poster: `/demo/poster`,
+    posterBig: `/demo/poster/big`,
   },
 ];
 
@@ -51,6 +57,9 @@ it(`Render Main`, () => {
     },
     [NameSpace.USER]: {
       isAuthorized: true,
+      user: {
+        [`avatar_url`]: `avatar-test/url`,
+      },
     }
   });
 

@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {Switch, Route, Router} from 'react-router-dom';
 import {connect} from 'react-redux';
+import shuffle from 'lodash/shuffle';
 import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
 import ErrorPage from '../error-page/error-page.jsx';
@@ -12,11 +13,10 @@ import PrivateRoute from '../private-route/private-route.jsx';
 import MyList from '../my-list/my-list.jsx';
 import {Operation as DataOperation, ActionCreator as DataActionCreator} from '../../reducer/data/data.js';
 import {getPromoMovie, getMovies, getFavoriteMovies} from '../../reducer/data/selectors.js';
-import {Operation as UserOperatopn, ActionCreator, AuthStatus} from '../../reducer/user/user.js';
+import {Operation as UserOperatopn} from '../../reducer/user/user.js';
 import {getAuthStatus} from '../../reducer/user/selectors.js';
 import history from '../../history.js';
 import {AppDynamicRoute} from '../../routes.js';
-import {ResponseStatusCode} from '../../api';
 
 class App extends PureComponent {
   constructor(props) {
@@ -35,7 +35,14 @@ class App extends PureComponent {
   }
 
   render() {
-    const {movies, favoriteMovies, onSignInSubmit, isAuthorized, onButtonFavoriteClick} = this.props;
+    const {
+      isAuthorized,
+      movies,
+      favoriteMovies,
+      onSignInSubmit,
+      onButtonFavoriteClick,
+      onCommentPost,
+    } = this.props;
 
     return (
       <Router history={history}>
@@ -56,17 +63,21 @@ class App extends PureComponent {
               return (
                 <AddReview
                   movie={movies.find((movie) => movie.id === Number(props.match.params.id))}
-                  onCommentPost={() => {}}
+                  onCommentPost={onCommentPost}
                 />
               );
             }}
           />
           <Route exact path="/films/:id"
             render={(props) => {
+              const currentMovie = movies.find((movie) => movie.id === Number(props.match.params.id));
+              const similarMovies = movies.filter((movie) => {
+                return currentMovie.genre === movie.genre && currentMovie.id !== movie.id;
+              });
               return (
                 <MoviePage
-                  movie={movies.find((movie) => movie.id === Number(props.match.params.id))}
-                  similarMovies={movies}
+                  movie={currentMovie}
+                  similarMovies={shuffle(similarMovies)}
                   onCardClick={this._handleCardClick}
                   onButtonPlayClick={() => {
                     this._handlePlayClick(props.match.params.id);
@@ -123,10 +134,10 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  isAuthorized: getAuthStatus(state),
   movies: getMovies(state),
   promoMovie: getPromoMovie(state),
   favoriteMovies: getFavoriteMovies(state),
-  isAuthorized: getAuthStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -134,17 +145,10 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(DataActionCreator.setPromoMovie((movie)));
   },
   onSignInSubmit(email, password) {
-    return dispatch(UserOperatopn.tryAuth(email, password))
-      .then((response) => {
-        if (response.status === ResponseStatusCode.OK) {
-          dispatch(ActionCreator.setAuthStatus(AuthStatus.AUTH));
-          dispatch(DataOperation.getFavorites());
-          history.goBack();
-        }
-      });
+    dispatch(UserOperatopn.tryAuth(email, password));
   },
   onCommentPost(id, commentPost) {
-    return dispatch(DataOperation.postComment(id, commentPost));
+    dispatch(DataOperation.postComment(id, commentPost));
   },
   onButtonFavoriteClick(id, isFavorite) {
     dispatch(DataOperation.addToFavorites(id, isFavorite));

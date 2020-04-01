@@ -1,8 +1,13 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {Router} from 'react-router-dom';
+import {Provider} from 'react-redux';
+import configureStore from 'redux-mock-store';
 import MyList from './my-list.jsx';
 import history from '../../history.js';
+import NameSpace from '../../reducer/name-space';
+
+const mockStore = configureStore([]);
 
 const movies = [
   {
@@ -26,10 +31,21 @@ const movies = [
 ];
 
 it(`Render MyList`, () => {
+  const store = mockStore({
+    [NameSpace.USER]: {
+      isAuthorized: true,
+      user: {
+        [`avatar_url`]: `img/avatar.jpg`,
+      },
+    }
+  });
+
   const tree = renderer
     .create(
         <Router history={history}>
-          <MyList movies={movies} onCardClick={() => {}}/>
+          <Provider store={store}>
+            <MyList movies={movies} onCardClick={() => {}}/>
+          </Provider>
         </Router>, {
           createNodeMock: () => ({})
         }

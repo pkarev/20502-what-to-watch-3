@@ -15,6 +15,8 @@ const movies = [
     genre: `Awesome genre`,
     releaseDate: 2020,
     isFavorite: false,
+    posterBig: `/demo/poster/big`,
+    poster: `/demo/poster`,
   },
   {
     id: 2,
@@ -24,6 +26,8 @@ const movies = [
     genre: `Drama`,
     releaseDate: 2020,
     isFavorite: false,
+    posterBig: `/demo/poster/big`,
+    poster: `/demo/poster`,
   },
   {
     id: 3,
@@ -33,6 +37,8 @@ const movies = [
     genre: `Some genre`,
     releaseDate: 2020,
     isFavorite: false,
+    posterBig: `/demo/poster/big`,
+    poster: `/demo/poster`,
   },
 ];
 
@@ -49,6 +55,9 @@ it(`Render App`, () => {
     },
     [NameSpace.USER]: {
       isAuthorized: true,
+      user: {
+        [`avatar_url`]: `avatar-test/url`,
+      },
     }
   });
 
