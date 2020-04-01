@@ -42,6 +42,7 @@ class App extends PureComponent {
       favoriteMovies,
       onSignInSubmit,
       onButtonFavoriteClick,
+      onCommentPost,
     } = this.props;
 
     return (
@@ -63,7 +64,7 @@ class App extends PureComponent {
               return (
                 <AddReview
                   movie={movies.find((movie) => movie.id === Number(props.match.params.id))}
-                  onCommentPost={() => {}}
+                  onCommentPost={onCommentPost}
                 />
               );
             }}
@@ -145,7 +146,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(DataActionCreator.setPromoMovie((movie)));
   },
   onSignInSubmit(email, password) {
-    return dispatch(UserOperatopn.tryAuth(email, password))
+    dispatch(UserOperatopn.tryAuth(email, password))
       .then((response) => {
         if (response.status === ResponseStatusCode.OK) {
           dispatch(ActionCreator.setUser(response.data));
@@ -156,7 +157,7 @@ const mapDispatchToProps = (dispatch) => ({
       });
   },
   onCommentPost(id, commentPost) {
-    return dispatch(DataOperation.postComment(id, commentPost));
+    dispatch(DataOperation.postComment(id, commentPost));
   },
   onButtonFavoriteClick(id, isFavorite) {
     dispatch(DataOperation.addToFavorites(id, isFavorite));

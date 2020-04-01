@@ -1,6 +1,6 @@
 import {ResponseStatusCode} from '../../api';
 import history from '../../history';
-import {AppRoute} from '../../routes';
+import {AppDynamicRoute, AppRoute} from '../../routes';
 
 const initialState = {
   movies: [],
@@ -51,7 +51,7 @@ const Operation = {
     return api.post(`/comments/${id}`, commentPost)
       .then((response) => {
         if (response.status === ResponseStatusCode.OK) {
-          history.push(AppRoute.MOVIE_PAGE);
+          history.push(AppDynamicRoute.film(id));
         }
       });
   },
