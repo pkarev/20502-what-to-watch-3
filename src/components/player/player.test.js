@@ -9,7 +9,11 @@ const movie = {
 
 it(`Render Player`, () => {
   const tree = renderer
-    .create(<Player movie={movie} onPlayerExitClick={() => {}}/>)
+    .create(
+        <Player movie={movie} onPlayerExitClick={() => {}}/>, {
+          createNodeMock: () => ({}),
+        }
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();
