@@ -10,10 +10,10 @@ const UserBlock = ({isAuthorized, avatar}) => (
       isAuthorized ?
         <Link to="/mylist">
           <div className="user-block__avatar">
-            <img src={avatar} alt="User avatar" width="63" height="63"/>
+            <img src={`//htmlacademy-react-3.appspot.com/${avatar}`} alt="User avatar" width="63" height="63"/>
           </div>
         </Link> :
-        <Link to="/login">
+        <Link to="/login" className="user-block__link">
           Sign in
         </Link>
     }

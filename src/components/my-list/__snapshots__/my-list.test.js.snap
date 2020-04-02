@@ -50,7 +50,7 @@ exports[`Render MyList 1`] = `
           <img
             alt="User avatar"
             height="63"
-            src="img/avatar.jpg"
+            src="//htmlacademy-react-3.appspot.com/img/avatar.jpg"
             width="63"
           />
         </div>

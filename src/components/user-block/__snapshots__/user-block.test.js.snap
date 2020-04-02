@@ -5,6 +5,7 @@ exports[`Reder UserBlock Render sign in link if not authorized 1`] = `
   className="user-block"
 >
   <a
+    className="user-block__link"
     href="/login"
     onClick={[Function]}
   >
@@ -27,7 +28,7 @@ exports[`Reder UserBlock Render user avatar if authorized 1`] = `
       <img
         alt="User avatar"
         height="63"
-        src="avatar-test/url"
+        src="//htmlacademy-react-3.appspot.com/avatar-test/url"
         width="63"
       />
     </div>
