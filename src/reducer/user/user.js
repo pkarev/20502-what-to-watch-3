@@ -17,13 +17,13 @@ const ActionType = {
 };
 
 const ActionCreator = {
-  setAuthStatus: (val) => ({
+  setAuthStatus: (authStatus) => ({
     type: ActionType.SET_AUTH_STATUS,
-    payload: val,
+    payload: authStatus,
   }),
-  setUser: (val) => ({
+  setUser: (user) => ({
     type: ActionType.SET_USER,
-    payload: val,
+    payload: user,
   }),
 };
 
