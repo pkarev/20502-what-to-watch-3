@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import chunk from 'lodash/chunk';
 
 const MovieReviews = ({reviews}) => {
-  const chunkedReviews = chunk(reviews, 2);
+  const chunkedReviews = chunk(reviews, Math.ceil(reviews.length / 2));
   const getDate = (dateString) => {
     const date = new Date(dateString);
     const month = date.toLocaleString(`default`, {month: `long`});
@@ -22,7 +22,7 @@ const MovieReviews = ({reviews}) => {
                 </p>
 
                 <footer className="review__details">
-                  <cite className="review__author">Kate Muir</cite>
+                  <cite className="review__author">{review.user.name}</cite>
                   <time className="review__date" dateTime={review.date}>{getDate(review.date)}</time>
                 </footer>
               </blockquote>
