@@ -11,7 +11,7 @@ import AddReview from '../add-review/add-review.jsx';
 import Player from '../player/player.jsx';
 import PrivateRoute from '../private-route/private-route.jsx';
 import MyList from '../my-list/my-list.jsx';
-import {Operation as DataOperation, ActionCreator as DataActionCreator} from '../../reducer/data/data.js';
+import {Operation as DataOperation} from '../../reducer/data/data.js';
 import {getPromoMovie, getMovies, getFavoriteMovies} from '../../reducer/data/selectors.js';
 import {Operation as UserOperatopn} from '../../reducer/user/user.js';
 import {getAuthStatus} from '../../reducer/user/selectors.js';
@@ -127,7 +127,6 @@ App.propTypes = {
     name: PropTypes.string,
     poster: PropTypes.string,
   }),
-  setPromoMovie: PropTypes.func.isRequired,
   onSignInSubmit: PropTypes.func.isRequired,
   onCommentPost: PropTypes.func.isRequired,
   onButtonFavoriteClick: PropTypes.func.isRequired,
@@ -141,9 +140,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setPromoMovie(movie) {
-    dispatch(DataActionCreator.setPromoMovie((movie)));
-  },
   onSignInSubmit(email, password) {
     dispatch(UserOperatopn.tryAuth(email, password));
   },
