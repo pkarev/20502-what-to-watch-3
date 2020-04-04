@@ -57,7 +57,7 @@ Array [
             <img
               alt="User avatar"
               height="63"
-              src="avatar-test/url"
+              src="//htmlacademy-react-3.appspot.com/avatar-test/url"
               width="63"
             />
           </div>
@@ -211,23 +211,31 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onClick={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <video
+          <div
             className="small-movie-card__image"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-            poster="/img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-            style={
-              Object {
-                "objectFit": "cover",
-                "width": "100%",
-              }
-            }
           >
-            <source
-              src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
-            />
-          </video>
+            <video
+              autoPlay={false}
+              controls={false}
+              muted={true}
+              poster="/img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              style={
+                Object {
+                  "height": "100%",
+                  "objectFit": "cover",
+                  "objectPosition": "center center",
+                  "width": "100%",
+                }
+              }
+            >
+              <source
+                src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+              />
+            </video>
+          </div>
           <h3
             className="small-movie-card__title"
           >
@@ -243,23 +251,31 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onClick={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <video
+          <div
             className="small-movie-card__image"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-            poster="/img/bohemian-rhapsody.jpg"
-            style={
-              Object {
-                "objectFit": "cover",
-                "width": "100%",
-              }
-            }
           >
-            <source
-              src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
-            />
-          </video>
+            <video
+              autoPlay={false}
+              controls={false}
+              muted={true}
+              poster="/img/bohemian-rhapsody.jpg"
+              style={
+                Object {
+                  "height": "100%",
+                  "objectFit": "cover",
+                  "objectPosition": "center center",
+                  "width": "100%",
+                }
+              }
+            >
+              <source
+                src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+              />
+            </video>
+          </div>
           <h3
             className="small-movie-card__title"
           >
@@ -275,23 +291,31 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onClick={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <video
+          <div
             className="small-movie-card__image"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-            poster="/img/moonrise-kingdom.jpg"
-            style={
-              Object {
-                "objectFit": "cover",
-                "width": "100%",
-              }
-            }
           >
-            <source
-              src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
-            />
-          </video>
+            <video
+              autoPlay={false}
+              controls={false}
+              muted={true}
+              poster="/img/moonrise-kingdom.jpg"
+              style={
+                Object {
+                  "height": "100%",
+                  "objectFit": "cover",
+                  "objectPosition": "center center",
+                  "width": "100%",
+                }
+              }
+            >
+              <source
+                src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+              />
+            </video>
+          </div>
           <h3
             className="small-movie-card__title"
           >

@@ -24,7 +24,7 @@ exports[`Render Component 1`] = `
           <cite
             className="review__author"
           >
-            Kate Muir
+            Kate
           </cite>
           <time
             className="review__date"
@@ -57,7 +57,7 @@ exports[`Render Component 1`] = `
           <cite
             className="review__author"
           >
-            Kate Muir
+            Muir
           </cite>
           <time
             className="review__date"

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render PrivateRoute child component if authorized 1`] = `
+<div>
+  <p>
+    test
+  </p>
+</div>
+`;

@@ -23,7 +23,8 @@ it(`When user clicks card, callback gets current movie as argument`, () => {
         <SmallMovieCard
           movie={movie}
           onCardClick={captionHoverHandler}
-        />
+        >
+        </SmallMovieCard>
       </Router>, {
         createNodeMock: () => ({})
       }
