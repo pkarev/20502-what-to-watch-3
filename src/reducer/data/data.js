@@ -63,7 +63,11 @@ const Operation = {
       .catch((err) => {
         if (err.response.status === ResponseStatusCode.UNAUTHORIZED) {
           history.push(AppRoute.SIGN_IN);
+
+          throw err;
         }
+
+        throw err;
       });
   },
 };
