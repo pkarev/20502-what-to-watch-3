@@ -28,39 +28,9 @@ const movies = [
   }
 ];
 
-const toggledFavoriteMovies = [
-  {
-    id: 1,
-    name: `Fantastic Beasts`,
-    previewImage: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    isFavorite: true,
-  },
-  {
-    id: 2,
-    name: `Bohemian Rhapsody`,
-    previewImage: `/img/bohemian-rhapsody.jpg`,
-    trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    isFavorite: false,
-  },
-  {
-    id: 3,
-    name: `Moonrise kindom`,
-    previewImage: `/img/moonrise-kingdom.jpg`,
-    trailer: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    isFavorite: false,
-  }
-];
-
 const initialState = {
   movies: [],
   promoMovie: {},
-  favoriteMovies: [],
-};
-
-const mockState = {
-  movies,
-  promoMovie: movies[0],
   favoriteMovies: [],
 };
 
@@ -81,14 +51,6 @@ it(`Reducer should set promo movie`, () => {
     movies: [],
     promoMovie: movies[0],
     favoriteMovies: [],
-  });
-});
-
-it(`Reducer should toggle favorite status`, () => {
-  expect(reducer(mockState, ActionCreator.updateFavoriteStatus(toggledFavoriteMovies[0]))).toMatchObject({
-    movies: toggledFavoriteMovies,
-    promoMovie: toggledFavoriteMovies[0],
-    favoriteMovies: [toggledFavoriteMovies[0]],
   });
 });
 
@@ -114,7 +76,7 @@ describe(`Operation work correctly`, () => {
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.LOAD_MOVIES,
+          type: ActionType.SET_MOVIES,
           payload: [],
         });
       });
@@ -133,7 +95,7 @@ describe(`Operation work correctly`, () => {
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.LOAD_PROMO_MOVIE,
+          type: ActionType.SET_PROMO_MOVIE,
           payload: formatMovie({}),
         });
       });

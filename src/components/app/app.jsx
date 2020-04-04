@@ -17,6 +17,8 @@ import {Operation as UserOperatopn} from '../../reducer/user/user.js';
 import {getAuthStatus} from '../../reducer/user/selectors.js';
 import history from '../../history.js';
 import {AppDynamicRoute} from '../../routes.js';
+import {toggleFavoriteStatus, updateFavoriteMovies, updateMoviesFavoriteStatus} from '../../reducer/data/data-utils';
+import {ActionCreator as DataActionCreator} from '../../reducer/data/data';
 
 class App extends PureComponent {
   constructor(props) {
@@ -37,6 +39,7 @@ class App extends PureComponent {
   render() {
     const {
       isAuthorized,
+      promoMovie,
       movies,
       favoriteMovies,
       onSignInSubmit,
@@ -51,7 +54,9 @@ class App extends PureComponent {
             <Main
               onCardClick={this._handleCardClick}
               onButtonPlayClick={this._handlePlayClick}
-              onButtonFavoriteClick={onButtonFavoriteClick}
+              onButtonFavoriteClick={(id) => {
+                onButtonFavoriteClick(id, movies, favoriteMovies, promoMovie);
+              }}
             />
           </Route>
           <Route exact path="/login">
@@ -82,7 +87,9 @@ class App extends PureComponent {
                   onButtonPlayClick={() => {
                     this._handlePlayClick(props.match.params.id);
                   }}
-                  onButtonFavoriteClick={onButtonFavoriteClick}
+                  onButtonFavoriteClick={(id) => {
+                    onButtonFavoriteClick(id, movies, favoriteMovies, promoMovie);
+                  }}
                 />
               );
             }}
@@ -146,8 +153,16 @@ const mapDispatchToProps = (dispatch) => ({
   onCommentPost(id, commentPost) {
     dispatch(DataOperation.postComment(id, commentPost));
   },
-  onButtonFavoriteClick(id, isFavorite) {
-    dispatch(DataOperation.addToFavorites(id, isFavorite));
+  onButtonFavoriteClick(id, movies, favoriteMovies, promoMovie) {
+    const movie = movies.find((item) => item.id === id);
+    dispatch(DataOperation.addToFavorites(id, movie.isFavorite))
+      .then(() => {
+        if (id === promoMovie.id) {
+          dispatch(DataActionCreator.setPromoMovie(toggleFavoriteStatus(promoMovie)));
+        }
+        dispatch(DataActionCreator.setMovies(updateMoviesFavoriteStatus(movies, movie)));
+        dispatch(DataActionCreator.setFavoriteMovies(updateFavoriteMovies(favoriteMovies, movie)));
+      });
   },
 });
 
