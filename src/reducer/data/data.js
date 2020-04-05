@@ -63,7 +63,11 @@ const Operation = {
       .catch((err) => {
         if (err.response.status === ResponseStatusCode.UNAUTHORIZED) {
           history.push(AppRoute.SIGN_IN);
+
+          throw err;
         }
+
+        throw err;
       });
   },
 };
@@ -100,6 +104,7 @@ const formatMovie = (movie) => ({
   poster: movie.poster_image,
   previewImage: movie.preview_image,
   posterBig: movie.background_image,
+  background: movie.background_color,
   isFavorite: movie.is_favorite,
   duration: formatDuration(movie.run_time),
   rating: {

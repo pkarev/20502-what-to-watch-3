@@ -31,6 +31,7 @@ const MoviePage = (
         poster,
         isFavorite,
         duration,
+        background,
       },
       similarMovies,
       onCardClick,
@@ -47,7 +48,7 @@ const MoviePage = (
 
   return (
     <React.Fragment>
-      <section className="movie-card movie-card--full">
+      <section className="movie-card movie-card--full" style={{backgroundColor: background}}>
         <div className="movie-card__hero">
           <div className="movie-card__bg">
             <img src={posterBig} alt={name}/>
@@ -186,6 +187,7 @@ MoviePage.propTypes = {
     posterBig: PropTypes.string,
     poster: PropTypes.string,
     duration: PropTypes.string,
+    background: PropTypes.string,
   }).isRequired,
   similarMovies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
